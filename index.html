@@ -2,1090 +2,1186 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>💎 Tap Empire V0.4</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>💎 Tap Empire V0.5</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --gold:#FFD700;--gold2:#FFA500;--gold3:#ff8c00;
-  --dark:#05050d;--panel:#0c0c1a;--panel2:#121226;--panel3:#1a1a32;--panel4:#22223e;
-  --accent:#00ffcc;--a2:#ff6b35;--purple:#c44fff;--p2:#7711bb;
-  --red:#ff3355;--green:#22ff88;--blue:#2299ff;--cyan:#00eeff;--pink:#ff44aa;
-  --text:#eeeef8;--muted:#55557a;
-  --glow:0 0 24px #FFD70077;--glowA:0 0 24px #00ffcc44;--glowP:0 0 24px #c44fff44;
+  --gold:#FFD700;--go:#FFA500;--go2:#ff8c00;
+  --dark:#04040b;--p:#0b0b18;--p2:#111122;--p3:#181830;--p4:#20203c;
+  --ac:#00ffcc;--a2:#ff6b35;--pu:#c44fff;--pu2:#7711bb;
+  --re:#ff3355;--gr:#22ff88;--bl:#2299ff;--cy:#00eeff;--pk:#ff44aa;
+  --tx:#eeeef8;--mu:#55557a;
+  --glow:0 0 22px #FFD70077;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;touch-action:manipulation;}
-body{background:var(--dark);color:var(--text);font-family:'Rajdhani',sans-serif;user-select:none;}
-
-/* BG */
-#bgGrid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(0,255,204,.018) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(0,255,204,.018) 1px,transparent 1px);
+body{background:var(--dark);color:var(--tx);font-family:'Rajdhani',sans-serif;user-select:none;}
+#BG{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,204,.016) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(0,255,204,.016) 1px,transparent 1px);
   background-size:46px 46px;}
-#bgGlow{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 45% at 50% 0%,rgba(90,0,200,.11),transparent);}
-#bgStars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.star{position:absolute;border-radius:50%;background:#fff;
-  animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
-@keyframes twinkle{0%,100%{opacity:.08;transform:scale(1);}50%{opacity:.75;transform:scale(1.5);}}
+#GL{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 75% 42% at 50% 0%,rgba(80,0,180,.1),transparent);}
+#ST{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:#fff;animation:tw var(--d,3s) ease-in-out infinite var(--dl,0s);}
+@keyframes tw{0%,100%{opacity:.07;transform:scale(1);}50%{opacity:.7;transform:scale(1.5);}}
 
-/* APP */
 .app{display:flex;flex-direction:column;height:100vh;max-width:540px;margin:0 auto;position:relative;z-index:1;}
 
 /* TOPBAR */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:9px 13px 3px;flex-shrink:0;}
-.logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;
-  background:linear-gradient(135deg,var(--gold),var(--accent),var(--purple));
+.tb{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 3px;flex-shrink:0;}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.05rem;font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--ac),var(--pu));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.ver{font-size:.5rem;border:1px solid var(--a2);color:var(--a2);padding:2px 6px;border-radius:10px;margin-left:5px;font-weight:700;vertical-align:middle;}
-.tbr{display:flex;gap:5px;align-items:center;}
-.tbtn{background:var(--panel2);border:1px solid rgba(255,255,255,.07);border-radius:8px;
-  padding:5px 9px;font-size:.73rem;cursor:pointer;color:var(--text);transition:all .2s;}
-.tbtn:hover{background:var(--panel3);}
-.rb-badge{font-size:.58rem;color:var(--pink);background:rgba(255,68,170,.1);
-  border:1px solid rgba(255,68,170,.28);padding:3px 8px;border-radius:10px;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;}
+.ver{font-size:.48rem;border:1px solid var(--a2);color:var(--a2);padding:1px 5px;border-radius:8px;margin-left:4px;font-weight:700;vertical-align:middle;}
+.tbr{display:flex;gap:4px;align-items:center;flex-wrap:wrap;}
+.tbtn{background:var(--p2);border:1px solid rgba(255,255,255,.07);border-radius:7px;
+  padding:4px 8px;font-size:.7rem;cursor:pointer;color:var(--tx);transition:all .18s;white-space:nowrap;}
+.tbtn:hover{background:var(--p3);}
+.rbb{font-size:.55rem;color:var(--pk);background:rgba(255,68,170,.09);
+  border:1px solid rgba(255,68,170,.25);padding:3px 7px;border-radius:9px;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;}
+.asb{font-size:.55rem;color:var(--cy);background:rgba(0,238,255,.09);
+  border:1px solid rgba(0,238,255,.25);padding:3px 7px;border-radius:9px;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;}
+.dly{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.28);border-radius:7px;
+  padding:4px 8px;font-size:.62rem;color:var(--gold);cursor:pointer;font-weight:700;white-space:nowrap;}
+.dly.claimed{opacity:.35;cursor:not-allowed;}
 
 /* MONEY PANEL */
-.mpanel{margin:0 11px 5px;border-radius:18px;padding:12px 17px;position:relative;overflow:hidden;flex-shrink:0;
-  background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid rgba(255,215,0,.14);}
+.mp{margin:0 10px 5px;border-radius:16px;padding:11px 15px;position:relative;overflow:hidden;flex-shrink:0;
+  background:linear-gradient(135deg,var(--p),var(--p2));border:1px solid rgba(255,215,0,.13);}
 .mpbg{position:absolute;top:-50%;left:-20%;width:140%;height:210%;pointer-events:none;
-  background:radial-gradient(ellipse,rgba(255,215,0,.045),transparent 65%);animation:pbg 4s ease-in-out infinite;}
-@keyframes pbg{0%,100%{transform:scale(1);}50%{transform:scale(1.09);}}
-.mrow{display:flex;align-items:flex-end;justify-content:center;gap:5px;position:relative;z-index:1;}
-.mnum{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:var(--gold);
+  background:radial-gradient(ellipse,rgba(255,215,0,.042),transparent 65%);animation:pbg 4s ease-in-out infinite;}
+@keyframes pbg{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.mrow{display:flex;align-items:flex-end;justify-content:center;gap:4px;position:relative;z-index:1;}
+.mn{font-family:'Orbitron',sans-serif;font-size:1.9rem;font-weight:900;color:var(--gold);
   text-shadow:var(--glow);line-height:1;transition:transform .08s,color .4s;}
-.msfx{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--gold2);font-weight:700;padding-bottom:3px;}
+.ms{font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--go);font-weight:700;padding-bottom:2px;}
 .trow{text-align:center;margin-top:4px;position:relative;z-index:1;}
-.tpill{display:inline-flex;align-items:center;gap:4px;padding:3px 13px;border-radius:20px;
-  font-family:'Orbitron',sans-serif;font-size:.52rem;font-weight:900;letter-spacing:1.5px;
+.tpill{display:inline-flex;align-items:center;gap:4px;padding:2px 12px;border-radius:18px;
+  font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:900;letter-spacing:1.5px;
   text-transform:uppercase;color:#000;box-shadow:var(--glow);
-  background:linear-gradient(135deg,var(--gold2),var(--gold));}
-.mmeta{display:flex;justify-content:space-between;margin-top:4px;position:relative;z-index:1;}
-.mmi{font-size:.7rem;}
-.ev-badge{display:none;position:absolute;top:7px;right:9px;z-index:2;
-  background:var(--p2);color:#fff;font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:900;
-  padding:2px 8px;border-radius:10px;animation:ep 1s ease-in-out infinite;}
-.ev-badge.on{display:block;}
-@keyframes ep{0%,100%{opacity:1;}50%{opacity:.55;}}
+  background:linear-gradient(135deg,var(--go),var(--gold));}
+.mm{display:flex;justify-content:space-between;margin-top:4px;position:relative;z-index:1;}
+.mmi{font-size:.67rem;}
+.evbadge{display:none;position:absolute;top:6px;right:8px;z-index:2;
+  background:var(--pu2);color:#fff;font-family:'Orbitron',sans-serif;font-size:.48rem;font-weight:900;
+  padding:2px 7px;border-radius:9px;animation:ep 1s ease-in-out infinite;}
+.evbadge.on{display:block;}
+@keyframes ep{0%,100%{opacity:1;}50%{opacity:.5;}}
 
 /* TIER BAR */
-.tprog{margin:0 11px 4px;flex-shrink:0;}
-.tbar{height:17px;border-radius:9px;overflow:hidden;position:relative;
-  background:rgba(255,215,0,.055);border:1px solid rgba(255,215,0,.1);}
-.tbfill{height:100%;border-radius:9px;position:absolute;left:0;top:0;
-  background:linear-gradient(90deg,var(--gold3),var(--gold));transition:width .5s ease;}
-.tbshine{position:absolute;top:0;left:0;right:0;height:45%;
-  background:linear-gradient(180deg,rgba(255,255,255,.14),transparent);pointer-events:none;}
-.tbtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:.59rem;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.95);}
+.tp{margin:0 10px 4px;flex-shrink:0;}
+.tbar{height:16px;border-radius:8px;overflow:hidden;position:relative;
+  background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.09);}
+.tbf{height:100%;border-radius:8px;position:absolute;left:0;top:0;
+  background:linear-gradient(90deg,var(--go2),var(--gold));transition:width .55s ease;}
+.tbsh{position:absolute;top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),transparent);pointer-events:none;}
+.tbt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:.57rem;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.95);}
 
 /* TABS */
-.tabs{display:flex;margin:0 11px 5px;gap:3px;flex-shrink:0;overflow-x:auto;}
+.tabs{display:flex;margin:0 10px 4px;gap:2px;flex-shrink:0;overflow-x:auto;padding-bottom:1px;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{flex:0 0 auto;min-width:52px;background:var(--panel);border:1px solid rgba(255,255,255,.05);
-  border-radius:9px;padding:5px 4px;text-align:center;cursor:pointer;font-size:.55rem;font-weight:700;
-  letter-spacing:.3px;text-transform:uppercase;color:var(--muted);transition:all .2s;position:relative;}
-.tab.on{background:var(--panel3);border-color:var(--gold);color:var(--gold);}
-.tab .ti{font-size:.85rem;display:block;margin-bottom:1px;}
-.dot{position:absolute;top:3px;right:3px;width:6px;height:6px;background:var(--red);border-radius:50%;display:none;}
+.tab{flex:0 0 auto;min-width:48px;background:var(--p);border:1px solid rgba(255,255,255,.045);
+  border-radius:8px;padding:4px 3px;text-align:center;cursor:pointer;font-size:.52rem;font-weight:700;
+  letter-spacing:.3px;text-transform:uppercase;color:var(--mu);transition:all .18s;position:relative;}
+.tab.on{background:var(--p3);border-color:var(--gold);color:var(--gold);}
+.tab .ti{font-size:.82rem;display:block;margin-bottom:1px;}
+.dot{position:absolute;top:2px;right:2px;width:5px;height:5px;background:var(--re);border-radius:50%;display:none;}
 .dot.on{display:block;}
 
 /* SCROLL */
-.scr{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 11px 60px;}
-.scr::-webkit-scrollbar{width:2px;}
-.scr::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px;}
+.sc{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 10px 55px;}
+.sc::-webkit-scrollbar{width:2px;}
+.sc::-webkit-scrollbar-thumb{background:var(--mu);border-radius:2px;}
 
-/* ===== TAP AREA ===== */
-.tapwrap{display:flex;flex-direction:column;align-items:center;padding:6px 0 4px;}
-.combotxt{font-family:'Orbitron',sans-serif;font-size:.65rem;color:var(--a2);
-  letter-spacing:2px;min-height:15px;margin-bottom:5px;transition:opacity .3s;opacity:0;}
-.combotxt.on{opacity:1;}
-.tapouter{position:relative;width:155px;height:155px;}
-.ring1{position:absolute;inset:-8px;border-radius:50%;border:2px solid transparent;
+/* TAP */
+.tw{display:flex;flex-direction:column;align-items:center;padding:5px 0 3px;}
+.ct{font-family:'Orbitron',sans-serif;font-size:.62rem;color:var(--a2);
+  letter-spacing:2px;min-height:14px;margin-bottom:4px;transition:opacity .28s;opacity:0;}
+.ct.on{opacity:1;}
+.to{position:relative;width:148px;height:148px;}
+.r1{position:absolute;inset:-7px;border-radius:50%;border:2px solid transparent;
   background:linear-gradient(var(--dark),var(--dark)) padding-box,
-             conic-gradient(from 0deg,var(--gold),var(--accent),var(--purple),var(--gold)) border-box;
-  animation:ringrot 3s linear infinite;pointer-events:none;}
-.ring2{position:absolute;inset:-15px;border-radius:50%;border:1px solid rgba(255,215,0,.12);
-  animation:ringrot 9s linear infinite reverse;pointer-events:none;}
-@keyframes ringrot{to{transform:rotate(360deg);}}
-.tapbtn{width:155px;height:155px;border-radius:50%;cursor:pointer;overflow:hidden;
-  background:radial-gradient(circle at 38% 34%,#1c1c38,#070710);
+             conic-gradient(from 0deg,var(--gold),var(--ac),var(--pu),var(--gold)) border-box;
+  animation:rr 3s linear infinite;pointer-events:none;}
+.r2{position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(255,215,0,.11);
+  animation:rr 9s linear infinite reverse;pointer-events:none;}
+@keyframes rr{to{transform:rotate(360deg);}}
+.tapbtn{width:148px;height:148px;border-radius:50%;cursor:pointer;overflow:hidden;
+  background:radial-gradient(circle at 38% 34%,#1a1a34,#060610);
   border:2px solid var(--gold);position:relative;
-  box-shadow:0 0 28px rgba(255,215,0,.22),0 0 60px rgba(255,215,0,.07),inset 0 0 28px rgba(0,0,0,.7);
+  box-shadow:0 0 26px rgba(255,215,0,.2),0 0 55px rgba(255,215,0,.06),inset 0 0 26px rgba(0,0,0,.7);
   transition:transform .07s,box-shadow .07s;
   display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.tapbtn::before{content:'';position:absolute;top:8%;left:8%;width:26%;height:17%;
-  background:rgba(255,255,255,.06);border-radius:50%;transform:rotate(-30deg);pointer-events:none;}
-.tapbtn.press{transform:scale(.9);
-  box-shadow:0 0 50px rgba(255,215,0,.5),0 0 90px rgba(255,215,0,.12),inset 0 0 38px rgba(255,215,0,.07);}
-.tapico{font-size:2.8rem;line-height:1;filter:drop-shadow(0 0 10px rgba(255,215,0,.65));transition:font-size .4s;}
-.taplbl{font-family:'Orbitron',sans-serif;font-size:.56rem;letter-spacing:3px;color:var(--gold);margin-top:3px;font-weight:700;}
-.cf{position:absolute;inset:0;border-radius:50%;background:rgba(255,80,30,.32);opacity:0;pointer-events:none;}
-.cf.go{animation:cfx .22s ease-out;}
+.tapbtn::before{content:'';position:absolute;top:8%;left:8%;width:25%;height:16%;
+  background:rgba(255,255,255,.055);border-radius:50%;transform:rotate(-30deg);pointer-events:none;}
+.tapbtn.pr{transform:scale(.9);
+  box-shadow:0 0 48px rgba(255,215,0,.48),0 0 88px rgba(255,215,0,.1),inset 0 0 36px rgba(255,215,0,.07);}
+.tico{font-size:2.7rem;line-height:1;filter:drop-shadow(0 0 10px rgba(255,215,0,.62));transition:font-size .4s;}
+.tlbl{font-family:'Orbitron',sans-serif;font-size:.54rem;letter-spacing:3px;color:var(--gold);margin-top:2px;font-weight:700;}
+.cf{position:absolute;inset:0;border-radius:50%;background:rgba(255,80,30,.3);opacity:0;pointer-events:none;}
+.cf.go{animation:cfx .2s ease-out;}
 @keyframes cfx{0%{opacity:1;}100%{opacity:0;}}
-.lhalo{position:absolute;inset:-20px;border-radius:50%;border:2px dashed rgba(180,79,255,.55);
-  animation:ringrot 1.4s linear infinite;display:none;pointer-events:none;}
-.lhalo.on{display:block;}
-.bhalo{position:absolute;inset:-22px;border-radius:50%;border:3px solid var(--red);
-  animation:bhp .45s linear infinite;display:none;pointer-events:none;
-  box-shadow:0 0 18px var(--red);}
-.bhalo.on{display:block;}
-@keyframes bhp{0%,100%{opacity:1;}50%{opacity:.25;}}
+.lh{position:absolute;inset:-18px;border-radius:50%;border:2px dashed rgba(180,79,255,.5);
+  animation:rr 1.4s linear infinite;display:none;pointer-events:none;}
+.lh.on{display:block;}
+.bh{position:absolute;inset:-20px;border-radius:50%;border:3px solid var(--re);
+  animation:bha .44s linear infinite;display:none;pointer-events:none;
+  box-shadow:0 0 16px var(--re);}
+.bh.on{display:block;}
+@keyframes bha{0%,100%{opacity:1;}50%{opacity:.2;}}
+/* chain kill ring */
+.ch{position:absolute;inset:-26px;border-radius:50%;border:2px solid var(--gold);
+  animation:rr .8s linear infinite;display:none;pointer-events:none;
+  box-shadow:0 0 20px rgba(255,215,0,.5);}
+.ch.on{display:block;}
 
-/* QUICK STATS */
-.qstats{display:flex;gap:5px;margin-top:9px;width:100%;}
-.qs{flex:1;background:var(--panel);border:1px solid rgba(255,255,255,.05);border-radius:9px;
-  padding:6px 3px;text-align:center;}
-.qsv{font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:700;color:var(--gold);}
-.qsl{font-size:.5rem;color:var(--muted);margin-top:1px;}
+.qs{display:flex;gap:4px;margin-top:8px;width:100%;}
+.qsi{flex:1;background:var(--p);border:1px solid rgba(255,255,255,.045);border-radius:8px;
+  padding:5px 2px;text-align:center;}
+.qsv{font-family:'Orbitron',sans-serif;font-size:.62rem;font-weight:700;color:var(--gold);}
+.qsl{font-size:.48rem;color:var(--mu);margin-top:1px;}
 
-/* EVENT BANNER */
-.evbanner{border-radius:13px;padding:8px 12px;margin-bottom:7px;
-  display:none;animation:slin .35s ease;
-  background:linear-gradient(135deg,rgba(180,79,255,.13),rgba(255,107,53,.09));
-  border:1px solid rgba(180,79,255,.3);}
-.evbanner.on{display:flex;align-items:center;gap:9px;}
-@keyframes slin{from{opacity:0;transform:translateY(-7px);}to{opacity:1;transform:translateY(0);}}
-.evico{font-size:1.6rem;}
-.evbody{flex:1;}
-.evname{font-size:.82rem;font-weight:700;color:var(--purple);}
-.evdesc{font-size:.65rem;color:var(--muted);}
-.evtimer{font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--a2);font-weight:700;min-width:28px;text-align:right;}
+/* EVENT */
+.evb{border-radius:12px;padding:7px 11px;margin-bottom:6px;
+  display:none;animation:slin .32s ease;
+  background:linear-gradient(135deg,rgba(180,79,255,.12),rgba(255,107,53,.08));
+  border:1px solid rgba(180,79,255,.28);}
+.evb.on{display:flex;align-items:center;gap:8px;}
+@keyframes slin{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.evico{font-size:1.5rem;}
+.evbd{flex:1;}
+.evn{font-size:.78rem;font-weight:700;color:var(--pu);}
+.evd{font-size:.62rem;color:var(--mu);}
+.evt{font-family:'Orbitron',sans-serif;font-size:.68rem;color:var(--a2);font-weight:700;min-width:26px;text-align:right;}
 
-/* BOSS PANEL */
-.bosspanel{border-radius:13px;padding:11px 13px;margin-bottom:8px;
-  background:linear-gradient(135deg,rgba(255,51,85,.07),rgba(255,140,0,.04));
-  border:1px solid rgba(255,51,85,.28);display:none;}
-.bosspanel.on{display:block;}
-.bossttl{font-family:'Orbitron',sans-serif;font-size:.68rem;color:var(--red);font-weight:900;letter-spacing:2px;margin-bottom:5px;}
-.bossrow{display:flex;align-items:center;gap:9px;}
-.bossico{font-size:2rem;}
-.bossinfo{flex:1;}
-.bossname{font-size:.87rem;font-weight:700;}
-.bosshpbar{height:13px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.05);margin-top:3px;border:1px solid rgba(255,51,85,.25);}
-.bosshpfill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--red),#ff8800);transition:width .25s;}
-.bosshptxt{font-size:.62rem;color:var(--muted);margin-top:2px;}
-.bossrew{font-size:.68rem;color:var(--gold);margin-top:2px;font-weight:700;}
+/* BOSS */
+.bsp{border-radius:12px;padding:10px 12px;margin-bottom:7px;
+  background:linear-gradient(135deg,rgba(255,51,85,.06),rgba(255,140,0,.04));
+  border:1px solid rgba(255,51,85,.25);display:none;}
+.bsp.on{display:block;}
+.bst{font-family:'Orbitron',sans-serif;font-size:.65rem;color:var(--re);font-weight:900;letter-spacing:2px;margin-bottom:4px;}
+.bsr{display:flex;align-items:center;gap:8px;}
+.bsi{font-size:1.9rem;}
+.bsif{flex:1;}
+.bsn{font-size:.83rem;font-weight:700;}
+.bshb{height:12px;border-radius:6px;overflow:hidden;background:rgba(255,255,255,.05);margin-top:3px;border:1px solid rgba(255,51,85,.22);}
+.bshf{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--re),#ff8800);transition:width .22s;}
+.bsht{font-size:.6rem;color:var(--mu);margin-top:2px;}
+.bsrw{font-size:.65rem;color:var(--gold);margin-top:2px;font-weight:700;}
+
+/* CHAIN KILL */
+.ckpanel{border-radius:12px;padding:8px 12px;margin-bottom:7px;display:none;
+  background:linear-gradient(135deg,rgba(255,215,0,.06),rgba(255,165,0,.04));
+  border:1px solid rgba(255,215,0,.22);text-align:center;}
+.ckpanel.on{display:block;}
+.cknum{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold);text-shadow:var(--glow);}
+.cklbl{font-size:.65rem;color:var(--mu);}
 
 /* PRESTIGE */
-.ppanel{border-radius:18px;padding:13px 15px;margin-bottom:9px;text-align:center;
+.pp{border-radius:16px;padding:12px 14px;margin-bottom:8px;text-align:center;
   background:linear-gradient(135deg,rgba(255,107,53,.06),rgba(255,215,0,.03));
-  border:1px solid rgba(255,107,53,.18);}
-.pstars{font-size:1rem;letter-spacing:2px;margin-bottom:3px;}
-.pttl{font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--a2);letter-spacing:2px;margin-bottom:3px;font-weight:900;}
-.pinfo{font-size:.68rem;color:var(--muted);margin-bottom:9px;line-height:1.5;}
-.pinfo b{color:var(--gold);}
-.pbtn{border:none;border-radius:10px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.67rem;
-  font-weight:700;letter-spacing:2px;padding:9px 22px;cursor:pointer;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--a2),#e51c00);box-shadow:0 0 18px rgba(255,107,53,.3);transition:all .2s;}
+  border:1px solid rgba(255,107,53,.16);}
+.pst{font-size:.95rem;letter-spacing:2px;margin-bottom:3px;}
+.pttl{font-family:'Orbitron',sans-serif;font-size:.68rem;color:var(--a2);letter-spacing:2px;margin-bottom:3px;font-weight:900;}
+.pi{font-size:.65rem;color:var(--mu);margin-bottom:8px;line-height:1.5;}
+.pi b{color:var(--gold);}
+.pbtn{border:none;border-radius:9px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.64rem;
+  font-weight:700;letter-spacing:2px;padding:8px 20px;cursor:pointer;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--a2),#d51a00);box-shadow:0 0 16px rgba(255,107,53,.28);transition:all .18s;}
 .pbtn:hover:not(:disabled){transform:scale(1.04);}
-.pbtn:disabled{opacity:.28;cursor:not-allowed;}
-.pperks{display:flex;gap:4px;margin-top:9px;flex-wrap:wrap;justify-content:center;}
-.pperk{background:rgba(255,107,53,.09);border:1px solid rgba(255,107,53,.18);border-radius:20px;
-  padding:2px 8px;font-size:.58rem;color:var(--a2);font-weight:700;}
+.pbtn:disabled{opacity:.25;cursor:not-allowed;}
+.ppk{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;justify-content:center;}
+.ppki{background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.16);border-radius:18px;
+  padding:2px 7px;font-size:.56rem;color:var(--a2);font-weight:700;}
 
-/* REBIRTH PANEL */
-.rbpanel{border-radius:18px;padding:13px 15px;margin-bottom:9px;text-align:center;
-  background:linear-gradient(135deg,rgba(255,68,170,.06),rgba(180,79,255,.04));
-  border:1px solid rgba(255,68,170,.2);}
-.rbttl{font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--pink);letter-spacing:2px;font-weight:900;margin-bottom:5px;}
-.rbinfo{font-size:.68rem;color:var(--muted);line-height:1.5;margin-bottom:9px;}
-.rbinfo b{color:var(--pink);}
-.rbbtn{border:none;border-radius:10px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.67rem;
-  font-weight:700;letter-spacing:2px;padding:9px 22px;cursor:pointer;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--pink),var(--p2));box-shadow:0 0 18px rgba(255,68,170,.28);transition:all .2s;}
-.rbbtn:hover:not(:disabled){transform:scale(1.04);}
-.rbbtn:disabled{opacity:.28;cursor:not-allowed;}
-.rbperks{display:flex;gap:4px;margin-top:9px;flex-wrap:wrap;justify-content:center;}
-.rbperk{background:rgba(255,68,170,.09);border:1px solid rgba(255,68,170,.18);border-radius:20px;
-  padding:2px 8px;font-size:.58rem;color:var(--pink);font-weight:700;}
-
-/* ASCENSION PANEL */
-.aspanel{border-radius:18px;padding:13px 15px;margin-bottom:9px;text-align:center;
-  background:linear-gradient(135deg,rgba(0,238,255,.06),rgba(34,153,255,.04));
-  border:1px solid rgba(0,238,255,.2);}
-.asttl{font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--cyan);letter-spacing:2px;font-weight:900;margin-bottom:5px;}
-.asinfo{font-size:.68rem;color:var(--muted);line-height:1.5;margin-bottom:9px;}
-.asinfo b{color:var(--cyan);}
-.asbtn{border:none;border-radius:10px;color:#000;font-family:'Orbitron',sans-serif;font-size:.67rem;
-  font-weight:700;letter-spacing:2px;padding:9px 22px;cursor:pointer;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 0 18px rgba(0,238,255,.28);transition:all .2s;}
-.asbtn:hover:not(:disabled){transform:scale(1.04);}
-.asbtn:disabled{opacity:.28;cursor:not-allowed;}
+/* PANELS generic */
+.panel{border-radius:16px;padding:12px 14px;margin-bottom:8px;text-align:center;}
+.panel.rb{background:linear-gradient(135deg,rgba(255,68,170,.06),rgba(180,79,255,.04));border:1px solid rgba(255,68,170,.18);}
+.panel.asc{background:linear-gradient(135deg,rgba(0,238,255,.06),rgba(34,153,255,.04));border:1px solid rgba(0,238,255,.18);}
+.panel.tr{background:linear-gradient(135deg,rgba(255,215,0,.06),rgba(255,165,0,.04));border:1px solid rgba(255,215,0,.22);}
+.panel h3{font-family:'Orbitron',sans-serif;font-size:.68rem;letter-spacing:2px;font-weight:900;margin-bottom:4px;}
+.panel h3.rb{color:var(--pk);}
+.panel h3.asc{color:var(--cy);}
+.panel h3.tr{color:var(--gold);}
+.panel p{font-size:.65rem;color:var(--mu);line-height:1.5;margin-bottom:8px;}
+.panel p b{color:inherit;}
+.pbtn2{border:none;border-radius:9px;font-family:'Orbitron',sans-serif;font-size:.62rem;
+  font-weight:700;letter-spacing:2px;padding:8px 18px;cursor:pointer;text-transform:uppercase;transition:all .18s;}
+.pbtn2.rb{background:linear-gradient(135deg,var(--pk),var(--pu2));color:#fff;box-shadow:0 0 15px rgba(255,68,170,.25);}
+.pbtn2.asc{background:linear-gradient(135deg,var(--cy),var(--bl));color:#000;box-shadow:0 0 15px rgba(0,238,255,.25);}
+.pbtn2.tr{background:linear-gradient(135deg,var(--gold),var(--go));color:#000;box-shadow:0 0 15px rgba(255,215,0,.35);}
+.pbtn2:hover:not(:disabled){transform:scale(1.04);}
+.pbtn2:disabled{opacity:.22;cursor:not-allowed;}
+.pks{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;justify-content:center;}
+.pk{border-radius:18px;padding:2px 7px;font-size:.55rem;font-weight:700;}
+.pk.rb{background:rgba(255,68,170,.08);border:1px solid rgba(255,68,170,.16);color:var(--pk);}
+.pk.asc{background:rgba(0,238,255,.08);border:1px solid rgba(0,238,255,.16);color:var(--cy);}
+.pk.tr{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.16);color:var(--gold);}
 
 /* SEC TITLE */
-.sec{font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:3px;color:var(--muted);
-  text-transform:uppercase;margin:7px 0 6px;display:flex;align-items:center;gap:7px;}
-.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--muted),transparent);}
-.sbadge{font-size:.52rem;color:var(--accent);background:rgba(0,255,204,.09);
-  border:1px solid rgba(0,255,204,.18);padding:1px 6px;border-radius:9px;}
+.sec{font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:3px;color:var(--mu);
+  text-transform:uppercase;margin:7px 0 5px;display:flex;align-items:center;gap:6px;}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--mu),transparent);}
+.sb{font-size:.5rem;color:var(--ac);background:rgba(0,255,204,.08);
+  border:1px solid rgba(0,255,204,.16);padding:1px 6px;border-radius:8px;}
 
 /* CARDS */
-.clist{display:flex;flex-direction:column;gap:5px;margin-bottom:7px;}
-.card{background:var(--panel);border:1px solid rgba(255,255,255,.045);border-radius:13px;
-  padding:9px 11px;display:flex;align-items:center;gap:9px;cursor:pointer;
-  transition:all .17s;position:relative;overflow:hidden;}
+.cl{display:flex;flex-direction:column;gap:5px;margin-bottom:7px;}
+.card{background:var(--p);border:1px solid rgba(255,255,255,.042);border-radius:12px;
+  padding:8px 10px;display:flex;align-items:center;gap:8px;cursor:pointer;
+  transition:all .16s;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  border-radius:3px 0 0 3px;opacity:0;transition:opacity .2s;}
-.card.aff{border-color:rgba(255,215,0,.17);}
-.card.aff::before{background:var(--gold);opacity:1;}
-.card.aff:hover{background:var(--panel2);border-color:rgba(255,215,0,.32);transform:translateX(2px);}
-.card.maxed{border-color:rgba(0,255,204,.13);opacity:.68;}
-.card.maxed::before{background:var(--accent);opacity:1;}
-.card.locked{opacity:.25;cursor:not-allowed;}
-.card.spec::before{background:var(--purple);opacity:1;border-color:rgba(180,79,255,.2);}
-.cico{font-size:1.7rem;min-width:34px;text-align:center;flex-shrink:0;}
-.cbody{flex:1;min-width:0;}
-.cname{font-size:.82rem;font-weight:700;}
-.cdesc{font-size:.63rem;color:var(--muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.cr{text-align:right;flex-shrink:0;}
-.ccost{font-family:'Orbitron',sans-serif;font-size:.67rem;font-weight:700;color:var(--gold);}
-.ccost.dim{color:var(--muted);}
-.clvl{font-size:.56rem;color:var(--muted);margin-top:1px;}
-.clvl b{color:var(--accent);}
-.genn{font-family:'Orbitron',sans-serif;font-size:.95rem;font-weight:900;
-  color:var(--accent);min-width:26px;text-align:center;flex-shrink:0;}
-.genn.mega{color:var(--purple);}
-.genn.div{color:var(--pink);}
-.genn.asc{color:var(--cyan);}
+  border-radius:3px 0 0 3px;opacity:0;transition:opacity .18s;}
+.card.af{border-color:rgba(255,215,0,.15);} .card.af::before{background:var(--gold);opacity:1;}
+.card.af:hover{background:var(--p2);border-color:rgba(255,215,0,.3);transform:translateX(2px);}
+.card.mx{border-color:rgba(0,255,204,.12);opacity:.65;} .card.mx::before{background:var(--ac);opacity:1;}
+.card.lk{opacity:.22;cursor:not-allowed;}
+.card.sp::before{background:var(--pu);opacity:1;}
+.card.sp{border-color:rgba(180,79,255,.15);}
+.cico{font-size:1.6rem;min-width:32px;text-align:center;flex-shrink:0;}
+.cb{flex:1;min-width:0;}
+.cn{font-size:.78rem;font-weight:700;}
+.cd{font-size:.6rem;color:var(--mu);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cr2{text-align:right;flex-shrink:0;}
+.cc{font-family:'Orbitron',sans-serif;font-size:.64rem;font-weight:700;color:var(--gold);}
+.cc.dm{color:var(--mu);}
+.clv{font-size:.54rem;color:var(--mu);margin-top:1px;}
+.clv b{color:var(--ac);}
+.gn{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:900;
+  color:var(--ac);min-width:24px;text-align:center;flex-shrink:0;}
+.gn.mg{color:var(--pu);}
+.gn.dv{color:var(--pk);}
+.gn.ag{color:var(--cy);}
+.gn.tg{color:var(--gold);}
 
 /* RELICS */
-.rslots{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:9px;}
-.rslot{background:var(--panel2);border:1px solid rgba(255,255,255,.06);border-radius:10px;
+.rsl{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;}
+.rs{background:var(--p2);border:1px solid rgba(255,255,255,.055);border-radius:9px;
   aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-size:1.4rem;cursor:pointer;transition:all .2s;position:relative;}
-.rslot.filled{border-color:rgba(180,79,255,.3);background:rgba(180,79,255,.05);}
-.rslot.filled:hover{border-color:rgba(180,79,255,.55);}
-.rsl{font-size:.48rem;color:var(--muted);margin-top:2px;text-align:center;}
-.rsla{font-size:.48rem;color:var(--purple);font-weight:700;}
-.rslbadge{position:absolute;top:2px;right:2px;background:var(--purple);color:#fff;
-  font-size:.42rem;font-weight:700;padding:1px 3px;border-radius:5px;}
+  font-size:1.3rem;cursor:pointer;transition:all .18s;position:relative;}
+.rs.fi{border-color:rgba(180,79,255,.28);background:rgba(180,79,255,.045);}
+.rs.fi:hover{border-color:rgba(180,79,255,.52);}
+.rsl2{font-size:.46rem;color:var(--mu);margin-top:2px;text-align:center;}
+.rsla{font-size:.46rem;color:var(--pu);font-weight:700;}
+.rsb{position:absolute;top:2px;right:2px;background:var(--pu);color:#fff;
+  font-size:.4rem;font-weight:700;padding:1px 3px;border-radius:5px;}
 
-/* ACHIEVEMENTS */
-.acard{background:var(--panel);border:1px solid rgba(255,255,255,.04);border-radius:13px;
-  padding:8px 11px;display:flex;align-items:center;gap:9px;margin-bottom:5px;position:relative;overflow:hidden;}
-.acard.done{border-color:rgba(255,215,0,.18);}
-.acard.lka{opacity:.3;filter:grayscale(.85);}
-.aico{font-size:1.6rem;min-width:32px;text-align:center;}
+/* ACH */
+.ach{background:var(--p);border:1px solid rgba(255,255,255,.04);border-radius:12px;
+  padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:5px;position:relative;overflow:hidden;}
+.ach.do{border-color:rgba(255,215,0,.16);}
+.ach.lk2{opacity:.28;filter:grayscale(.9);}
+.aico{font-size:1.5rem;min-width:30px;text-align:center;}
 .abody{flex:1;}
-.aname{font-size:.8rem;font-weight:700;}
-.adesc{font-size:.63rem;color:var(--muted);margin-top:1px;}
-.arew{font-size:.6rem;color:var(--gold);margin-top:1px;font-weight:700;}
-.apbar{height:3px;background:rgba(255,215,0,.08);border-radius:2px;margin-top:3px;overflow:hidden;}
-.apfill{height:100%;background:var(--gold);border-radius:2px;}
-.ashine{position:absolute;top:0;right:0;bottom:0;left:55%;
+.an{font-size:.76rem;font-weight:700;}
+.ad{font-size:.6rem;color:var(--mu);margin-top:1px;}
+.ar{font-size:.58rem;color:var(--gold);margin-top:1px;font-weight:700;}
+.apb{height:3px;background:rgba(255,215,0,.07);border-radius:2px;margin-top:3px;overflow:hidden;}
+.apbf{height:100%;background:var(--gold);border-radius:2px;}
+.ash{position:absolute;top:0;right:0;bottom:0;left:55%;
   background:linear-gradient(90deg,transparent,rgba(255,215,0,.04));pointer-events:none;}
 
 /* STATS */
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px;}
-.sbox{background:var(--panel);border:1px solid rgba(255,255,255,.05);border-radius:13px;padding:10px;}
-.slbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
-.sval{font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--gold);margin-top:2px;}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;}
+.sb2{background:var(--p);border:1px solid rgba(255,255,255,.045);border-radius:12px;padding:9px;}
+.sl{font-size:.58rem;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;}
+.sv{font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;color:var(--gold);margin-top:2px;}
 
-/* WORLD MAP */
-.wmap{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:9px;}
-.zone{background:var(--panel);border:1px solid rgba(255,255,255,.05);border-radius:13px;
-  padding:9px 5px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
-.zone.cur{border-color:var(--accent);background:var(--panel3);}
-.zone.done{border-color:rgba(0,255,136,.18);opacity:.72;}
-.zone.lkz{opacity:.28;cursor:not-allowed;}
-.zico{font-size:1.4rem;}
-.zname{font-size:.56rem;font-weight:700;margin-top:2px;color:var(--text);}
-.ztier{font-size:.48rem;color:var(--muted);}
-.zstar{position:absolute;top:2px;right:3px;font-size:.58rem;}
+/* WORLD */
+.wm{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;}
+.zone{background:var(--p);border:1px solid rgba(255,255,255,.045);border-radius:12px;
+  padding:8px 4px;text-align:center;transition:all .18s;position:relative;}
+.zone.cu{border-color:var(--ac);background:var(--p3);}
+.zone.dn{border-color:rgba(0,255,136,.16);opacity:.7;}
+.zone.lo{opacity:.22;}
+.zic{font-size:1.3rem;}
+.zn{font-size:.52rem;font-weight:700;margin-top:2px;color:var(--tx);}
+.zt{font-size:.45rem;color:var(--mu);}
+.zs{position:absolute;top:2px;right:2px;font-size:.55rem;}
 
-/* MINIGAME */
-.mgwrap{border-radius:13px;padding:11px 13px;margin-bottom:9px;
+/* MG */
+.mgw{border-radius:12px;padding:10px 12px;margin-bottom:8px;
   background:linear-gradient(135deg,rgba(0,238,255,.04),rgba(34,153,255,.04));
-  border:1px solid rgba(0,238,255,.18);}
-.mgttl{font-family:'Orbitron',sans-serif;font-size:.67rem;color:var(--cyan);letter-spacing:2px;margin-bottom:7px;}
-.mgbtn{background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;border-radius:9px;
-  color:#000;font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:900;
-  padding:8px 18px;cursor:pointer;letter-spacing:1px;transition:all .2s;}
-.mgbtn:hover:not(:disabled){transform:scale(1.04);}
-.mgbtn:disabled{opacity:.4;cursor:not-allowed;}
-.cfgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:7px 0;}
-.cfcell{background:var(--panel2);border:1px solid rgba(255,255,255,.06);border-radius:7px;
-  aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  cursor:pointer;transition:all .14s;}
-.cfcell.act{background:rgba(255,215,0,.13);border-color:var(--gold);}
-.cfcell.hit{animation:cfh .14s ease-out;}
+  border:1px solid rgba(0,238,255,.16);}
+.mgt{font-family:'Orbitron',sans-serif;font-size:.64rem;color:var(--cy);letter-spacing:2px;margin-bottom:6px;}
+.mgb{background:linear-gradient(135deg,var(--cy),var(--bl));border:none;border-radius:8px;
+  color:#000;font-family:'Orbitron',sans-serif;font-size:.62rem;font-weight:900;
+  padding:7px 15px;cursor:pointer;letter-spacing:1px;transition:all .18s;}
+.mgb:hover:not(:disabled){transform:scale(1.04);}
+.mgb:disabled{opacity:.38;cursor:not-allowed;}
+.mgb.pu{background:linear-gradient(135deg,var(--pu),var(--pu2));color:#fff;}
+.mgb.go{background:linear-gradient(135deg,var(--gold),var(--go));color:#000;}
+.cfgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 0;}
+.cfc{background:var(--p2);border:1px solid rgba(255,255,255,.055);border-radius:7px;
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem;
+  cursor:pointer;transition:all .13s;}
+.cfc.ac{background:rgba(255,215,0,.12);border-color:var(--gold);}
+.cfc.ht{animation:cfh .13s ease-out;}
 @keyframes cfh{0%{transform:scale(1.35);}100%{transform:scale(1);}}
+.nrg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0;}
+.nrc{background:var(--p2);border:1px solid rgba(255,255,255,.055);border-radius:8px;
+  padding:9px 3px;text-align:center;cursor:pointer;transition:all .13s;font-weight:700;font-size:.85rem;}
+.nrc:hover{background:var(--p3);}
+.nrc.co{background:rgba(34,255,136,.18);border-color:var(--gr);}
+.nrc.wr{background:rgba(255,51,85,.18);border-color:var(--re);}
+/* CLICK RACE */
+.crace{text-align:center;}
+.crprog{height:14px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.05);
+  border:1px solid rgba(0,238,255,.2);margin:6px 0;}
+.crprogf{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--cy),var(--bl));transition:width .1s;}
 
-/* NUMBER RUSH MINIGAME */
-.nrgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:7px 0;}
-.nrcell{background:var(--panel2);border:1px solid rgba(255,255,255,.06);border-radius:8px;
-  padding:10px 4px;text-align:center;cursor:pointer;transition:all .14s;font-weight:700;font-size:.9rem;}
-.nrcell:hover{background:var(--panel3);}
-.nrcell.correct{background:rgba(34,255,136,.2);border-color:var(--green);}
-.nrcell.wrong{background:rgba(255,51,85,.2);border-color:var(--red);}
+/* FLOAT */
+.ft{position:fixed;font-family:'Orbitron',sans-serif;font-weight:900;font-size:.9rem;
+  pointer-events:none;z-index:9999;animation:fu .8s ease-out forwards;
+  color:var(--gold);text-shadow:0 0 9px rgba(255,215,0,.6);}
+.ft.cr{font-size:1.25rem;color:#ff9944!important;text-shadow:0 0 14px #ff440099!important;}
+.ft.bo{color:var(--pu)!important;text-shadow:0 0 11px rgba(180,79,255,.6)!important;}
+.ft.bk{color:var(--re)!important;text-shadow:0 0 11px rgba(255,51,85,.6)!important;}
+.ft.pk{color:var(--pk)!important;text-shadow:0 0 11px rgba(255,68,170,.6)!important;}
+.ft.cy{color:var(--cy)!important;text-shadow:0 0 11px rgba(0,238,255,.6)!important;}
+@keyframes fu{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-88px) scale(.38);}}
 
-/* FLOAT TEXT */
-.ft{position:fixed;font-family:'Orbitron',sans-serif;font-weight:900;font-size:.95rem;
-  pointer-events:none;z-index:9999;animation:fup .82s ease-out forwards;
-  color:var(--gold);text-shadow:0 0 10px rgba(255,215,0,.65);}
-.ft.crit{font-size:1.3rem;color:#ff9944!important;text-shadow:0 0 14px #ff4400aa!important;}
-.ft.bon{color:var(--purple)!important;text-shadow:0 0 12px rgba(180,79,255,.65)!important;}
-.ft.boss{color:var(--red)!important;text-shadow:0 0 12px rgba(255,51,85,.65)!important;}
-.ft.pink{color:var(--pink)!important;text-shadow:0 0 12px rgba(255,68,170,.65)!important;}
-@keyframes fup{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-90px) scale(.4);}}
-
-/* TOASTS */
-.toasts{position:fixed;top:11px;left:50%;transform:translateX(-50%);
+/* TOAST */
+.toasts{position:fixed;top:10px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;gap:4px;z-index:10000;pointer-events:none;align-items:center;}
-.toast{background:var(--panel2);border-radius:12px;padding:7px 16px;
-  font-family:'Orbitron',sans-serif;font-size:.67rem;font-weight:700;white-space:nowrap;
+.toast{background:var(--p2);border-radius:11px;padding:6px 15px;
+  font-family:'Orbitron',sans-serif;font-size:.64rem;font-weight:700;white-space:nowrap;
   border:1px solid var(--gold);color:var(--gold);
-  box-shadow:0 0 14px rgba(255,215,0,.18);animation:tin .32s cubic-bezier(.34,1.56,.64,1) forwards;}
-.toast.red{border-color:var(--red);color:var(--red);}
-.toast.green{border-color:var(--green);color:var(--green);}
-.toast.purple{border-color:var(--purple);color:var(--purple);}
-.toast.blue{border-color:var(--blue);color:var(--blue);}
-.toast.pink{border-color:var(--pink);color:var(--pink);}
-.toast.cyan{border-color:var(--cyan);color:var(--cyan);}
-@keyframes tin{from{opacity:0;transform:scale(.6) translateY(-8px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  box-shadow:0 0 13px rgba(255,215,0,.16);animation:tin .3s cubic-bezier(.34,1.56,.64,1) forwards;}
+.toast.re{border-color:var(--re);color:var(--re);}
+.toast.gr{border-color:var(--gr);color:var(--gr);}
+.toast.pu{border-color:var(--pu);color:var(--pu);}
+.toast.bl{border-color:var(--bl);color:var(--bl);}
+.toast.pk{border-color:var(--pk);color:var(--pk);}
+.toast.cy{border-color:var(--cy);color:var(--cy);}
+@keyframes tin{from{opacity:0;transform:scale(.55) translateY(-8px);}to{opacity:1;transform:scale(1) translateY(0);}}
 
-/* OVERLAYS */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.83);z-index:20000;
+/* OVERLAY */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.84);z-index:20000;
   display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
-.modal{background:var(--panel2);border-radius:18px;padding:24px;text-align:center;
-  max-width:308px;width:92%;animation:min .38s cubic-bezier(.34,1.56,.64,1);}
-@keyframes min{from{opacity:0;transform:scale(.6);}to{opacity:1;transform:scale(1);}}
-.modal h2{font-family:'Orbitron',sans-serif;font-size:.9rem;margin-bottom:7px;}
-.modal p{font-size:.75rem;color:var(--muted);line-height:1.6;margin-bottom:12px;}
-.mval{font-family:'Orbitron',sans-serif;font-size:1.6rem;color:var(--gold);
-  text-shadow:var(--glow);margin:8px 0;}
-.mbtn{border:none;border-radius:9px;font-family:'Orbitron',sans-serif;font-size:.68rem;font-weight:900;
-  padding:9px 22px;cursor:pointer;letter-spacing:1px;transition:all .2s;margin:3px;}
-.mbtn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#000;}
-.mbtn.red{background:linear-gradient(135deg,var(--red),#bb0011);color:#fff;}
-.mbtn.grey{background:var(--panel3);color:var(--muted);border:1px solid rgba(255,255,255,.07);}
+.modal{background:var(--p2);border-radius:17px;padding:22px;text-align:center;
+  max-width:305px;width:92%;animation:mi .36s cubic-bezier(.34,1.56,.64,1);}
+@keyframes mi{from{opacity:0;transform:scale(.58);}to{opacity:1;transform:scale(1);}}
+.modal h2{font-family:'Orbitron',sans-serif;font-size:.88rem;margin-bottom:6px;}
+.modal p{font-size:.72rem;color:var(--mu);line-height:1.6;margin-bottom:11px;}
+.mval{font-family:'Orbitron',sans-serif;font-size:1.5rem;color:var(--gold);text-shadow:var(--glow);margin:7px 0;}
+.mbtn{border:none;border-radius:9px;font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:900;
+  padding:8px 20px;cursor:pointer;letter-spacing:1px;transition:all .18s;margin:3px;}
+.mbtn.go{background:linear-gradient(135deg,var(--go),var(--gold));color:#000;}
+.mbtn.re{background:linear-gradient(135deg,var(--re),#aa0011);color:#fff;}
+.mbtn.gy{background:var(--p3);color:var(--mu);border:1px solid rgba(255,255,255,.07);}
 
 /* MILESTONE */
-.mile{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) scale(0);
-  background:linear-gradient(135deg,var(--panel2),var(--panel3));border-radius:13px;
-  border:1px solid var(--purple);padding:10px 20px;text-align:center;z-index:9000;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
+.mile{position:fixed;bottom:65px;left:50%;transform:translateX(-50%) scale(0);
+  background:linear-gradient(135deg,var(--p2),var(--p3));border-radius:12px;
+  border:1px solid var(--pu);padding:9px 18px;text-align:center;z-index:9000;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
 .mile.on{transform:translateX(-50%) scale(1);}
-.mlet{font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--purple);font-weight:700;}
-.mles{font-size:.65rem;color:var(--muted);margin-top:1px;}
+.mlt{font-family:'Orbitron',sans-serif;font-size:.68rem;color:var(--pu);font-weight:700;}
+.mls{font-size:.62rem;color:var(--mu);margin-top:1px;}
 
-/* Daily bonus indicator */
-.daily-btn{background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,165,0,.08));
-  border:1px solid rgba(255,215,0,.3);border-radius:9px;padding:5px 10px;
-  font-size:.65rem;color:var(--gold);cursor:pointer;font-weight:700;white-space:nowrap;}
-.daily-btn.claimed{opacity:.4;cursor:not-allowed;border-color:rgba(255,255,255,.1);color:var(--muted);}
-
-@media(max-height:670px){
-  .tapico{font-size:2.4rem;}
-  .tapbtn{width:130px;height:130px;}
-  .tapouter{width:130px;height:130px;}
-  .mnum{font-size:1.75rem;}
+@media(max-height:660px){
+  .tapbtn,.to{width:125px;height:125px;}
+  .tico{font-size:2.3rem;}
+  .mn{font-size:1.65rem;}
 }
 </style>
 </head>
 <body>
-<div id="bgGrid"></div>
-<div id="bgGlow"></div>
-<div id="bgStars"></div>
-
+<div id="BG"></div><div id="GL"></div><div id="ST"></div>
 <div class="app">
+
 <!-- TOPBAR -->
-<div class="topbar">
-  <div>
-    <span class="logo">TAP EMPIRE</span>
-    <span class="ver">V0.4</span>
-  </div>
+<div class="tb">
+  <div><span class="logo">TAP EMPIRE</span><span class="ver">V0.5</span></div>
   <div class="tbr">
-    <div class="rb-badge" id="rbBadge" onclick="sw('rebirth')">🔁 0×</div>
-    <button class="daily-btn" id="dailyBtn" onclick="claimDaily()">🎁 Daily</button>
+    <div class="rbb" id="rbb" onclick="sw('rb')">🔁 0×</div>
+    <div class="asb" id="asb" onclick="sw('asc')">🌠 0</div>
+    <button class="dly" id="dlyBtn" onclick="openDaily()">🎁 Daily</button>
     <button class="tbtn" onclick="saveGame()">💾</button>
     <button class="tbtn" onclick="openSet()">⚙️</button>
   </div>
 </div>
 
 <!-- MONEY PANEL -->
-<div class="mpanel">
+<div class="mp">
   <div class="mpbg"></div>
-  <div class="ev-badge on" id="evBadge" style="display:none">⚡ EVENT!</div>
-  <div class="mrow">
-    <div class="mnum" id="mNum">0</div>
-    <div class="msfx" id="mSfx"></div>
-  </div>
-  <div class="trow"><div class="tpill" id="tPill">🌱 MULAI</div></div>
-  <div class="mmeta">
-    <div class="mmi" style="color:var(--accent)" id="mPs">⚡ 0/dtk</div>
-    <div class="mmi" style="color:var(--gold2)" id="mTap">👆 1/tap</div>
-    <div class="mmi" style="color:var(--pink);display:none" id="mRb">🔁 ×1</div>
+  <div class="evbadge" id="evBadge">⚡ EVENT!</div>
+  <div class="mrow"><div class="mn" id="MN">0</div><div class="ms" id="MS"></div></div>
+  <div class="trow"><div class="tpill" id="TP">🌱 MULAI</div></div>
+  <div class="mm">
+    <div class="mmi" style="color:var(--ac)" id="MPS">⚡ 0/dtk</div>
+    <div class="mmi" style="color:var(--go)" id="MTP">👆 1/tap</div>
+    <div class="mmi" style="color:var(--pk);display:none" id="MRB">🔁 ×1</div>
   </div>
 </div>
 
 <!-- TIER BAR -->
-<div class="tprog">
+<div class="tp">
   <div class="tbar">
-    <div class="tbfill" id="tFill" style="width:0%"></div>
-    <div class="tbshine"></div>
-    <div class="tbtxt" id="tTxt">—</div>
+    <div class="tbf" id="TF" style="width:0%"></div>
+    <div class="tbsh"></div>
+    <div class="tbt" id="TT">—</div>
   </div>
 </div>
 
 <!-- TABS -->
-<div class="tabs" id="tabRow">
+<div class="tabs" id="TABS">
   <div class="tab on" id="tab-tap" onclick="sw('tap')"><span class="ti">💎</span>Tap<div class="dot" id="d-tap"></div></div>
   <div class="tab" id="tab-shop" onclick="sw('shop')"><span class="ti">⚡</span>Shop<div class="dot" id="d-shop"></div></div>
   <div class="tab" id="tab-gen" onclick="sw('gen')"><span class="ti">🏭</span>Gen<div class="dot" id="d-gen"></div></div>
   <div class="tab" id="tab-world" onclick="sw('world')"><span class="ti">🗺️</span>World</div>
   <div class="tab" id="tab-relic" onclick="sw('relic')"><span class="ti">💠</span>Relic<div class="dot" id="d-relic"></div></div>
   <div class="tab" id="tab-ach" onclick="sw('ach')"><span class="ti">🏆</span>Medal<div class="dot" id="d-ach"></div></div>
-  <div class="tab" id="tab-rebirth" onclick="sw('rebirth')"><span class="ti">🔁</span>Rebirth</div>
+  <div class="tab" id="tab-rb" onclick="sw('rb')"><span class="ti">🔁</span>Rebirth</div>
   <div class="tab" id="tab-asc" onclick="sw('asc')"><span class="ti">🌠</span>Ascend</div>
+  <div class="tab" id="tab-trans" onclick="sw('trans')"><span class="ti">🌀</span>Trans</div>
   <div class="tab" id="tab-stats" onclick="sw('stats')"><span class="ti">📊</span>Stats</div>
 </div>
 
-<!-- SCROLL AREA -->
-<div class="scr" id="scr">
+<div class="sc" id="SC">
 
-<!-- TAP TAB -->
+<!-- TAP -->
 <div id="c-tap">
-  <div class="tapwrap">
-    <div class="combotxt" id="comboTxt">🔥 COMBO ×1</div>
-    <div class="tapouter">
-      <div class="ring1"></div><div class="ring2"></div>
-      <button class="tapbtn" id="tapBtn">
-        <div class="cf" id="cfEl"></div>
-        <div class="lhalo" id="lhalo"></div>
-        <div class="bhalo" id="bhalo"></div>
-        <div class="tapico" id="tapIco">💎</div>
-        <div class="taplbl">TAP!</div>
+  <div class="tw">
+    <div class="ct" id="CT">🔥 COMBO ×1</div>
+    <div class="to">
+      <div class="r1"></div><div class="r2"></div>
+      <button class="tapbtn" id="TAPBTN">
+        <div class="cf" id="CF"></div>
+        <div class="lh" id="LH"></div>
+        <div class="bh" id="BH"></div>
+        <div class="ch" id="CH"></div>
+        <div class="tico" id="TICO">💎</div>
+        <div class="tlbl">TAP!</div>
       </button>
     </div>
-    <div class="qstats">
-      <div class="qs"><div class="qsv" id="qs0">0</div><div class="qsl">Total Tap</div></div>
-      <div class="qs"><div class="qsv" id="qs1">0×</div><div class="qsl">Combo</div></div>
-      <div class="qs"><div class="qsv" id="qs2">5%</div><div class="qsl">Crit%</div></div>
-      <div class="qs"><div class="qsv" id="qs3">0</div><div class="qsl">Boss Kill</div></div>
+    <div class="qs">
+      <div class="qsi"><div class="qsv" id="QS0">0</div><div class="qsl">Tap</div></div>
+      <div class="qsi"><div class="qsv" id="QS1">0×</div><div class="qsl">Combo</div></div>
+      <div class="qsi"><div class="qsv" id="QS2">5%</div><div class="qsl">Crit%</div></div>
+      <div class="qsi"><div class="qsv" id="QS3">0</div><div class="qsl">BossKill</div></div>
+      <div class="qsi"><div class="qsv" id="QS4">0</div><div class="qsl">Chain</div></div>
     </div>
   </div>
 
-  <div class="evbanner" id="evBanner">
-    <div class="evico" id="evIco">🍀</div>
-    <div class="evbody">
-      <div class="evname" id="evName">Lucky!</div>
-      <div class="evdesc" id="evDesc">Tap ×3</div>
-    </div>
-    <div class="evtimer" id="evTimer">30s</div>
+  <!-- CHAIN KILL -->
+  <div class="ckpanel" id="CKP">
+    <div class="cknum" id="CKN">🔥 0× CHAIN KILL!</div>
+    <div class="cklbl" id="CKL">Kalahkan boss berikutnya dalam 30 detik untuk chain bonus!</div>
   </div>
 
-  <div class="bosspanel" id="bossPanel">
-    <div class="bossttl">⚔️ BOSS MUNCUL!</div>
-    <div class="bossrow">
-      <div class="bossico" id="bIco">👹</div>
-      <div class="bossinfo">
-        <div class="bossname" id="bName">Goblin Kapak</div>
-        <div class="bosshpbar"><div class="bosshpfill" id="bHpF" style="width:100%"></div></div>
-        <div class="bosshptxt" id="bHpT">HP: 100 / 100</div>
-        <div class="bossrew" id="bRew">Reward: 100</div>
+  <div class="evb" id="EVB">
+    <div class="evico" id="EVICO">🍀</div>
+    <div class="evbd"><div class="evn" id="EVN">Lucky!</div><div class="evd" id="EVD">Tap ×3</div></div>
+    <div class="evt" id="EVT">30s</div>
+  </div>
+
+  <div class="bsp" id="BSP">
+    <div class="bst">⚔️ BOSS MUNCUL!</div>
+    <div class="bsr">
+      <div class="bsi" id="BICO">👹</div>
+      <div class="bsif">
+        <div class="bsn" id="BNM">Boss</div>
+        <div class="bshb"><div class="bshf" id="BHF" style="width:100%"></div></div>
+        <div class="bsht" id="BHT">HP: 100/100</div>
+        <div class="bsrw" id="BRW">Reward: 0</div>
       </div>
     </div>
   </div>
 
-  <div class="ppanel">
-    <div class="pstars" id="pStars">☆</div>
+  <div class="pp">
+    <div class="pst" id="PST">☆</div>
     <div class="pttl">✨ PRESTIGE</div>
-    <div class="pinfo">Reset semua, bonus permanen tetap.<br>Butuh: <b id="pReq">1 Qi</b></div>
-    <button class="pbtn" id="pBtn" onclick="doPrestige()" disabled>🌟 PRESTIGE!</button>
-    <div class="pperks" id="pPerks"></div>
+    <div class="pi">Reset semua, bonus permanen.<br>Butuh: <b id="PRQ">1 Qi</b></div>
+    <button class="pbtn" id="PBTN" onclick="doPrestige()" disabled>🌟 PRESTIGE!</button>
+    <div class="ppk" id="PPK"></div>
   </div>
 </div>
 
-<!-- SHOP TAB -->
+<!-- SHOP -->
 <div id="c-shop" style="display:none">
-  <div class="sec">⚡ Upgrade Tap <span class="sbadge" id="shopUBadge">—</span></div>
-  <div class="clist" id="upgCont"></div>
-  <div class="sec">🔓 Skill Pasif <span class="sbadge" id="shopPBadge">—</span></div>
-  <div class="clist" id="pasCont"></div>
+  <div class="sec">⚡ Upgrade Tap <span class="sb" id="SUB">—</span></div>
+  <div class="cl" id="UC"></div>
+  <div class="sec">🔓 Skill Pasif <span class="sb" id="SPB">—</span></div>
+  <div class="cl" id="PC"></div>
   <div class="sec">🎮 Mini Game</div>
-  <div class="mgwrap" id="mgWrap">Loading...</div>
+  <div class="mgw" id="MGW">Loading...</div>
 </div>
 
-<!-- GEN TAB -->
+<!-- GEN -->
 <div id="c-gen" style="display:none">
-  <div class="sec">🏭 Generator <span class="sbadge" id="genBadge">0 aktif</span></div>
-  <div class="clist" id="genCont"></div>
+  <div class="sec">🏭 Generator <span class="sb" id="GB">0 aktif</span></div>
+  <div class="cl" id="GC"></div>
   <div class="sec">🚀 Mega Generator</div>
-  <div class="clist" id="megaCont"></div>
-  <div class="sec">⚗️ Divine Generator <span class="sbadge">Post-END</span></div>
-  <div class="clist" id="divCont"></div>
-  <div class="sec">🌠 Ascension Generator <span class="sbadge">Post-∞</span></div>
-  <div class="clist" id="ascGenCont"></div>
+  <div class="cl" id="MC"></div>
+  <div class="sec">⚗️ Divine Generator <span class="sb">Post-END</span></div>
+  <div class="cl" id="DC"></div>
+  <div class="sec">🌠 Ascension Generator <span class="sb">Post-∞</span></div>
+  <div class="cl" id="AC2"></div>
+  <div class="sec">🌀 Transcendence Generator <span class="sb">Post-THE REAL END</span></div>
+  <div class="cl" id="TC"></div>
 </div>
 
-<!-- WORLD TAB -->
+<!-- WORLD -->
 <div id="c-world" style="display:none">
   <div class="sec">🗺️ Peta Dunia</div>
-  <div class="wmap" id="wmap"></div>
-  <div class="sec">⚔️ Riwayat Boss</div>
-  <div class="clist" id="bossLog"></div>
+  <div class="wm" id="WM"></div>
+  <div class="sec">⚔️ Boss History <span class="sb" id="BKB">0 killed</span></div>
+  <div class="cl" id="BL"></div>
 </div>
 
-<!-- RELIC TAB -->
+<!-- RELIC -->
 <div id="c-relic" style="display:none">
-  <div class="sec">💠 Relic Aktif <span class="sbadge" id="relicSlotBadge">0/4</span></div>
-  <div class="rslots" id="rSlots"></div>
-  <div class="sec">📦 Koleksi Relic</div>
-  <div class="clist" id="relicCont"></div>
+  <div class="sec">💠 Slot Aktif <span class="sb" id="RSB">0/4</span></div>
+  <div class="rsl" id="RSL"></div>
+  <div class="sec">📦 Koleksi</div>
+  <div class="cl" id="RC"></div>
 </div>
 
-<!-- ACHIEVEMENTS TAB -->
+<!-- ACH -->
 <div id="c-ach" style="display:none">
-  <div class="sec">🏆 Pencapaian <span class="sbadge" id="achBadge">0/0</span></div>
-  <div id="achCont"></div>
+  <div class="sec">🏆 Pencapaian <span class="sb" id="AB">0/0</span></div>
+  <div id="ACHC"></div>
 </div>
 
-<!-- REBIRTH TAB -->
-<div id="c-rebirth" style="display:none">
-  <div class="rbpanel">
-    <div class="rbttl">🔁 REBIRTH</div>
-    <div class="rbinfo" id="rbInfo">Reset prestige+generator. Dapatkan <b>Rebirth Bonus</b> permanen masif.<br>Butuh: <b>Prestige 10× + tier THE END</b></div>
-    <button class="rbbtn" id="rbBtn" onclick="doRebirth()" disabled>🔁 REBIRTH!</button>
-    <div class="rbperks" id="rbPerks"></div>
+<!-- REBIRTH -->
+<div id="c-rb" style="display:none">
+  <div class="panel rb">
+    <h3 class="rb">🔁 REBIRTH</h3>
+    <p id="RBI">Reset prestige+generator. Rebirth bonus permanen masif.<br>Butuh: <b>Prestige 10× + THE END tier</b></p>
+    <button class="pbtn2 rb" id="RBBTN" onclick="doRebirth()" disabled>🔁 REBIRTH!</button>
+    <div class="pks" id="RBPK"></div>
   </div>
   <div class="sec">💡 Rebirth Upgrade</div>
-  <div class="clist" id="rbUpgCont"></div>
+  <div class="cl" id="RUC"></div>
 </div>
 
-<!-- ASCENSION TAB -->
+<!-- ASCEND -->
 <div id="c-asc" style="display:none">
-  <div class="aspanel">
-    <div class="asttl">🌠 ASCENSION</div>
-    <div class="asinfo" id="asInfo">Melampaui Rebirth. Reset segalanya termasuk Rebirth. Dapatkan <b>Ascension Token</b> permanen yang memberi kekuatan diluar nalar.<br>Butuh: <b>Rebirth 5× + tier ∞ ABSOLUTE</b></div>
-    <button class="asbtn" id="asBtn" onclick="doAscension()" disabled>🌠 ASCEND!</button>
+  <div class="panel asc">
+    <h3 class="asc">🌠 ASCENSION</h3>
+    <p id="ASI">Melampaui Rebirth. Dapat Ascension Token.<br>Butuh: <b>Rebirth 5× + VT 17 (∞ ABSOLUTE)</b></p>
+    <button class="pbtn2 asc" id="ASBTN" onclick="doAscension()" disabled>🌠 ASCEND!</button>
+    <div class="pks" id="ASPK"></div>
   </div>
-  <div class="sec">⭐ Ascension Token: <span class="sbadge" id="asTokenBadge">0</span></div>
-  <div class="sec">🔮 Ascension Upgrades</div>
-  <div class="clist" id="asUpgCont"></div>
-  <div class="sec">📜 Riwayat Ascension</div>
-  <div id="asHistory" style="font-size:.7rem;color:var(--muted);padding:6px 0">Belum pernah ascension.</div>
+  <div class="sec">🔮 Ascension Upgrade <span class="sb" id="ATB">0 Token</span></div>
+  <div class="cl" id="AUC"></div>
 </div>
 
-<!-- STATS TAB -->
+<!-- TRANSCENDENCE -->
+<div id="c-trans" style="display:none">
+  <div class="panel tr">
+    <h3 class="tr">🌀 TRANSCENDENCE</h3>
+    <p id="TRI">Melampaui Ascension. Reset segalanya. Dapat <b>Transcendence Crystal</b> permanen — kekuatan melampaui logika.<br>Butuh: <b>Ascension 3× + VT 34 (THE REAL END)</b></p>
+    <button class="pbtn2 tr" id="TRBTN" onclick="doTranscend()" disabled>🌀 TRANSCEND!</button>
+    <div class="pks" id="TRPK"></div>
+  </div>
+  <div class="sec">💎 Transcendence Crystal <span class="sb" id="TCB">0 Crystal</span></div>
+  <div class="sec">⭐ Transcendence Upgrade</div>
+  <div class="cl" id="TUC"></div>
+  <div class="sec">📜 Tier Beyond THE REAL END</div>
+  <div id="POSTTRE" style="font-size:.68rem;color:var(--mu);line-height:2;padding:4px 0;"></div>
+</div>
+
+<!-- STATS -->
 <div id="c-stats" style="display:none">
   <div class="sec">📊 Statistik</div>
-  <div class="sgrid" id="statGrid"></div>
+  <div class="sg" id="SGR"></div>
   <div class="sec">🌌 Tier History</div>
-  <div id="tierHist" style="margin-bottom:10px;line-height:2.1;"></div>
+  <div id="THC" style="margin-bottom:10px;line-height:2.1;"></div>
 </div>
 
-</div><!-- end scr -->
+</div><!-- end SC -->
 </div><!-- end app -->
 
-<div class="toasts" id="toasts"></div>
+<div class="toasts" id="TOASTS"></div>
+<div class="mile" id="MILE"><div class="mlt" id="MLT">🎉</div><div class="mls" id="MLS">Tier baru!</div></div>
 
-<div class="mile" id="mile">
-  <div class="mlet" id="mileT">🎉 TIER BARU!</div>
-  <div class="mles" id="mileS">Luar biasa!</div>
-</div>
-
-<!-- OFFLINE MODAL -->
-<div class="ov" id="offModal" style="display:none">
+<!-- OFFLINE -->
+<div class="ov" id="OFFM" style="display:none">
   <div class="modal">
-    <h2 style="color:var(--cyan)">💤 Offline Income!</h2>
-    <p>Generator terus bekerja selama kamu pergi...</p>
-    <div class="mval" id="offVal">0</div>
-    <p style="color:var(--gold);font-size:.72rem">diterima! 🎉</p>
-    <button class="mbtn gold" onclick="document.getElementById('offModal').style.display='none'" style="margin-top:8px">AMBIL!</button>
+    <h2 style="color:var(--cy)">💤 Offline Income!</h2>
+    <p>Generator terus bekerja...</p>
+    <div class="mval" id="OFV">0</div>
+    <p style="color:var(--gold);font-size:.68rem">Diterima! 🎉</p>
+    <button class="mbtn go" onclick="document.getElementById('OFFM').style.display='none'" style="margin-top:7px">AMBIL!</button>
   </div>
 </div>
 
-<!-- SETTINGS MODAL -->
-<div class="ov" id="setModal" style="display:none">
+<!-- SETTINGS -->
+<div class="ov" id="SETM" style="display:none">
   <div class="modal">
     <h2 style="color:var(--gold)">⚙️ Pengaturan</h2>
-    <div style="text-align:left;margin:10px 0;display:flex;flex-direction:column;gap:9px;">
-      <label style="font-size:.78rem;display:flex;align-items:center;gap:8px;cursor:pointer;">
-        <input type="checkbox" id="setStars" checked onchange="G.cfg.stars=this.checked;document.getElementById('bgStars').style.display=this.checked?'block':'none'"> Animasi bintang latar
+    <div style="text-align:left;margin:9px 0;display:flex;flex-direction:column;gap:8px;">
+      <label style="font-size:.75rem;display:flex;align-items:center;gap:7px;cursor:pointer;">
+        <input type="checkbox" id="setS" checked onchange="G.cfg.stars=this.checked;document.getElementById('ST').style.display=this.checked?'block':'none'"> Animasi bintang
       </label>
-      <label style="font-size:.78rem;display:flex;align-items:center;gap:8px;cursor:pointer;">
-        <input type="checkbox" id="setFloat" checked onchange="G.cfg.floatTxt=this.checked"> Floating text +angka
+      <label style="font-size:.75rem;display:flex;align-items:center;gap:7px;cursor:pointer;">
+        <input type="checkbox" id="setF" checked onchange="G.cfg.float=this.checked"> Floating +angka
       </label>
-      <label style="font-size:.78rem;display:flex;align-items:center;gap:8px;cursor:pointer;">
-        <input type="checkbox" id="setDot" checked onchange="G.cfg.notif=this.checked"> Notifikasi tab (titik merah)
+      <label style="font-size:.75rem;display:flex;align-items:center;gap:7px;cursor:pointer;">
+        <input type="checkbox" id="setN" checked onchange="G.cfg.notif=this.checked"> Notif tab
       </label>
     </div>
-    <div style="font-size:.65rem;color:var(--muted);margin-bottom:12px">Auto-save tiap 45 detik | Last save: <span id="lastSaveTxt">—</span></div>
-    <button class="mbtn red" onclick="confirmReset()">🗑️ Reset Total</button>
-    <button class="mbtn grey" onclick="document.getElementById('setModal').style.display='none'" style="margin-left:6px">Tutup</button>
+    <div style="font-size:.62rem;color:var(--mu);margin-bottom:11px">Auto-save 45dtk | <span id="LST">—</span></div>
+    <button class="mbtn re" onclick="confirmReset()">🗑️ Reset Total</button>
+    <button class="mbtn gy" onclick="document.getElementById('SETM').style.display='none'" style="margin-left:5px">Tutup</button>
   </div>
 </div>
 
-<!-- MINI GAME MODAL -->
-<div class="ov" id="mgModal" style="display:none">
-  <div class="modal" style="max-width:335px">
-    <h2 id="mgTitle" style="color:var(--cyan)">🎮 Mini Game</h2>
-    <div style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--gold);margin:5px 0" id="mgScore">0</div>
-    <div id="mgBody"></div>
-    <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;color:var(--red);margin-top:5px" id="mgCd">—</div>
-    <button class="mbtn grey" onclick="closeMg()" style="margin-top:8px">Tutup</button>
+<!-- MG MODAL -->
+<div class="ov" id="MGM" style="display:none">
+  <div class="modal" style="max-width:330px">
+    <h2 id="MGTTL" style="color:var(--cy)">🎮 Mini Game</h2>
+    <div style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--gold);margin:4px 0" id="MGSCO">0</div>
+    <div id="MGBDY"></div>
+    <div style="font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--re);margin-top:4px" id="MGCD">—</div>
+    <button class="mbtn gy" onclick="closeMg()" style="margin-top:7px">Tutup</button>
   </div>
 </div>
 
-<!-- DAILY BONUS MODAL -->
-<div class="ov" id="dailyModal" style="display:none">
+<!-- DAILY -->
+<div class="ov" id="DLYM" style="display:none">
   <div class="modal">
     <h2 style="color:var(--gold)">🎁 Daily Bonus!</h2>
-    <p>Hadir setiap hari untuk hadiah berlipat ganda!</p>
-    <div class="mval" id="dailyVal">0</div>
-    <div style="display:flex;gap:5px;justify-content:center;margin:8px 0;flex-wrap:wrap" id="dailyStreak"></div>
-    <button class="mbtn gold" onclick="collectDaily()" style="margin-top:4px">AMBIL!</button>
+    <p>Login tiap hari untuk hadiah berlipat!</p>
+    <div class="mval" id="DLV">+0</div>
+    <div style="display:flex;gap:4px;justify-content:center;margin:7px 0;flex-wrap:wrap" id="DLSK"></div>
+    <button class="mbtn go" onclick="collectDaily()">AMBIL!</button>
   </div>
 </div>
 
 <script>
 // =====================================================================
-// BIG NUMBER — uses logarithm-based representation to handle ANY size
+// ██████╗ ██╗ ██████╗     ███╗   ██╗██╗   ██╗███╗   ███╗
+// ██╔══██╗██║██╔════╝     ████╗  ██║██║   ██║████╗ ████║
+// ██████╔╝██║██║  ███╗    ██╔██╗ ██║██║   ██║██╔████╔██║
+// ██╔══██╗██║██║   ██║    ██║╚██╗██║██║   ██║██║╚██╔╝██║
+// ██████╔╝██║╚██████╔╝    ██║ ╚████║╚██████╔╝██║ ╚═╝ ██║
 // =====================================================================
-// We store money as a plain JS number but cap at 1e308 (Number.MAX_VALUE)
-// For display we use the TIERS suffix table.
-// All values beyond 1e308 are represented as Infinity which we display as MAX.
+// V0.5 SEMI FINAL
+// BUG FIX: Complete tier table with no gaps (1e48→1e51→...→1e99→1e100)
+// BUG FIX: fmt() now correctly loops ALL real tiers
+// NEW: Transcendence system, Chain Kill, new post-THE-REAL-END tiers
+// =====================================================================
 
-const TIERS=[
-  {n:"MULAI",       i:"🌱",s:"",    v:1},
-  {n:"PULUHAN",     i:"💵",s:"",    v:10},
-  {n:"RATUSAN",     i:"💴",s:"",    v:100},
-  {n:"RIBU",        i:"💳",s:"K",   v:1e3},
-  {n:"JUTA",        i:"💰",s:"M",   v:1e6},
-  {n:"MILIAR",      i:"🏦",s:"B",   v:1e9},
-  {n:"TRILIUN",     i:"🚀",s:"T",   v:1e12},
-  {n:"QUADRILIUN",  i:"⭐",s:"Qa",  v:1e15},
-  {n:"QUINTILIUN",  i:"🌟",s:"Qi",  v:1e18},
-  {n:"SEXTILIUN",   i:"💫",s:"Sx",  v:1e21},
-  {n:"SEPTILIUN",   i:"🌙",s:"Sp",  v:1e24},
-  {n:"OKTILIUN",    i:"🪐",s:"Oc",  v:1e27},
-  {n:"NONILIUN",    i:"🌍",s:"No",  v:1e30},
-  {n:"DESILIUN",    i:"☀️",s:"De",  v:1e33},
-  {n:"UNDESILIUN",  i:"🌌",s:"UDe", v:1e36},
-  {n:"DUODESILIUN", i:"🔭",s:"DDe", v:1e39},
-  {n:"TRESILIUN",   i:"⚡",s:"Tre", v:1e42},
-  {n:"KTATRES",     i:"🌀",s:"KTT", v:1e45},
-  {n:"KENDECILIUN", i:"💠",s:"KND", v:1e48},
-  {n:"GOOGOL",      i:"♾️",s:"Ggl", v:1e100},
-  {n:"GOOGOLPLEX",  i:"🌈",s:"GgP", v:1e150},
-  {n:"MEGA-GOD",    i:"👁️",s:"MG",  v:1e200},
-  {n:"OMEGA",       i:"Ω", s:"Ω",   v:1e250},
-  {n:"TRANSCEND",   i:"✨",s:"Tr",  v:1e300},
-  // JS number ends around 1e308 — beyond here we use Infinity
-  {n:"THE END",     i:"🎴",s:"END", v:Infinity},
-  // Post-THE END tiers (Infinity territory — shown symbolically)
-  {n:"VOID",        i:"🕳️",s:"Vd",  v:Infinity},
-  {n:"NULL",        i:"∅", s:"Nl",  v:Infinity},
-  {n:"SINGULARITY", i:"🔵",s:"Sng", v:Infinity},
-  {n:"PARADOX",     i:"🔄",s:"Pdx", v:Infinity},
-  {n:"GENESIS",     i:"🌅",s:"Gen", v:Infinity},
-  {n:"CREATOR",     i:"🖊️",s:"Cre", v:Infinity},
-  {n:"DESTROYER",   i:"🌪️",s:"Dst", v:Infinity},
-  {n:"OVERSEER",    i:"🧿",s:"Ovs", v:Infinity},
-  {n:"PRIMORDIAL",  i:"🦕",s:"Prm", v:Infinity},
-  {n:"AXIOM",       i:"📐",s:"Axm", v:Infinity},
-  {n:"AKASHA",      i:"🔮",s:"Aka", v:Infinity},
-  {n:"TRUE VOID",   i:"⬛",s:"TV",  v:Infinity},
-  {n:"OBLIVION",    i:"💀",s:"Obl", v:Infinity},
-  {n:"BEYOND ALL",  i:"🌀",s:"BA",  v:Infinity},
-  {n:"ALPHA",       i:"Α", s:"Alp", v:Infinity},
-  {n:"OMEGA END",   i:"Ω∞",s:"OΩ",  v:Infinity},
-  {n:"∞ ABSOLUTE",  i:"♾", s:"∞A",  v:Infinity},
-  // NEW V0.4 TIERS — Post ∞ ABSOLUTE
-  {n:"BEYOND ∞",    i:"🌊",s:"B∞",  v:Infinity},
-  {n:"NULL ORIGIN", i:"🌑",s:"NO",  v:Infinity},
-  {n:"PRE-GENESIS", i:"💠",s:"PG",  v:Infinity},
-  {n:"THE SOURCE",  i:"🔆",s:"TSr", v:Infinity},
-  {n:"DREAM",       i:"😴",s:"Drm", v:Infinity},
-  {n:"MYTH",        i:"📖",s:"Myt", v:Infinity},
-  {n:"LEGEND",      i:"🦁",s:"Lgd", v:Infinity},
-  {n:"DIVINE",      i:"😇",s:"Div", v:Infinity},
-  {n:"SUPREME",     i:"👆",s:"Sup", v:Infinity},
-  {n:"ULTIMATE",    i:"🏆",s:"Ult", v:Infinity},
-  {n:"ETERNAL ZERO",i:"0∞",s:"EZ",  v:Infinity},
-  {n:"TRUE ABSOLUTE",i:"💫",s:"TAb", v:Infinity},
-  {n:"EXISTENCE",   i:"🌍",s:"Ext", v:Infinity},
-  {n:"NONEXISTENCE",i:"🚫",s:"Non", v:Infinity},
-  {n:"THE REAL END",i:"🎯",s:"TRE", v:Infinity},
+// =====================================================================
+// TIER TABLE — COMPLETE, NO GAPS
+// Between KENDECILIUN (1e48) and GOOGOL (1e100):
+//   1e51  UNDEKENDECILIUN  UKD
+//   1e54  DUODEKENDECILIUN DKD
+//   ...filling with proper latin prefixes
+// =====================================================================
+const TIERS = [
+  // idx  name                  icon  suffix    value
+  /* 0*/  {n:"MULAI",           i:"🌱",s:"",     v:1},
+  /* 1*/  {n:"PULUHAN",         i:"💵",s:"",     v:10},
+  /* 2*/  {n:"RATUSAN",         i:"💴",s:"",     v:100},
+  /* 3*/  {n:"RIBU",            i:"💳",s:"K",    v:1e3},
+  /* 4*/  {n:"JUTA",            i:"💰",s:"M",    v:1e6},
+  /* 5*/  {n:"MILIAR",          i:"🏦",s:"B",    v:1e9},
+  /* 6*/  {n:"TRILIUN",         i:"🚀",s:"T",    v:1e12},
+  /* 7*/  {n:"QUADRILIUN",      i:"⭐",s:"Qa",   v:1e15},
+  /* 8*/  {n:"QUINTILIUN",      i:"🌟",s:"Qi",   v:1e18},
+  /* 9*/  {n:"SEXTILIUN",       i:"💫",s:"Sx",   v:1e21},
+  /*10*/  {n:"SEPTILIUN",       i:"🌙",s:"Sp",   v:1e24},
+  /*11*/  {n:"OKTILIUN",        i:"🪐",s:"Oc",   v:1e27},
+  /*12*/  {n:"NONILIUN",        i:"🌍",s:"No",   v:1e30},
+  /*13*/  {n:"DESILIUN",        i:"☀️",s:"De",   v:1e33},
+  /*14*/  {n:"UNDESILIUN",      i:"🌌",s:"UDe",  v:1e36},
+  /*15*/  {n:"DUODESILIUN",     i:"🔭",s:"DDe",  v:1e39},
+  /*16*/  {n:"TRESILIUN",       i:"⚡",s:"Tre",  v:1e42},
+  /*17*/  {n:"KTATRESILIUN",    i:"🌀",s:"KTT",  v:1e45},
+  /*18*/  {n:"KENDECILIUN",     i:"💠",s:"KND",  v:1e48},
+  // ═══ FIX: TIER ANTARA KENDECILIUN DAN GOOGOL ═══
+  /*19*/  {n:"UNDEKENDECILIUN", i:"🌸",s:"UKD",  v:1e51},
+  /*20*/  {n:"DUODEKENDECILIUN",i:"🌺",s:"DKD",  v:1e54},
+  /*21*/  {n:"TREKENDECILIUN",  i:"🌻",s:"TKD",  v:1e57},
+  /*22*/  {n:"QUATUORKENDEC",   i:"🌼",s:"QKD",  v:1e60},
+  /*23*/  {n:"QUINKENDESILIUN", i:"🌷",s:"QuKD", v:1e63},
+  /*24*/  {n:"SEXKENDECILIUN",  i:"🍀",s:"SKD",  v:1e66},
+  /*25*/  {n:"SEPTKENDECILIUN", i:"🍁",s:"SpKD", v:1e69},
+  /*26*/  {n:"OKTOKENDECILIUN", i:"🍂",s:"OKD",  v:1e72},
+  /*27*/  {n:"NOVENKENDECILIUN",i:"🍃",s:"NKD",  v:1e75},
+  /*28*/  {n:"VIGINTILIUN",     i:"🌿",s:"Vg",   v:1e78},
+  /*29*/  {n:"UNVIGINTILIUN",   i:"🌾",s:"UVg",  v:1e81},
+  /*30*/  {n:"DUOVIGINTILIUN",  i:"🎋",s:"DVg",  v:1e84},
+  /*31*/  {n:"TREVIGINTILIUN",  i:"🎍",s:"TVg",  v:1e87},
+  /*32*/  {n:"QUATUORVIGINTI",  i:"🎑",s:"QVg",  v:1e90},
+  /*33*/  {n:"QUINVIGINTILIUN", i:"🌙",s:"QuVg", v:1e93},
+  /*34*/  {n:"SEXVIGINTILIUN",  i:"⛅",s:"SxVg", v:1e96},
+  /*35*/  {n:"SEPTVIGINTILIUN", i:"🌤️",s:"SpVg", v:1e99},
+  /*36*/  {n:"GOOGOL",          i:"♾️",s:"Ggl",  v:1e100},
+  // ═══ GOOGOL → GOOGOLPLEX ZONE ═══
+  /*37*/  {n:"GOOGOL-X",        i:"🌈",s:"GgX",  v:1e110},
+  /*38*/  {n:"GOOGOL-C",        i:"🎆",s:"GgC",  v:1e120},
+  /*39*/  {n:"GOOGOL-M",        i:"🎇",s:"GgM",  v:1e130},
+  /*40*/  {n:"SUPER-GOOGOL",    i:"✨",s:"SGg",  v:1e150},
+  /*41*/  {n:"HYPER-GOOGOL",    i:"💫",s:"HGg",  v:1e175},
+  /*42*/  {n:"MEGA-GOD",        i:"👁️",s:"MG",   v:1e200},
+  /*43*/  {n:"OMEGA",           i:"Ω", s:"Ω",    v:1e250},
+  /*44*/  {n:"TRANSCEND",       i:"✨",s:"Tr",   v:1e300},
+  // ═══ VIRTUAL TIER ZONE (v:Infinity → handled by VT system) ═══
+];
+// After TRANSCEND (1e300), JS floats overflow → use Virtual Tier (VT)
+// VT 0 = normal JS numbers up to 1e300
+// VT 1+ = post-TRANSCEND tiers shown symbolically
+
+const VT_TIERS = [
+  /*vt0=normal*/
+  /*vt1*/ {n:"THE END",       i:"🎴",s:"END"},
+  /*vt2*/ {n:"VOID",          i:"🕳️",s:"Vd"},
+  /*vt3*/ {n:"NULL",          i:"∅", s:"Nl"},
+  /*vt4*/ {n:"SINGULARITY",   i:"🔵",s:"Sng"},
+  /*vt5*/ {n:"PARADOX",       i:"🔄",s:"Pdx"},
+  /*vt6*/ {n:"GENESIS",       i:"🌅",s:"Gen"},
+  /*vt7*/ {n:"CREATOR",       i:"🖊️",s:"Cre"},
+  /*vt8*/ {n:"DESTROYER",     i:"🌪️",s:"Dst"},
+  /*vt9*/ {n:"OVERSEER",      i:"🧿",s:"Ovs"},
+  /*vt10*/{n:"PRIMORDIAL",    i:"🦕",s:"Prm"},
+  /*vt11*/{n:"AXIOM",         i:"📐",s:"Axm"},
+  /*vt12*/{n:"AKASHA",        i:"🔮",s:"Aka"},
+  /*vt13*/{n:"TRUE VOID",     i:"⬛",s:"TV"},
+  /*vt14*/{n:"OBLIVION",      i:"💀",s:"Obl"},
+  /*vt15*/{n:"BEYOND ALL",    i:"🌀",s:"BA"},
+  /*vt16*/{n:"ALPHA",         i:"Α", s:"Alp"},
+  /*vt17*/{n:"OMEGA END",     i:"Ω∞",s:"OΩ"},
+  /*vt18*/{n:"∞ ABSOLUTE",    i:"♾", s:"∞A"},
+  /*vt19*/{n:"BEYOND ∞",      i:"🌊",s:"B∞"},
+  /*vt20*/{n:"NULL ORIGIN",   i:"🌑",s:"NO"},
+  /*vt21*/{n:"PRE-GENESIS",   i:"💠",s:"PG"},
+  /*vt22*/{n:"THE SOURCE",    i:"🔆",s:"TSr"},
+  /*vt23*/{n:"DREAM",         i:"😴",s:"Drm"},
+  /*vt24*/{n:"MYTH",          i:"📖",s:"Myt"},
+  /*vt25*/{n:"LEGEND",        i:"🦁",s:"Lgd"},
+  /*vt26*/{n:"DIVINE",        i:"😇",s:"Div"},
+  /*vt27*/{n:"SUPREME",       i:"👆",s:"Sup"},
+  /*vt28*/{n:"ULTIMATE",      i:"🏆",s:"Ult"},
+  /*vt29*/{n:"ETERNAL ZERO",  i:"0∞",s:"EZ"},
+  /*vt30*/{n:"TRUE ABSOLUTE",i:"💫",s:"TAb"},
+  /*vt31*/{n:"EXISTENCE",     i:"🌍",s:"Ext"},
+  /*vt32*/{n:"NONEXISTENCE",  i:"🚫",s:"Non"},
+  /*vt33*/{n:"THE REAL END",  i:"🎯",s:"TRE"},
+  // ═══ V0.5 NEW — POST THE REAL END ═══
+  /*vt34*/{n:"ABSOLUTE ZERO", i:"❄️",s:"AZ"},
+  /*vt35*/{n:"CHAOS ROOT",    i:"🌪️",s:"CR"},
+  /*vt36*/{n:"ORDER",         i:"📏",s:"Ord"},
+  /*vt37*/{n:"HARMONY",       i:"🎵",s:"Har"},
+  /*vt38*/{n:"DISSONANCE",    i:"🎸",s:"Dis"},
+  /*vt39*/{n:"THE FIRST",     i:"1️⃣",s:"TF"},
+  /*vt40*/{n:"THE LAST",      i:"🔚",s:"TL"},
+  /*vt41*/{n:"PRE-EXISTENCE", i:"🫧",s:"PE"},
+  /*vt42*/{n:"POST-EXISTENCE",i:"🌫️",s:"PsE"},
+  /*vt43*/{n:"ANTI-VOID",     i:"🔲",s:"AV"},
+  /*vt44*/{n:"COUNTER-VOID",  i:"🔳",s:"CV"},
+  /*vt45*/{n:"MIRROR",        i:"🪞",s:"Mir"},
+  /*vt46*/{n:"REFLECTION",    i:"🫀",s:"Ref"},
+  /*vt47*/{n:"PARADOX ZERO",  i:"🔀",s:"PZ"},
+  /*vt48*/{n:"EMPTY SET",     i:"∅∅",s:"ES"},
+  /*vt49*/{n:"UNNAMED",       i:"?",s:"???"},
+  /*vt50*/{n:"BEYOND NAMING", i:"▓",s:"▓"},
+  /*vt51*/{n:"TRUE SOURCE",   i:"🔆🔆",s:"TS2"},
+  /*vt52*/{n:"ORIGIN",        i:"🐣",s:"Org"},
+  /*vt53*/{n:"OMEGA ORIGIN",  i:"Ωo",s:"OmO"},
+  /*vt54*/{n:"ALPHA OMEGA",   i:"ΑΩ",s:"AO"},
+  /*vt55*/{n:"ETERNITY",      i:"♾️♾️",s:"Et2"},
+  /*vt56*/{n:"BEYOND ETERNITY",i:"∞+",s:"BE"},
+  /*vt57*/{n:"THE BEGINNING", i:"🌅🌅",s:"TB"},
+  /*vt58*/{n:"THE CYCLE",     i:"🔄🔄",s:"TC"},
+  /*vt59*/{n:"LOOP ZERO",     i:"🔁0",s:"L0"},
+  /*vt60*/{n:"∞∞ ULTIMATE",   i:"♾♾",s:"UU"},
 ];
 
-// For post-JS-number tiers we track "virtual tier" separately
-// Virtual money = actual JS number (capped at 1e300) + virtualTierOffset * 1e300
-// When money >= 1e300, we increment virtualTier and reset money.
+const VT_THRESHOLD = 1e300; // when money hits this, increment VT
 
-function fmt(n){
-  if(n===null||n===undefined||isNaN(n)) n=0;
-  if(n<0) n=0;
-  if(!isFinite(n)) return{d:"∞",s:""};
-  if(n<1000) return{d:Math.floor(n).toString(),s:""};
-  // find tier
-  for(let i=22;i>=3;i--){
-    if(n>=TIERS[i].v&&TIERS[i].s&&isFinite(TIERS[i].v)){
-      const v=n/TIERS[i].v;
-      return{d:v>=100?Math.floor(v).toString():v.toFixed(v>=10?1:2),s:TIERS[i].s};
+// =====================================================================
+// NUMBER FORMATTING — FIXED
+// =====================================================================
+function fmt(n) {
+  if (n === null || n === undefined || isNaN(n)) return {d:"0", s:""};
+  if (n < 0) n = 0;
+  if (!isFinite(n)) return {d:"∞", s:""};
+  if (n < 1000) return {d: Math.floor(n).toString(), s: ""};
+  // scan ALL real tiers from highest to lowest
+  for (let i = TIERS.length - 1; i >= 3; i--) {
+    if (n >= TIERS[i].v && TIERS[i].s !== "") {
+      const v = n / TIERS[i].v;
+      const d = v >= 100 ? Math.floor(v).toString() : v.toFixed(v >= 10 ? 1 : 2);
+      return {d, s: TIERS[i].s};
     }
   }
-  // fallback to standard notation
-  if(n>=1e15){
-    const exp=Math.floor(Math.log10(n));
-    const man=(n/Math.pow(10,exp)).toFixed(2);
-    return{d:man,s:"e"+exp};
-  }
-  return{d:Math.floor(n).toString(),s:""};
+  return {d: Math.floor(n).toString(), s: ""};
 }
-function fmtF(n){const f=fmt(n);return f.d+f.s;}
+function fF(n) { const f = fmt(n); return f.d + f.s; }
 
-// Virtual tier system for post-1e300 gameplay
-// G.vt = virtual tier index (0 = normal JS numbers, 1+ = post-THE-END)
-function getRealTierIdx(){
-  const base=23; // "THE END" index in TIERS
-  return Math.min(base+G.vt, TIERS.length-1);
+function getDisplayTier() {
+  if (G.vt === 0) {
+    for (let i = TIERS.length - 1; i >= 0; i--) {
+      if (G.money >= TIERS[i].v) return {idx: i, vt: false, data: TIERS[i]};
+    }
+    return {idx: 0, vt: false, data: TIERS[0]};
+  }
+  const vd = VT_TIERS[Math.min(G.vt - 1, VT_TIERS.length - 1)];
+  return {idx: G.vt, vt: true, data: vd};
 }
-function getCurrentTier(){return TIERS[getRealTierIdx()];}
+function getNormalTierIdx() {
+  for (let i = TIERS.length - 1; i >= 0; i--) {
+    if (G.money >= TIERS[i].v) return i;
+  }
+  return 0;
+}
 
 // =====================================================================
 // GAME DATA
 // =====================================================================
-const UPGRADES=[
-  {n:"Kuku Baja",      ico:"🔨",d:"Tap ×2 per lvl",        bc:10,    m:2,   max:15},
-  {n:"Sarung Tangan",  ico:"🥊",d:"Tap ×3 per lvl",         bc:500,   m:3,   max:12},
-  {n:"Laser Finger",   ico:"☄️",d:"Tap ×5 per lvl",         bc:25000, m:5,   max:10},
-  {n:"Quantum Hand",   ico:"⚡",d:"Tap ×10 per lvl",        bc:1e7,   m:10,  max:8},
-  {n:"God Tap",        ico:"🌟",d:"Tap ×50 per lvl",        bc:1e13,  m:50,  max:6},
-  {n:"Cosmic Slam",    ico:"🌌",d:"Tap ×200 per lvl",       bc:1e20,  m:200, max:5},
-  {n:"Omega Strike",   ico:"Ω", d:"Tap ×1000 per lvl",      bc:1e30,  m:1000,max:5},
-  {n:"Absolute Fist",  ico:"💥",d:"Tap ×1e4 per lvl",       bc:1e50,  m:1e4, max:4},
-  {n:"Void Punch",     ico:"🕳️",d:"Tap ×1e6 per lvl",       bc:1e100, m:1e6, max:3},
-  {n:"Singularity Hit",ico:"🔵",d:"Tap ×1e8 per lvl",       bc:1e200, m:1e8, max:3},
-  {n:"Alpha Strike",   ico:"Α", d:"Tap ×1e10 per lvl",      bc:1e295, m:1e10,max:2},
+const UPGRADES = [
+  {n:"Kuku Baja",       ico:"🔨",d:"Tap ×2",          bc:10,     m:2,   max:15},
+  {n:"Sarung Tangan",   ico:"🥊",d:"Tap ×3",           bc:500,    m:3,   max:12},
+  {n:"Laser Finger",    ico:"☄️",d:"Tap ×5",           bc:25000,  m:5,   max:10},
+  {n:"Quantum Hand",    ico:"⚡",d:"Tap ×10",          bc:1e7,    m:10,  max:8},
+  {n:"God Tap",         ico:"🌟",d:"Tap ×50",          bc:1e13,   m:50,  max:6},
+  {n:"Cosmic Slam",     ico:"🌌",d:"Tap ×200",         bc:1e20,   m:200, max:5},
+  {n:"Omega Strike",    ico:"Ω", d:"Tap ×1000",        bc:1e30,   m:1e3, max:5},
+  {n:"Absolute Fist",   ico:"💥",d:"Tap ×1e4",         bc:1e50,   m:1e4, max:4},
+  {n:"Void Punch",      ico:"🕳️",d:"Tap ×1e6",         bc:1e100,  m:1e6, max:3},
+  {n:"Singularity Hit", ico:"🔵",d:"Tap ×1e8",         bc:1e200,  m:1e8, max:3},
+  {n:"Alpha Strike",    ico:"Α", d:"Tap ×1e10",        bc:1e295,  m:1e10,max:2},
+  {n:"Transcend Blow",  ico:"🌀",d:"Tap ×1e15",        bc:1e299,  m:1e15,max:2},
 ];
-const PASSIVES=[
-  {n:"Crit Ahli",   ico:"🎯",d:"Crit chance +5%",  bc:500,   eff:"cc", v:.05,max:15},
-  {n:"Crit Keras",  ico:"💢",d:"Crit mult +2×",     bc:2000,  eff:"cm", v:2,  max:10},
-  {n:"Lucky Pro",   ico:"🍀",d:"Event lebih sering", bc:10000, eff:"lk", v:.05,max:10},
-  {n:"Combo Master",ico:"🔥",d:"Combo bonus +10%",   bc:50000, eff:"cb", v:.1, max:10},
-  {n:"Offline Pro", ico:"😴",d:"Offline income +10%",bc:2e5,   eff:"of", v:.1, max:10},
-  {n:"Auto Tap",    ico:"🤖",d:"+1 auto tap/dtk",    bc:1e6,   eff:"at", v:1,  max:5},
-  {n:"Boss Hunter", ico:"⚔️",d:"Boss reward +25%",   bc:5e6,   eff:"bh", v:.25,max:8},
-  {n:"Relic Finder",ico:"💠",d:"Relic drop +10%",    bc:2e7,   eff:"rf", v:.1, max:5},
-  {n:"Gold Rush",   ico:"⛏️",d:"All income +15%",    bc:5e8,   eff:"gr", v:.15,max:10},
-  {n:"Time Warp",   ico:"⌚",d:"Auto tap ×2 spd",    bc:1e12,  eff:"tw", v:2,  max:5},
+const PASSIVES = [
+  {n:"Crit Ahli",    ico:"🎯",d:"Crit chance +5%",   bc:500,   eff:"cc",v:.05,max:15},
+  {n:"Crit Keras",   ico:"💢",d:"Crit mult +2×",      bc:2000,  eff:"cm",v:2,  max:10},
+  {n:"Lucky Pro",    ico:"🍀",d:"Event lebih sering",  bc:10000, eff:"lk",v:.05,max:10},
+  {n:"Combo Master", ico:"🔥",d:"Combo bonus +10%",    bc:50000, eff:"cb",v:.1, max:10},
+  {n:"Offline Pro",  ico:"😴",d:"Offline income +10%", bc:2e5,   eff:"of",v:.1, max:10},
+  {n:"Auto Tap",     ico:"🤖",d:"+1 auto tap/dtk",     bc:1e6,   eff:"at",v:1,  max:5},
+  {n:"Boss Hunter",  ico:"⚔️",d:"Boss dmg +25%",       bc:5e6,   eff:"bh",v:.25,max:8},
+  {n:"Relic Finder", ico:"💠",d:"Relic drop +10%",     bc:2e7,   eff:"rf",v:.1, max:5},
+  {n:"Gold Rush",    ico:"⛏️",d:"All income +15%",     bc:5e8,   eff:"gr",v:.15,max:10},
+  {n:"Chain Killer", ico:"⛓️",d:"Chain kill bonus +20%",bc:1e12, eff:"ck",v:.2, max:10},
 ];
-const GENS=[
-  {n:"Pengemis",    ico:"🧑‍🦯",d:"Minta receh",        bc:15,    r:0.1},
-  {n:"Pedagang",    ico:"🛒", d:"Jualan pasar",        bc:100,   r:0.5},
-  {n:"Buruh",       ico:"⛏️",d:"Gali tambang",        bc:1100,  r:4},
-  {n:"Bank Mini",   ico:"🏦", d:"Bunga mengalir",      bc:12000, r:20},
-  {n:"Pabrik",      ico:"🏭", d:"Produksi 24 jam",     bc:130000,r:100},
-  {n:"Korporasi",   ico:"🏢", d:"Ratusan karyawan",    bc:1.4e6, r:500},
-  {n:"Negara Kecil",ico:"🏴",d:"GDP sendiri",         bc:2e7,   r:2500},
-  {n:"Planet",      ico:"🌍", d:"Planet bekerja",      bc:3.3e8, r:12500},
-  {n:"Galaksi",     ico:"🌌", d:"Bintang jadi energi", bc:5e9,   r:62500},
-  {n:"Multiverse",  ico:"♾️", d:"Semesta paralel",     bc:7.5e10,r:312500},
-  {n:"Dimensi-X",   ico:"🌀", d:"Dimensi tersembunyi", bc:1e12,  r:1562500},
-  {n:"Waktu",       ico:"⏳", d:"Energi waktu",        bc:1e14,  r:7812500},
-  {n:"Kesadaran",   ico:"🧠", d:"Pikiran kolektif",    bc:1e16,  r:3.9e7},
+const GENS = [
+  {n:"Pengemis",    ico:"🧑‍🦯",d:"Minta receh",    bc:15,     r:0.1},
+  {n:"Pedagang",    ico:"🛒", d:"Jualan pasar",    bc:100,    r:0.5},
+  {n:"Buruh",       ico:"⛏️",d:"Gali tambang",    bc:1100,   r:4},
+  {n:"Bank Mini",   ico:"🏦", d:"Bunga mengalir",  bc:12000,  r:20},
+  {n:"Pabrik",      ico:"🏭", d:"Produksi 24 jam", bc:130000, r:100},
+  {n:"Korporasi",   ico:"🏢", d:"Ratusan karyawan",bc:1.4e6,  r:500},
+  {n:"Negara Kecil",ico:"🏴",d:"GDP sendiri",     bc:2e7,    r:2500},
+  {n:"Planet",      ico:"🌍", d:"Planet bekerja",  bc:3.3e8,  r:12500},
+  {n:"Galaksi",     ico:"🌌", d:"Bintang = energi",bc:5e9,    r:62500},
+  {n:"Multiverse",  ico:"♾️", d:"Semesta paralel", bc:7.5e10, r:312500},
+  {n:"Dimensi-X",   ico:"🌀", d:"Dimensi rahasia", bc:1e12,   r:1562500},
+  {n:"Waktu",       ico:"⏳", d:"Energi waktu",    bc:1e14,   r:7812500},
+  {n:"Kesadaran",   ico:"🧠", d:"Pikiran kolektif",bc:1e16,   r:3.9e7},
 ];
-const MEGA_GENS=[
-  {n:"Alam Semesta", ico:"🌐",d:"Seluruh semesta",    bc:1e20,  r:1e8,  ut:8},
-  {n:"Big Bang",     ico:"💫",d:"Energi Big Bang",    bc:1e30,  r:1e12, ut:13},
-  {n:"Dark Matter",  ico:"🌑",d:"Dark matter",        bc:1e50,  r:1e18, ut:18},
-  {n:"Googol Engine",ico:"♾️",d:"Mesin Googol",       bc:1e105, r:1e50, ut:19},
-  {n:"God Machine",  ico:"👁️",d:"Mesin dewa",         bc:1e160, r:1e80, ut:21},
-  {n:"Omega Drive",  ico:"Ω", d:"Energi Omega",       bc:1e255, r:1e130,ut:22},
-  {n:"Eternity Core",ico:"👑",d:"Inti kekekalan",     bc:1e300, r:1e200,ut:23},
+const MEGA_GENS = [
+  {n:"Alam Semesta", ico:"🌐",d:"Seluruh semesta",  bc:1e20,  r:1e8,  ti:36},
+  {n:"Big Bang",     ico:"💫",d:"Energi Big Bang",  bc:1e30,  r:1e12, ti:37},
+  {n:"Dark Matter",  ico:"🌑",d:"Dark matter",      bc:1e50,  r:1e18, ti:40},
+  {n:"Googol Engine",ico:"♾️",d:"Mesin Googol",     bc:1e105, r:1e50, ti:36},
+  {n:"God Machine",  ico:"👁️",d:"Mesin dewa",       bc:1e160, r:1e80, ti:42},
+  {n:"Omega Drive",  ico:"Ω", d:"Energi Omega",     bc:1e255, r:1e130,ti:43},
+  {n:"Eternity Core",ico:"👑",d:"Inti kekekalan",   bc:1e299, r:1e200,ti:44},
 ];
-const DIVINE_GENS=[
-  {n:"Void Reactor",   ico:"🕳️",d:"Energi Void",      vt:1,r:1e10},
-  {n:"Null Engine",    ico:"∅", d:"Mesin kekosongan",  vt:2,r:1e15},
-  {n:"Singularity Core",ico:"🔵",d:"Inti singularitas",vt:3,r:1e20},
-  {n:"Paradox Loop",   ico:"🔄",d:"Loop paradoks",     vt:4,r:1e25},
-  {n:"Genesis Forge",  ico:"🌅",d:"Menempa realitas",  vt:5,r:1e30},
-  {n:"Creator Engine", ico:"🖊️",d:"Mesin penciptaan",  vt:6,r:1e35},
-  {n:"Destroyer Core", ico:"🌪️",d:"Inti kehancuran",   vt:7,r:1e40},
+const DIVINE_GENS = [
+  {n:"Void Reactor",    ico:"🕳️",d:"Energi Void",       vt:1,r:1e10},
+  {n:"Null Engine",     ico:"∅", d:"Mesin kekosongan",   vt:2,r:1e15},
+  {n:"Singularity Core",ico:"🔵",d:"Inti singularitas",  vt:3,r:1e20},
+  {n:"Paradox Loop",    ico:"🔄",d:"Loop paradoks",      vt:4,r:1e25},
+  {n:"Genesis Forge",   ico:"🌅",d:"Menempa realitas",   vt:5,r:1e30},
+  {n:"Creator Engine",  ico:"🖊️",d:"Mesin penciptaan",   vt:6,r:1e35},
+  {n:"Destroyer Core",  ico:"🌪️",d:"Inti kehancuran",    vt:7,r:1e40},
 ];
-const ASC_GENS=[
-  {n:"Source Reactor", ico:"🔆",d:"Reaktor The Source",  vt:27,r:1e50},
-  {n:"Dream Engine",   ico:"😴",d:"Mesin mimpi abadi",   vt:28,r:1e60},
-  {n:"Myth Forge",     ico:"📖",d:"Menempa mitos",       vt:29,r:1e70},
-  {n:"Legend Core",    ico:"🦁",d:"Inti legenda",        vt:30,r:1e80},
-  {n:"Divine Engine",  ico:"😇",d:"Mesin ilahi",         vt:31,r:1e90},
-  {n:"Supreme Drive",  ico:"👆",d:"Penggerak supremasi", vt:32,r:1e100},
-  {n:"Ultimate Core",  ico:"🏆",d:"Inti tertinggi",      vt:33,r:1e120},
-  {n:"True End Engine",ico:"🎯",d:"Mesin akhir sejati",  vt:34,r:1e150},
+const ASC_GENS = [
+  {n:"Source Reactor", ico:"🔆",d:"Reaktor The Source", vt:22,r:1e50},
+  {n:"Dream Engine",   ico:"😴",d:"Mesin mimpi abadi",  vt:23,r:1e60},
+  {n:"Myth Forge",     ico:"📖",d:"Menempa mitos",      vt:24,r:1e70},
+  {n:"Legend Core",    ico:"🦁",d:"Inti legenda",       vt:25,r:1e80},
+  {n:"Divine Engine",  ico:"😇",d:"Mesin ilahi",        vt:26,r:1e90},
+  {n:"Supreme Drive",  ico:"👆",d:"Penggerak supremasi",vt:27,r:1e100},
+  {n:"Ultimate Core",  ico:"🏆",d:"Inti tertinggi",     vt:28,r:1e120},
+  {n:"True End Engine",ico:"🎯",d:"Mesin akhir sejati", vt:33,r:1e150},
 ];
-const RELICS=[
-  {id:0,n:"Koin Kuno",     ico:"🪙",d:"Tap +15%",          rar:"Biasa",    eff:{tapB:.15}},
-  {id:1,n:"Kristal Crit",  ico:"🔮",d:"Crit chance +8%",    rar:"Biasa",    eff:{ccB:.08}},
-  {id:2,n:"Jam Waktu",     ico:"⏱️",d:"Auto tap +2/dtk",    rar:"Langka",   eff:{atB:2}},
-  {id:3,n:"Mahkota Emas",  ico:"👑",d:"Gen +20%",           rar:"Langka",   eff:{genB:.20}},
-  {id:4,n:"Pedang Omega",  ico:"⚔️",d:"Boss dmg +50%",      rar:"Langka",   eff:{bossB:.5}},
-  {id:5,n:"Bola Api",      ico:"🔥",d:"Event dur +30%",     rar:"Epik",     eff:{evDB:.3}},
-  {id:6,n:"Sayap Malaikat",ico:"👼",d:"Semua ×1.5",         rar:"Epik",     eff:{all:1.5}},
-  {id:7,n:"Mata Dewa",     ico:"👁️",d:"Crit mult +10×",     rar:"Legendaris",eff:{cmB:10}},
-  {id:8,n:"Bintang Abadi", ico:"⭐",d:"Prestige bonus ×2",  rar:"Legendaris",eff:{prstM:2}},
-  {id:9,n:"Inti Void",     ico:"🕳️",d:"Semua ×3",           rar:"Mythic",   eff:{all:3}},
-  {id:10,n:"Genesis Stone",ico:"🌅",d:"Gen ×5",             rar:"Mythic",   eff:{genB:4}},
-  {id:11,n:"Alpha Gem",    ico:"Α", d:"Tap ×100",           rar:"Mythic",   eff:{tapB:99}},
+// NEW V0.5: Transcendence Generators
+const TRANS_GENS = [
+  {n:"Absolute Zero Reactor",ico:"❄️",d:"Energi suhu nol absolut",  vt:34,r:1e200},
+  {n:"Chaos Forge",          ico:"🌪️",d:"Menempa dari kekacauan",    vt:35,r:1e250},
+  {n:"Order Engine",         ico:"📏",d:"Energi dari keteraturan",   vt:36,r:1e300},
+  {n:"Harmony Core",         ico:"🎵",d:"Resonansi harmonik abadi",  vt:37,r:1e400},
+  {n:"The First Reactor",    ico:"1️⃣",d:"Reaktor Yang Pertama",      vt:39,r:1e500},
+  {n:"Mirror Drive",         ico:"🪞",d:"Energi refleksi tak batas", vt:45,r:1e600},
+  {n:"Origin Engine",        ico:"🐣",d:"Mesin asal mula segalanya", vt:52,r:1e750},
+  {n:"Alpha Omega Core",     ico:"ΑΩ",d:"Dari awal sampai akhir",    vt:54,r:1e999},
+  {n:"∞∞ ULTIMATE ENGINE",   ico:"♾♾",d:"Mesin tak terbatas absolut",vt:60,r:1e9999},
 ];
-const RELIC_COL={Biasa:"#888",Langka:"#2299ff",Epik:"#c44fff",Legendaris:"#FFD700",Mythic:"#ff44aa"};
 
-const BOSSES=[
-  {n:"Goblin Kapak",    ico:"👹",hp:500,     vt:0,rew:1000},
-  {n:"Troll Batu",      ico:"🧌",hp:5000,    vt:0,rew:50000},
-  {n:"Naga Api",        ico:"🐉",hp:50000,   vt:0,rew:1e8},
-  {n:"Lich King",       ico:"💀",hp:5e5,     vt:0,rew:1e13},
-  {n:"Titan Kosmik",    ico:"🏔️",hp:5e7,    vt:0,rew:1e19},
-  {n:"Dewa Kehancuran", ico:"⚡",hp:5e10,    vt:0,rew:1e30},
-  {n:"Omega Demon",     ico:"Ω", hp:5e16,    vt:0,rew:1e60},
-  {n:"Void Lord",       ico:"🕳️",hp:5e30,   vt:1,rew:1e100},
-  {n:"NULL God",        ico:"∅", hp:5e60,    vt:2,rew:1e200},
-  {n:"∞ Destroyer",     ico:"∞", hp:5e100,   vt:3,rew:1e280},
-  {n:"Source Demon",    ico:"🔆",hp:1e300,   vt:27,rew:1e290},
-  {n:"Dream Eater",     ico:"😴",hp:1e300,   vt:28,rew:1e295},
-  {n:"True End Boss",   ico:"🎯",hp:1e300,   vt:34,rew:1e300},
+const RELICS = [
+  {id:0, n:"Koin Kuno",      ico:"🪙",d:"Tap +15%",           rar:"Biasa",     eff:{tapB:.15}},
+  {id:1, n:"Kristal Crit",   ico:"🔮",d:"Crit chance +8%",     rar:"Biasa",     eff:{ccB:.08}},
+  {id:2, n:"Jam Waktu",      ico:"⏱️",d:"Auto tap +2/dtk",     rar:"Langka",    eff:{atB:2}},
+  {id:3, n:"Mahkota Emas",   ico:"👑",d:"Gen +20%",            rar:"Langka",    eff:{genB:.20}},
+  {id:4, n:"Pedang Omega",   ico:"⚔️",d:"Boss dmg +50%",       rar:"Langka",    eff:{bossB:.5}},
+  {id:5, n:"Bola Api",       ico:"🔥",d:"Event dur +30%",      rar:"Epik",      eff:{evDB:.3}},
+  {id:6, n:"Sayap Malaikat", ico:"👼",d:"Semua ×1.5",          rar:"Epik",      eff:{all:1.5}},
+  {id:7, n:"Mata Dewa",      ico:"👁️",d:"Crit mult +10×",      rar:"Legendaris",eff:{cmB:10}},
+  {id:8, n:"Bintang Abadi",  ico:"⭐",d:"Prestige bonus ×2",   rar:"Legendaris",eff:{prstM:2}},
+  {id:9, n:"Inti Void",      ico:"🕳️",d:"Semua ×3",            rar:"Mythic",    eff:{all:3}},
+  {id:10,n:"Genesis Stone",  ico:"🌅",d:"Gen ×5",              rar:"Mythic",    eff:{genBm:5}},
+  {id:11,n:"Alpha Gem",      ico:"Α", d:"Tap ×100",            rar:"Mythic",    eff:{tapB:99}},
+  {id:12,n:"Chain Amplifier",ico:"⛓️",d:"Chain bonus ×3",      rar:"Legendaris",eff:{chainM:3}},
+  {id:13,n:"Transcend Shard",ico:"🌀",d:"Transcend bonus ×5",  rar:"Mythic",    eff:{transM:5}},
 ];
-const ZONES=[
-  {n:"Desa",     ico:"🏘️",vt:0}, {n:"Kota",    ico:"🏙️",vt:0},
-  {n:"Negara",   ico:"🌏", vt:0}, {n:"Galaksi", ico:"🌌", vt:0},
-  {n:"Kosmos",   ico:"🔭", vt:0}, {n:"Googol",  ico:"♾️", vt:0},
-  {n:"Omega",    ico:"Ω",  vt:0}, {n:"THE END", ico:"🎴", vt:0},
-  {n:"VOID",     ico:"🕳️",vt:1}, {n:"NULL",    ico:"∅",  vt:2},
-  {n:"GENESIS",  ico:"🌅", vt:5}, {n:"ALPHA",   ico:"Α",  vt:15},
-  {n:"∞ ABS",    ico:"♾",  vt:17},{n:"SOURCE",  ico:"🔆", vt:27},
-  {n:"DREAM",    ico:"😴", vt:28},{n:"THE REAL END",ico:"🎯",vt:34},
+const RELIC_COL = {Biasa:"#888",Langka:"#2299ff",Epik:"#c44fff",Legendaris:"#FFD700",Mythic:"#ff44aa"};
+
+const BOSSES = [
+  {n:"Goblin Kapak",    ico:"👹",hp:500,     vt:0, nti:0,  rew:1000},
+  {n:"Troll Batu",      ico:"🧌",hp:5000,    vt:0, nti:5,  rew:50000},
+  {n:"Naga Api",        ico:"🐉",hp:5e4,     vt:0, nti:10, rew:1e8},
+  {n:"Lich King",       ico:"💀",hp:5e5,     vt:0, nti:18, rew:1e13},
+  {n:"Titan Kosmik",    ico:"🏔️",hp:5e7,    vt:0, nti:36, rew:1e19},
+  {n:"Dewa Kehancuran", ico:"⚡",hp:5e10,    vt:0, nti:43, rew:1e30},
+  {n:"Omega Demon",     ico:"Ω", hp:5e16,    vt:0, nti:44, rew:1e60},
+  {n:"Void Lord",       ico:"🕳️",hp:5e30,   vt:1, nti:99, rew:1e100},
+  {n:"NULL God",        ico:"∅", hp:5e60,    vt:3, nti:99, rew:1e200},
+  {n:"∞ Destroyer",     ico:"∞", hp:5e100,   vt:5, nti:99, rew:1e280},
+  {n:"Source Demon",    ico:"🔆",hp:1e200,   vt:22,nti:99, rew:1e290},
+  {n:"Dream Eater",     ico:"😴",hp:1e280,   vt:23,nti:99, rew:1e295},
+  {n:"True End Boss",   ico:"🎯",hp:1e299,   vt:33,nti:99, rew:1e299},
+  // V0.5 NEW BOSSES
+  {n:"Absolute Zero God",ico:"❄️",hp:1e299,  vt:34,nti:99, rew:1e299},
+  {n:"Chaos Serpent",   ico:"🌀",hp:1e299,   vt:35,nti:99, rew:1e299},
+  {n:"Order Titan",     ico:"📏",hp:1e299,   vt:36,nti:99, rew:1e299},
+  {n:"Mirror Demon",    ico:"🪞",hp:1e299,   vt:45,nti:99, rew:1e299},
+  {n:"∞∞ FINAL BOSS",   ico:"♾♾",hp:1e299,  vt:60,nti:99, rew:1e299},
 ];
-const ACHIEVEMENTS=[
-  {id:0, n:"Tap Pertama",    ico:"👆",d:"Tap pertamamu",        rew:"Crit +1%",   cond:g=>g.totalTaps>=1,        prog:g=>g.totalTaps,   max:1},
-  {id:1, n:"100 Tap",        ico:"💪",d:"100× tap",             rew:"Tap +5%",    cond:g=>g.totalTaps>=100,      prog:g=>g.totalTaps,   max:100},
-  {id:2, n:"1000 Tap",       ico:"🔥",d:"1000× tap",            rew:"Tap +10%",   cond:g=>g.totalTaps>=1000,     prog:g=>g.totalTaps,   max:1000},
-  {id:3, n:"10K Tap",        ico:"🌟",d:"10,000× tap",          rew:"Tap +20%",   cond:g=>g.totalTaps>=10000,    prog:g=>g.totalTaps,   max:10000},
-  {id:4, n:"Jutawan",        ico:"💰",d:"1 Juta dikumpulkan",   rew:"+50% gen",   cond:g=>g.totalEarned>=1e6,    prog:g=>g.totalEarned, max:1e6},
-  {id:5, n:"Triliuner",      ico:"🚀",d:"1 Triliun",            rew:"Crit ×2",    cond:g=>g.totalEarned>=1e12,   prog:g=>g.totalEarned, max:1e12},
-  {id:6, n:"Googoler",       ico:"♾️",d:"Capai Googol tier",    rew:"Mega boost", cond:g=>g.vt>=0&&g.money>=1e100,prog:g=>g.money,      max:1e100},
-  {id:7, n:"Post-END",       ico:"🕳️",d:"Masuk VOID",          rew:"×5 semua",   cond:g=>g.vt>=1,               prog:g=>g.vt,          max:1},
-  {id:8, n:"∞ Absolute",     ico:"♾", d:"Capai ∞ ABSOLUTE",    rew:"God mode",   cond:g=>g.vt>=17,              prog:g=>g.vt,          max:17},
-  {id:9, n:"THE REAL END",   ico:"🎯",d:"Capai THE REAL END",  rew:"TRUE LEGEND", cond:g=>g.vt>=34,             prog:g=>g.vt,          max:34},
-  {id:10,n:"Crit Pertama",   ico:"🎯",d:"Crit pertama",         rew:"Crit +3%",   cond:g=>g.totalCrits>=1,       prog:g=>g.totalCrits,  max:1},
-  {id:11,n:"100 Crit",       ico:"💢",d:"100 crit",             rew:"Crit ×1.5",  cond:g=>g.totalCrits>=100,     prog:g=>g.totalCrits,  max:100},
-  {id:12,n:"Combo 10×",      ico:"⚡",d:"Combo 10×",            rew:"+20% combo", cond:g=>g.maxCombo>=10,        prog:g=>g.maxCombo,    max:10},
-  {id:13,n:"Combo 100×",     ico:"🌀",d:"Combo 100×",           rew:"+50% tap",   cond:g=>g.maxCombo>=100,       prog:g=>g.maxCombo,    max:100},
-  {id:14,n:"Boss Pertama",   ico:"⚔️",d:"Bunuh boss pertama",   rew:"+30% gen",   cond:g=>g.bossKills>=1,        prog:g=>g.bossKills,   max:1},
-  {id:15,n:"10 Boss Kill",   ico:"🏆",d:"10 boss terbunuh",     rew:"Boss ×2",    cond:g=>g.bossKills>=10,       prog:g=>g.bossKills,   max:10},
-  {id:16,n:"Prestige 1×",    ico:"✨",d:"Prestige pertama",     rew:"+10% bonus", cond:g=>g.pCount>=1,           prog:g=>g.pCount,      max:1},
-  {id:17,n:"Prestige 10×",   ico:"🌠",d:"10× prestige",         rew:"+50% bonus", cond:g=>g.pCount>=10,          prog:g=>g.pCount,      max:10},
-  {id:18,n:"Rebirth!",       ico:"🔁",d:"Rebirth pertama",      rew:"God mode",   cond:g=>g.rbCount>=1,          prog:g=>g.rbCount,     max:1},
-  {id:19,n:"Ascension!",     ico:"🌠",d:"Ascension pertama",    rew:"BEYOND GOD", cond:g=>g.asCount>=1,          prog:g=>g.asCount,     max:1},
-  {id:20,n:"Relic ×5",       ico:"💠",d:"Punya 5 relic",        rew:"+25% all",   cond:g=>g.relicsOwned.size>=5, prog:g=>g.relicsOwned.size,max:5},
-  {id:21,n:"10 Event",       ico:"🍀",d:"10 event dimainkan",   rew:"+20% ev",    cond:g=>g.totalEvents>=10,     prog:g=>g.totalEvents, max:10},
-  {id:22,n:"Minimaster",     ico:"🎮",d:"5 mini game dimenangkan",rew:"+100% tap",cond:g=>g.mgWins>=5,           prog:g=>g.mgWins,      max:5},
-  {id:23,n:"Daily ×7",       ico:"📅",d:"Login 7 hari berturut",rew:"×2 semua",  cond:g=>g.dailyStreak>=7,      prog:g=>g.dailyStreak, max:7},
+const ZONES = [
+  {n:"Desa",      ico:"🏘️",vt:0,nti:0},   {n:"Kota",      ico:"🏙️",vt:0,nti:5},
+  {n:"Negara",    ico:"🌏", vt:0,nti:12},  {n:"Galaksi",   ico:"🌌",vt:0,nti:36},
+  {n:"Googol",    ico:"♾️", vt:0,nti:36},  {n:"Omega",     ico:"Ω", vt:0,nti:43},
+  {n:"TRANSCEND", ico:"✨",vt:0,nti:44},   {n:"THE END",   ico:"🎴",vt:1,nti:99},
+  {n:"VOID",      ico:"🕳️",vt:2,nti:99},   {n:"NULL",      ico:"∅", vt:3,nti:99},
+  {n:"∞ ABSOLUTE",ico:"♾", vt:18,nti:99},  {n:"SOURCE",    ico:"🔆",vt:22,nti:99},
+  {n:"THE REAL END",ico:"🎯",vt:33,nti:99},{n:"ABS ZERO",  ico:"❄️",vt:34,nti:99},
+  {n:"CHAOS",     ico:"🌪️",vt:35,nti:99},  {n:"MIRROR",    ico:"🪞",vt:45,nti:99},
+  {n:"ORIGIN",    ico:"🐣",vt:52,nti:99},  {n:"ALPHA OMEGA",ico:"ΑΩ",vt:54,nti:99},
+  {n:"∞∞ ULT",    ico:"♾♾",vt:60,nti:99},
 ];
-const RB_UPGRADES=[
-  {n:"Void Tap",     ico:"🕳️",d:"Tap ×1000 permanen",    rbReq:1},
-  {n:"Genesis Boost",ico:"🌅",d:"+200% semua gen",        rbReq:2},
-  {n:"Null Prestige",ico:"∅", d:"Prestige bonus ×5",      rbReq:3},
-  {n:"Alpha Power",  ico:"Α", d:"Crit mult ×10",          rbReq:5},
-  {n:"Omega Eternal",ico:"Ω∞",d:"Semua bonus ×50",        rbReq:8},
+const ACHIEVEMENTS = [
+  {id:0, n:"Tap Pertama",      ico:"👆",d:"Tap pertamamu",           rew:"Crit +1%",    cond:g=>g.tt>=1,           pg:g=>g.tt,           mx:1},
+  {id:1, n:"100 Tap",          ico:"💪",d:"100× tap",                rew:"Tap +5%",     cond:g=>g.tt>=100,         pg:g=>g.tt,           mx:100},
+  {id:2, n:"1000 Tap",         ico:"🔥",d:"1000× tap",               rew:"Tap +10%",    cond:g=>g.tt>=1000,        pg:g=>g.tt,           mx:1000},
+  {id:3, n:"10K Tap",          ico:"🌟",d:"10,000× tap",             rew:"Tap +20%",    cond:g=>g.tt>=10000,       pg:g=>g.tt,           mx:10000},
+  {id:4, n:"1M Tap",           ico:"🏆",d:"1,000,000× tap",          rew:"Tap ×2",      cond:g=>g.tt>=1e6,         pg:g=>g.tt,           mx:1e6},
+  {id:5, n:"Jutawan",          ico:"💰",d:"1 Juta dikumpulkan",      rew:"+50% gen",    cond:g=>g.te>=1e6,         pg:g=>g.te,           mx:1e6},
+  {id:6, n:"Triliuner",        ico:"🚀",d:"1 Triliun",               rew:"Crit ×2",     cond:g=>g.te>=1e12,        pg:g=>g.te,           mx:1e12},
+  {id:7, n:"Googoler",         ico:"♾️",d:"Capai Googol tier",       rew:"Mega boost",  cond:g=>g.vt>0||getNTI()>=36,pg:g=>getNTI(),     mx:36},
+  {id:8, n:"Post-END",         ico:"🕳️",d:"Masuk VOID",              rew:"×5 semua",    cond:g=>g.vt>=2,           pg:g=>g.vt,           mx:2},
+  {id:9, n:"∞ Absolute",       ico:"♾", d:"Capai ∞ ABSOLUTE",       rew:"God mode",    cond:g=>g.vt>=18,          pg:g=>g.vt,           mx:18},
+  {id:10,n:"THE REAL END",     ico:"🎯",d:"Capai THE REAL END",      rew:"TRUE LEGEND", cond:g=>g.vt>=33,          pg:g=>g.vt,           mx:33},
+  {id:11,n:"BEYOND THE REAL",  ico:"❄️",d:"Post-THE REAL END",       rew:"BEYOND GOD",  cond:g=>g.vt>=34,          pg:g=>g.vt,           mx:34},
+  {id:12,n:"∞∞ ULTIMATE",      ico:"♾♾",d:"VT 60 diraih!",           rew:"∞ POWER",     cond:g=>g.vt>=60,          pg:g=>g.vt,           mx:60},
+  {id:13,n:"Crit Pertama",     ico:"🎯",d:"Crit pertama",            rew:"Crit +3%",    cond:g=>g.tc>=1,           pg:g=>g.tc,           mx:1},
+  {id:14,n:"100 Crit",         ico:"💢",d:"100 crit",                rew:"Crit ×1.5",   cond:g=>g.tc>=100,         pg:g=>g.tc,           mx:100},
+  {id:15,n:"Combo 10×",        ico:"⚡",d:"Combo 10×",               rew:"+20% combo",  cond:g=>g.mc>=10,          pg:g=>g.mc,           mx:10},
+  {id:16,n:"Combo 100×",       ico:"🌀",d:"Combo 100×",              rew:"+50% tap",    cond:g=>g.mc>=100,         pg:g=>g.mc,           mx:100},
+  {id:17,n:"Boss Pertama",     ico:"⚔️",d:"Bunuh boss pertama",      rew:"+30% gen",    cond:g=>g.bk>=1,           pg:g=>g.bk,           mx:1},
+  {id:18,n:"10 Boss Kill",     ico:"🏆",d:"10 boss",                  rew:"Boss ×2",     cond:g=>g.bk>=10,          pg:g=>g.bk,           mx:10},
+  {id:19,n:"Chain Kill ×5",    ico:"⛓️",d:"5× chain kill",           rew:"Chain ×2",    cond:g=>g.bestChain>=5,    pg:g=>g.bestChain,    mx:5},
+  {id:20,n:"Chain Kill ×10",   ico:"⛓️⛓️",d:"10× chain kill",        rew:"Chain ×5",    cond:g=>g.bestChain>=10,   pg:g=>g.bestChain,    mx:10},
+  {id:21,n:"Prestige 1×",      ico:"✨",d:"Prestige pertama",        rew:"+10% bonus",  cond:g=>g.pc>=1,           pg:g=>g.pc,           mx:1},
+  {id:22,n:"Prestige 10×",     ico:"🌠",d:"10× prestige",            rew:"+50% bonus",  cond:g=>g.pc>=10,          pg:g=>g.pc,           mx:10},
+  {id:23,n:"Rebirth!",         ico:"🔁",d:"Rebirth pertama",         rew:"God mode",    cond:g=>g.rc>=1,           pg:g=>g.rc,           mx:1},
+  {id:24,n:"Ascension!",       ico:"🌠",d:"Ascension pertama",       rew:"BEYOND GOD",  cond:g=>g.ac>=1,           pg:g=>g.ac,           mx:1},
+  {id:25,n:"Transcendence!",   ico:"🌀",d:"Transcendence pertama",   rew:"GODLIKE",     cond:g=>g.trc>=1,          pg:g=>g.trc,          mx:1},
+  {id:26,n:"Relic ×5",         ico:"💠",d:"Punya 5 relic",           rew:"+25% all",    cond:g=>g.ro.length>=5,    pg:g=>g.ro.length,    mx:5},
+  {id:27,n:"10 Event",         ico:"🍀",d:"10 event dimainkan",      rew:"+20% ev",     cond:g=>g.tev>=10,         pg:g=>g.tev,          mx:10},
+  {id:28,n:"Minimaster",       ico:"🎮",d:"5 MG dimenangkan",        rew:"+100% tap",   cond:g=>g.mw>=5,           pg:g=>g.mw,           mx:5},
+  {id:29,n:"Daily ×7",         ico:"📅",d:"Streak 7 hari",           rew:"×2 semua",    cond:g=>g.ds>=7,           pg:g=>g.ds,           mx:7},
 ];
-const AS_UPGRADES=[
-  {n:"Source Tap",    ico:"🔆",d:"Tap ×1e6 permanen",    asReq:1},
-  {n:"Dream Income",  ico:"😴",d:"Gen ×1000",            asReq:1},
-  {n:"Myth Crit",     ico:"📖",d:"Crit mult ×100",       asReq:2},
+function getNTI(){return G.vt===0?getNormalTierIdx():99;}
+
+const RB_UPGRADES = [
+  {n:"Void Tap",      ico:"🕳️",d:"Tap ×1000 permanen",  rbReq:1},
+  {n:"Genesis Boost", ico:"🌅",d:"+200% gen",            rbReq:2},
+  {n:"Null Prestige", ico:"∅", d:"Prestige bonus ×5",    rbReq:3},
+  {n:"Alpha Power",   ico:"Α", d:"Crit mult ×10",        rbReq:5},
+  {n:"Omega Eternal", ico:"Ω∞",d:"Semua bonus ×50",      rbReq:8},
+];
+const AS_UPGRADES = [
+  {n:"Source Tap",     ico:"🔆",d:"Tap ×1e6",            asReq:1},
+  {n:"Dream Income",   ico:"😴",d:"Gen ×1000",           asReq:1},
+  {n:"Myth Crit",      ico:"📖",d:"Crit mult ×100",      asReq:2},
   {n:"Divine Prestige",ico:"😇",d:"Prestige bonus ×20",  asReq:3},
-  {n:"Supreme Auto",  ico:"👆",d:"Auto tap ×50",         asReq:4},
-  {n:"Ultimate All",  ico:"🏆",d:"Semua ×10000",         asReq:5},
+  {n:"Supreme Auto",   ico:"👆",d:"Auto tap ×50",        asReq:4},
+  {n:"Ultimate All",   ico:"🏆",d:"Semua ×10000",        asReq:5},
 ];
-const EVENTS=[
-  {n:"Lucky Hour!",    ico:"🍀",d:"Tap ×3",          mult:3,  tap:true, dur:30},
-  {n:"Money Rain!",    ico:"💸",d:"Generator ×5",     mult:5,  tap:false,dur:20},
-  {n:"Frenzy!",        ico:"⚡",d:"Semua ×10",        mult:10, tap:true, dur:15},
-  {n:"Crit Storm!",    ico:"🌩️",d:"Crit 100%!",       mult:1,  tap:false,dur:25,crit:true},
-  {n:"Cosmic Surge!",  ico:"🌌",d:"Tap ×50",          mult:50, tap:true, dur:10},
-  {n:"Void Pulse!",    ico:"🕳️",d:"Semua ×200",       mult:200,tap:true, dur:8},
-  {n:"Genesis Flash!", ico:"🌅",d:"Gen ×1000",        mult:1000,tap:false,dur:5},
-  {n:"Source Burst!",  ico:"🔆",d:"Tap ×1e6 (5dtk!)", mult:1e6, tap:true, dur:5},
+// NEW V0.5: Transcendence Upgrades (require Transcendence Crystals)
+const TR_UPGRADES = [
+  {n:"Chaos Tap",      ico:"🌀",d:"Tap ×1e9 permanen",         trReq:1},
+  {n:"Order Income",   ico:"📏",d:"Gen ×1e6",                  trReq:1},
+  {n:"Harmony Crit",   ico:"🎵",d:"Crit mult ×1000",           trReq:2},
+  {n:"Mirror Prestige",ico:"🪞",d:"Prestige bonus ×100",        trReq:2},
+  {n:"Origin Auto",    ico:"🐣",d:"Auto tap ×1000",            trReq:3},
+  {n:"Alpha Omega All",ico:"ΑΩ",d:"Semua ×1,000,000",          trReq:5},
+  {n:"∞∞ GODMODE",     ico:"♾♾",d:"Semua ×1e12 PERMANENT",    trReq:10},
+];
+const EVENTS = [
+  {n:"Lucky Hour!",    ico:"🍀",d:"Tap ×3",           mult:3,   tap:true, dur:30},
+  {n:"Money Rain!",    ico:"💸",d:"Generator ×5",      mult:5,   tap:false,dur:20},
+  {n:"Frenzy!",        ico:"⚡",d:"Semua ×10",         mult:10,  tap:true, dur:15},
+  {n:"Crit Storm!",    ico:"🌩️",d:"Crit 100%!",        mult:1,   tap:false,dur:25,crit:true},
+  {n:"Cosmic Surge!",  ico:"🌌",d:"Tap ×50",           mult:50,  tap:true, dur:10},
+  {n:"Void Pulse!",    ico:"🕳️",d:"Semua ×200",        mult:200, tap:true, dur:8},
+  {n:"Genesis Flash!", ico:"🌅",d:"Gen ×1000",         mult:1000,tap:false,dur:5},
+  {n:"Source Burst!",  ico:"🔆",d:"Tap ×1e6",          mult:1e6, tap:true, dur:5},
+  {n:"Chain Fever!",   ico:"⛓️",d:"Chain bonus ×10",   mult:1,   tap:false,dur:20,chain:true},
+  {n:"Transcend Pulse!",ico:"🌀",d:"Semua ×1e9",       mult:1e9, tap:true, dur:3},
 ];
 
 // =====================================================================
 // GAME STATE
 // =====================================================================
-let G={
-  money:0, totalEarned:0, totalTaps:0, totalCrits:0,
-  bossKills:0, totalEvents:0, mgWins:0, dailyStreak:0,
-  lastDailyDate:"",
-  pCount:0, pBonus:1,
-  rbCount:0, rbBonus:1,
-  asCount:0, asBonus:1, asTokens:0,
-  vt:0,  // virtual tier (0=normal, 1+=post-THE-END)
-  combo:0, maxCombo:0,
-  critBase:.05, critMultBase:5,
+let G = {
+  money:0, te:0, tt:0, tc:0, bk:0, tev:0, mw:0, ds:0, ld:"",
+  pc:0, pb:1, rc:0, rb:1, ac:0, ab:1, at:0, trc:0, trb:1, trc2:0,
+  vt:0,
+  combo:0, mc:0,
+  critBase:.05, critMBase:5,
   evActive:false, curEv:null, evLeft:0,
   bossActive:false, bossData:null, bossHp:0, bossHpMax:0,
-  bossHistory:[],
+  bossHistory:[], chainCount:0, bestChain:0, chainTimer:null,
   perSec:0,
-  achUnlocked:[], // array of IDs — FIX: was Set, now array for JSON safe
-  tiersReached:[], // array of vt values reached
-  relicsOwned:[], // array of relic IDs
-  relicsEquipped:[null,null,null,null],
-  upgLvl:[], pasLvl:[], genOwn:[], megaOwn:[], divOwn:[], ascGenOwn:[],
-  rbUpgOwned:[], asUpgOwned:[],
-  startTime:Date.now(), lastSaveTs:Date.now(),
-  cfg:{stars:true,floatTxt:true,notif:true},
+  au:[], // achievements unlocked (array)
+  tr:[], // tiers reached (vt values, array)
+  ro:[], // relics owned (array)
+  re:[null,null,null,null], // relics equipped
+  ul:[], pl:[], go:[], mo:[], do2:[], ao:[], to2:[], // gen/upgrade levels
+  ru:[], su:[], tu:[],       // rb/asc/trans upgrades owned
+  startTime:Date.now(), lastSave:Date.now(),
+  cfg:{stars:true,float:true,notif:true},
 };
-
-// helper sets
-function achSet(){return new Set(G.achUnlocked||[]);}
-function tierSet(){return new Set(G.tiersReached||[]);}
-function relicSet(){return new Set(G.relicsOwned||[]);}
-
-function initArrays(){
-  while(G.upgLvl.length<UPGRADES.length) G.upgLvl.push(0);
-  while(G.pasLvl.length<PASSIVES.length) G.pasLvl.push(0);
-  while(G.genOwn.length<GENS.length) G.genOwn.push(0);
-  while(G.megaOwn.length<MEGA_GENS.length) G.megaOwn.push(0);
-  while(G.divOwn.length<DIVINE_GENS.length) G.divOwn.push(0);
-  while(G.ascGenOwn.length<ASC_GENS.length) G.ascGenOwn.push(0);
-  while(G.rbUpgOwned.length<RB_UPGRADES.length) G.rbUpgOwned.push(0);
-  while(G.asUpgOwned.length<AS_UPGRADES.length) G.asUpgOwned.push(0);
-  if(!Array.isArray(G.achUnlocked)) G.achUnlocked=[];
-  if(!Array.isArray(G.tiersReached)) G.tiersReached=[];
-  if(!Array.isArray(G.relicsOwned)) G.relicsOwned=[];
-  if(!Array.isArray(G.relicsEquipped)) G.relicsEquipped=[null,null,null,null];
-  while(G.relicsEquipped.length<4) G.relicsEquipped.push(null);
+function initA(){
+  while(G.ul.length<UPGRADES.length) G.ul.push(0);
+  while(G.pl.length<PASSIVES.length) G.pl.push(0);
+  while(G.go.length<GENS.length)     G.go.push(0);
+  while(G.mo.length<MEGA_GENS.length) G.mo.push(0);
+  while(G.do2.length<DIVINE_GENS.length) G.do2.push(0);
+  while(G.ao.length<ASC_GENS.length) G.ao.push(0);
+  while(G.to2.length<TRANS_GENS.length) G.to2.push(0);
+  while(G.ru.length<RB_UPGRADES.length) G.ru.push(0);
+  while(G.su.length<AS_UPGRADES.length) G.su.push(0);
+  while(G.tu.length<TR_UPGRADES.length) G.tu.push(0);
+  if(!Array.isArray(G.au)) G.au=[];
+  if(!Array.isArray(G.tr)) G.tr=[];
+  if(!Array.isArray(G.ro)) G.ro=[];
+  if(!Array.isArray(G.re)||G.re.length<4) G.re=[null,null,null,null];
   if(!G.bossHistory) G.bossHistory=[];
-  if(!G.cfg) G.cfg={stars:true,floatTxt:true,notif:true};
+  if(!G.cfg) G.cfg={stars:true,float:true,notif:true};
+  if(G.bestChain===undefined) G.bestChain=0;
+  if(G.chainCount===undefined) G.chainCount=0;
+  if(G.trc===undefined) G.trc=0;
+  if(G.trb===undefined) G.trb=1;
+  if(G.trc2===undefined) G.trc2=0;
 }
+
+// =====================================================================
+// RELIC HELPERS
+// =====================================================================
+function rB(key,def=0){
+  let v=def;
+  G.re.forEach(rid=>{
+    if(rid===null||!RELICS[rid]) return;
+    const r=RELICS[rid];
+    if(r.eff[key]!==undefined) v+=r.eff[key];
+  });
+  return v;
+}
+function rAll(){
+  let m=1;
+  G.re.forEach(rid=>{
+    if(rid===null||!RELICS[rid]) return;
+    if(RELICS[rid].eff.all) m*=RELICS[rid].eff.all;
+    if(RELICS[rid].eff.transM&&G.trc>0) m*=RELICS[rid].eff.transM;
+  });
+  return m;
+}
+function relicSet(){return new Set(G.ro);}
 
 // =====================================================================
 // DERIVED STATS
 // =====================================================================
-function relicBonus(key,def=0){
-  let v=def;
-  G.relicsEquipped.forEach(rid=>{
-    if(rid===null||rid===undefined) return;
-    const r=RELICS[rid]; if(!r) return;
-    if(r.eff[key]!==undefined) v+=r.eff[key];
-    // all multiplier stacks multiplicatively
-  });
-  return v;
-}
-function relicAllMult(){
-  let m=1;
-  G.relicsEquipped.forEach(rid=>{
-    if(rid===null||rid===undefined) return;
-    const r=RELICS[rid]; if(!r) return;
-    if(r.eff.all) m*=r.eff.all;
-  });
-  return m;
-}
-
-function getTapPower(){
+function getTap(){
   let tp=1;
-  UPGRADES.forEach((u,i)=>{if(G.upgLvl[i]>0) tp*=Math.pow(u.m,G.upgLvl[i]);});
-  tp*=G.pBonus*G.rbBonus*G.asBonus;
-  const aSet=achSet();
-  if(aSet.has(0)) tp*=1.01;
-  if(aSet.has(1)) tp*=1.05;
-  if(aSet.has(2)) tp*=1.10;
-  if(aSet.has(3)) tp*=1.20;
-  if(aSet.has(13)) tp*=1.50;
-  if(aSet.has(22)) tp*=2;
-  // relic
-  tp*=(1+relicBonus('tapB',0));
-  tp*=relicAllMult();
-  // rb upgrades
-  if(G.rbUpgOwned[0]) tp*=1000;
-  // as upgrades
-  if(G.asUpgOwned[0]) tp*=1e6;
-  if(G.asUpgOwned[5]) tp*=10000;
-  // passive gold rush
-  tp*=(1+G.pasLvl[8]*.15);
+  UPGRADES.forEach((u,i)=>{if(G.ul[i]>0) tp*=Math.pow(u.m,G.ul[i]);});
+  tp *= G.pb * G.rb * G.ab * G.trb;
+  const au=new Set(G.au);
+  if(au.has(0)) tp*=1.01; if(au.has(1)) tp*=1.05;
+  if(au.has(2)) tp*=1.10; if(au.has(3)) tp*=1.20;
+  if(au.has(4)) tp*=2;    if(au.has(16)) tp*=1.50;
+  if(au.has(28)) tp*=2;
+  tp *= (1+rB('tapB',0)); tp *= rAll();
+  if(G.ru[0]) tp*=1000;
+  if(G.su[0]) tp*=1e6;
+  if(G.tu[0]) tp*=1e9;
+  if(G.tu[5]) tp*=1e6;
+  if(G.tu[6]) tp*=1e12;
+  tp *= (1+G.pl[8]*.15);
   return tp;
 }
-
-function calcPerSec(){
+function calcPS(){
   let ps=0;
-  GENS.forEach((g,i)=>ps+=g.r*G.genOwn[i]);
-  MEGA_GENS.forEach((g,i)=>ps+=g.r*G.megaOwn[i]);
-  // divine gens: only active if vt >= their requirement
-  DIVINE_GENS.forEach((g,i)=>{if(G.vt>=g.vt) ps+=g.r*G.divOwn[i];});
-  ASC_GENS.forEach((g,i)=>{if(G.vt>=g.vt) ps+=g.r*G.ascGenOwn[i];});
-  ps*=G.pBonus*G.rbBonus*G.asBonus;
-  const aSet=achSet();
-  if(aSet.has(4)) ps*=1.5;
-  if(aSet.has(14)) ps*=1.3;
-  if(aSet.has(15)) ps*=2;
-  if(aSet.has(20)) ps*=1.25;
-  if(aSet.has(23)) ps*=2;
-  ps*=(1+relicBonus('genB',0));
-  ps*=relicAllMult();
-  if(G.rbUpgOwned[1]) ps*=3;
-  if(G.asUpgOwned[1]) ps*=1000;
-  if(G.asUpgOwned[5]) ps*=10000;
-  ps*=(1+G.pasLvl[8]*.15);
-  G.perSec=ps;
-  return ps;
+  GENS.forEach((g,i)=>ps+=g.r*G.go[i]);
+  MEGA_GENS.forEach((g,i)=>ps+=g.r*G.mo[i]);
+  DIVINE_GENS.forEach((g,i)=>{if(G.vt>=g.vt) ps+=g.r*G.do2[i];});
+  ASC_GENS.forEach((g,i)=>{if(G.vt>=g.vt) ps+=g.r*G.ao[i];});
+  TRANS_GENS.forEach((g,i)=>{if(G.vt>=g.vt) ps+=g.r*G.to2[i];});
+  ps *= G.pb * G.rb * G.ab * G.trb;
+  const au=new Set(G.au);
+  if(au.has(5)) ps*=1.5; if(au.has(17)) ps*=1.3; if(au.has(18)) ps*=2;
+  if(au.has(26)) ps*=1.25; if(au.has(29)) ps*=2;
+  ps *= (1+rB('genB',0)); if(RELICS[10]&&G.re.includes(10)) ps*=5;
+  ps *= rAll(); if(G.ru[1]) ps*=3; if(G.su[1]) ps*=1000;
+  if(G.tu[1]) ps*=1e6; if(G.tu[5]) ps*=1e6; if(G.tu[6]) ps*=1e12;
+  ps *= (1+G.pl[8]*.15);
+  G.perSec = ps; return ps;
 }
-
-function getCritChance(){
-  let c=G.critBase+G.pasLvl[0]*.05;
-  const aSet=achSet();
-  if(aSet.has(0)) c+=.01;
-  if(aSet.has(10)) c+=.03;
-  c+=relicBonus('ccB',0);
-  return Math.min(c,.97);
-}
-function getCritMult(){
-  let m=G.critMultBase+G.pasLvl[1]*2;
-  const aSet=achSet();
-  if(aSet.has(5)) m*=2;
-  if(aSet.has(11)) m*=1.5;
-  if(aSet.has(15)) m*=2;
-  m+=relicBonus('cmB',0);
-  if(G.rbUpgOwned[3]) m*=10;
-  if(G.asUpgOwned[2]) m*=100;
-  return m;
-}
-function getComboBonus(){
-  const cb=.02+G.pasLvl[3]*.01;
-  let b=1+G.combo*cb;
-  const aSet=achSet();
-  if(aSet.has(12)) b+=.2;
-  if(aSet.has(13)) b+=.5;
+function getCrit(){ let c=G.critBase+G.pl[0]*.05; c+=rB('ccB',0); const au=new Set(G.au); if(au.has(0)) c+=.01; if(au.has(13)) c+=.03; return Math.min(c,.97); }
+function getCritM(){ let m=G.critMBase+G.pl[1]*2; m+=rB('cmB',0); const au=new Set(G.au); if(au.has(6)) m*=2; if(au.has(14)) m*=1.5; if(au.has(18)) m*=2; if(G.ru[3]) m*=10; if(G.su[2]) m*=100; if(G.tu[2]) m*=1000; return m; }
+function getComboB(){ let b=1+G.combo*(.02+G.pl[3]*.01); const au=new Set(G.au); if(au.has(15)) b+=.2; if(au.has(16)) b+=.5; return b; }
+function getAutoR(){ let ar=G.pl[5]*1; ar+=rB('atB',0); if(G.su[4]) ar*=50; if(G.tu[4]) ar*=1000; return ar; }
+function getBossD(){ return 1+G.pl[6]*.25+rB('bossB',0); }
+function getChainB(){
+  let b=1+G.chainCount*(.5+G.pl[9]*.2);
+  if(G.re.includes(12)) b*=3;
+  if(G.evActive&&G.curEv&&G.curEv.chain) b*=10;
   return b;
 }
-function getAutoRate(){
-  let ar=G.pasLvl[5]*1;
-  ar+=relicBonus('atB',0);
-  if(G.asUpgOwned[4]) ar*=50;
-  // time warp
-  if(G.pasLvl[9]>0) ar*=Math.pow(2,G.pasLvl[9]);
-  return ar;
-}
-function getBossDmgMult(){
-  return 1+G.pasLvl[6]*.25+relicBonus('bossB',0);
+function getPB(){
+  let pb=1+G.pc*.75;
+  if(G.re.some(r=>r!==null&&RELICS[r]&&RELICS[r].eff.prstM)) pb*=2;
+  if(G.ru[2]) pb*=5; if(G.su[3]) pb*=20; if(G.tu[3]) pb*=100;
+  return pb;
 }
 
 // =====================================================================
-// VT PROGRESSION
+// VT SYSTEM
 // =====================================================================
-const VT_THRESHOLD=1e300; // when money hits this, increment vt and reset money
 function checkVT(){
   if(G.money>=VT_THRESHOLD){
-    G.vt++;
-    G.money=G.money-VT_THRESHOLD; // carry over
+    G.money -= VT_THRESHOLD;
     if(G.money<0||!isFinite(G.money)) G.money=0;
-    if(!tierSet().has(G.vt)){
-      G.tiersReached.push(G.vt);
-      const t=TIERS[Math.min(23+G.vt,TIERS.length-1)];
-      showMile(t.i+' '+t.n,'Tier baru diraih! VT '+G.vt);
-      checkAch();
-    }
-    checkVT(); // recursive for fast progression
+    G.vt++;
+    if(!G.tr.includes(G.vt)) G.tr.push(G.vt);
+    const vd=VT_TIERS[Math.min(G.vt-1,VT_TIERS.length-1)];
+    showMile(vd.i+' '+vd.n,'VT'+G.vt+' diraih!');
+    checkAch(); if(!G.bossActive) scheduleBoss();
+    checkVT();
   }
 }
 
@@ -1094,352 +1190,335 @@ function checkVT(){
 // =====================================================================
 function saveGame(){
   try{
-    const sv={...G, relicsOwned:G.relicsOwned, achUnlocked:G.achUnlocked,
-      tiersReached:G.tiersReached, savedAt:Date.now()};
-    // remove functions
-    localStorage.setItem('tapEmpV4',JSON.stringify(sv));
-    G.lastSaveTs=Date.now();
-    document.getElementById('lastSaveTxt').textContent=new Date().toLocaleTimeString();
-    showToast('💾 Tersimpan!','green');
-  }catch(e){showToast('⚠️ Save gagal!','red');}
+    const sv={...G,savedAt:Date.now()};
+    localStorage.setItem('tapEmpV5',JSON.stringify(sv));
+    G.lastSave=Date.now();
+    document.getElementById('LST').textContent=new Date().toLocaleTimeString();
+    showToast('💾 Tersimpan!','gr');
+  }catch(e){showToast('⚠️ Save gagal','re');}
 }
 function loadGame(){
   try{
-    const raw=localStorage.getItem('tapEmpV4');
+    const raw=localStorage.getItem('tapEmpV5');
     if(!raw) return;
     const sv=JSON.parse(raw);
-    // merge safely
-    const fields=['money','totalEarned','totalTaps','totalCrits','bossKills','totalEvents',
-      'mgWins','dailyStreak','lastDailyDate','pCount','pBonus','rbCount','rbBonus',
-      'asCount','asBonus','asTokens','vt','maxCombo','critBase','critMultBase',
-      'evActive','curEv','evLeft','bossHistory','startTime','cfg',
-      'upgLvl','pasLvl','genOwn','megaOwn','divOwn','ascGenOwn',
-      'rbUpgOwned','asUpgOwned','relicsEquipped'];
+    const fields=['money','te','tt','tc','bk','tev','mw','ds','ld',
+      'pc','pb','rc','rb','ac','ab','at','trc','trb','trc2',
+      'vt','mc','critBase','critMBase','bossHistory','startTime','cfg',
+      'ul','pl','go','mo','do2','ao','to2','ru','su','tu',
+      're','bestChain','chainCount'];
     fields.forEach(k=>{if(sv[k]!==undefined) G[k]=sv[k];});
-    G.achUnlocked=Array.isArray(sv.achUnlocked)?sv.achUnlocked:[];
-    G.tiersReached=Array.isArray(sv.tiersReached)?sv.tiersReached:[];
-    G.relicsOwned=Array.isArray(sv.relicsOwned)?sv.relicsOwned:[];
-    if(!Array.isArray(G.relicsEquipped)) G.relicsEquipped=[null,null,null,null];
-    G.evActive=false; G.curEv=null; // reset event on load
-    // offline income
-    const offSec=Math.min((Date.now()-(sv.savedAt||Date.now()))/1000, 3600*12);
-    if(offSec>60){
-      calcPerSec();
-      const ob=1+G.pasLvl[4]*.1;
-      const earned=G.perSec*offSec*ob;
+    G.au=Array.isArray(sv.au)?sv.au:[];
+    G.tr=Array.isArray(sv.tr)?sv.tr:[];
+    G.ro=Array.isArray(sv.ro)?sv.ro:[];
+    if(!Array.isArray(G.re)||G.re.length<4) G.re=[null,null,null,null];
+    G.evActive=false; G.curEv=null;
+    // OFFLINE INCOME
+    const off=Math.min((Date.now()-(sv.savedAt||Date.now()))/1000,3600*16);
+    if(off>60){
+      calcPS();
+      const ob=1+G.pl[4]*.1;
+      const earned=G.perSec*off*ob;
       if(earned>0&&isFinite(earned)){
-        G.money+=earned; G.totalEarned+=earned;
-        document.getElementById('offVal').textContent=fmtF(earned);
-        document.getElementById('offModal').style.display='flex';
+        G.money+=earned; G.te+=earned; checkVT();
+        document.getElementById('OFV').textContent=fF(earned);
+        document.getElementById('OFFM').style.display='flex';
       }
     }
   }catch(e){console.warn('Load failed:',e);}
 }
 setInterval(saveGame,45000);
-function confirmReset(){
-  if(confirm('RESET TOTAL semua data?\nTidak bisa di-undo!'))
-    {localStorage.removeItem('tapEmpV4');location.reload();}
-}
+function confirmReset(){if(confirm('RESET TOTAL?\nTidak bisa di-undo!')){localStorage.removeItem('tapEmpV5');location.reload();}}
 function openSet(){
-  document.getElementById('setStars').checked=G.cfg.stars;
-  document.getElementById('setFloat').checked=G.cfg.floatTxt;
-  document.getElementById('setDot').checked=G.cfg.notif;
-  document.getElementById('setModal').style.display='flex';
+  document.getElementById('setS').checked=G.cfg.stars;
+  document.getElementById('setF').checked=G.cfg.float;
+  document.getElementById('setN').checked=G.cfg.notif;
+  document.getElementById('SETM').style.display='flex';
 }
 
 // =====================================================================
 // DAILY BONUS
 // =====================================================================
-function claimDaily(){
+function openDaily(){
   const today=new Date().toDateString();
-  if(G.lastDailyDate===today){showToast('Sudah claim hari ini!','blue');return;}
-  const yesterday=new Date(Date.now()-86400000).toDateString();
-  if(G.lastDailyDate===yesterday) G.dailyStreak++;
-  else G.dailyStreak=1;
-  G.lastDailyDate=today;
-  const mult=Math.pow(2,Math.min(G.dailyStreak-1,6));
-  const base=Math.max(getTapPower()*100, G.perSec*60);
-  const reward=base*mult;
-  G.money+=reward; G.totalEarned+=reward;
-  document.getElementById('dailyVal').textContent='+'+fmtF(reward);
-  const streakEl=document.getElementById('dailyStreak');
-  streakEl.innerHTML='';
+  if(G.ld===today){showToast('Sudah claim hari ini!','bl');return;}
+  const yest=new Date(Date.now()-86400000).toDateString();
+  if(G.ld===yest) G.ds++;
+  else G.ds=1;
+  G.ld=today;
+  const mult=Math.pow(2,Math.min(G.ds-1,6));
+  const base=Math.max(getTap()*100,G.perSec*60);
+  const rew=base*mult;
+  G.money+=rew; G.te+=rew; checkVT();
+  document.getElementById('DLV').textContent='+'+fF(rew);
+  const sk=document.getElementById('DLSK'); sk.innerHTML='';
   for(let i=1;i<=7;i++){
     const d=document.createElement('div');
     d.style.cssText=`display:inline-flex;flex-direction:column;align-items:center;gap:2px;
-      padding:6px 8px;border-radius:9px;font-size:.65rem;font-weight:700;
-      background:${i<=G.dailyStreak?'rgba(255,215,0,.15)':'var(--panel)'};
-      border:1px solid ${i<=G.dailyStreak?'var(--gold)':'rgba(255,255,255,.07)'};
-      color:${i<=G.dailyStreak?'var(--gold)':'var(--muted)'}`;
-    d.innerHTML=`<span>${i<=G.dailyStreak?'✅':'📅'}</span><span>Hari ${i}</span>`;
-    streakEl.appendChild(d);
+      padding:5px 7px;border-radius:8px;font-size:.6rem;font-weight:700;
+      background:${i<=G.ds?'rgba(255,215,0,.13)':'var(--p)'};
+      border:1px solid ${i<=G.ds?'var(--gold)':'rgba(255,255,255,.06)'};
+      color:${i<=G.ds?'var(--gold)':'var(--mu)'}`;
+    d.innerHTML=`<span>${i<=G.ds?'✅':'📅'}</span><span>Hari${i}</span>`;
+    sk.appendChild(d);
   }
-  document.getElementById('dailyModal').style.display='flex';
-  document.getElementById('dailyBtn').className='daily-btn claimed';
+  document.getElementById('DLYM').style.display='flex';
+  document.getElementById('dlyBtn').className='dly claimed';
   checkAch();
 }
-function collectDaily(){
-  document.getElementById('dailyModal').style.display='none';
-  showToast('🎁 Daily bonus diklaim! Streak: '+G.dailyStreak+' hari','gold');
-}
+function collectDaily(){document.getElementById('DLYM').style.display='none';showToast('🎁 Daily Streak: '+G.ds+' hari!','gold');}
 
 // =====================================================================
 // TAP
 // =====================================================================
-let autoAcc=0, comboDecayT=null;
+let autoAcc=0, comboT=null;
 function doTap(x,y,auto=false){
-  let gain=getTapPower();
-  let isCrit=false;
-  const critOverride=G.evActive&&G.curEv&&G.curEv.crit;
+  let gain=getTap(); let crit=false;
+  const critOv=G.evActive&&G.curEv&&G.curEv.crit;
 
-  // combo
-  G.combo++;
-  if(G.combo>G.maxCombo) G.maxCombo=G.combo;
-  clearTimeout(comboDecayT);
-  comboDecayT=setTimeout(()=>{G.combo=0;updCombo();},2000);
-  gain*=getComboBonus();
+  G.combo++; if(G.combo>G.mc) G.mc=G.combo;
+  clearTimeout(comboT);
+  comboT=setTimeout(()=>{G.combo=0;updCombo();},2000);
+  gain*=getComboB();
 
-  // event
   if(G.evActive&&G.curEv&&G.curEv.tap) gain*=G.curEv.mult;
 
-  // crit
-  if(critOverride||Math.random()<getCritChance()){
-    gain*=getCritMult();
-    isCrit=true; G.totalCrits++;
-    const cf=document.getElementById('cfEl');
-    cf.classList.remove('go');void cf.offsetWidth;cf.classList.add('go');
+  if(critOv||Math.random()<getCrit()){
+    gain*=getCritM(); crit=true; G.tc++;
+    const cf=document.getElementById('CF');
+    cf.classList.remove('go'); void cf.offsetWidth; cf.classList.add('go');
   }
 
-  // boss damage
+  // boss dmg
   if(G.bossActive){
-    const dmg=gain*getBossDmgMult()*(G.evActive&&G.curEv?G.curEv.mult:1)*1e-6;
+    const dmg=gain*getBossD()*(G.evActive&&G.curEv?G.curEv.mult:1)*1e-6;
     G.bossHp=Math.max(0,G.bossHp-dmg);
     if(G.bossHp<=0) defeatBoss();
     else updBossUI();
   }
 
-  G.money+=gain; G.totalEarned+=gain; G.totalTaps++;
+  G.money+=gain; G.te+=gain; G.tt++;
   checkVT();
+  if(!auto&&G.cfg.float&&x!==undefined) spawnFt(x,y,gain,crit);
+  bumpM(); updCombo(); checkAch();
+}
 
-  if(!auto&&G.cfg.floatTxt&&x!==undefined) spawnFt(x,y,gain,isCrit);
-  bumpMoney();
-  updCombo();
+function bumpM(){const el=document.getElementById('MN');el.style.transform='scale(1.07)';setTimeout(()=>el.style.transform='',85);}
+function spawnFt(x,y,n,crit,cls=''){
+  const el=document.createElement('div');
+  el.className='ft'+(crit?' cr':'')+(cls?' '+cls:'');
+  const f=fmt(n); el.textContent=(crit?'💥 ':'')+'+'+f.d+f.s;
+  el.style.left=(x-38)+'px'; el.style.top=(y-20)+'px';
+  document.body.appendChild(el); setTimeout(()=>el.remove(),820);
+}
+function updCombo(){
+  const el=document.getElementById('CT');
+  if(G.combo>1){el.textContent='🔥 COMBO ×'+G.combo+' (+'+((getComboB()-1)*100).toFixed(0)+'%)';el.className='ct on';}
+  else el.className='ct';
+  document.getElementById('QS1').textContent=G.combo+'×';
+}
+
+// =====================================================================
+// CHAIN KILL SYSTEM
+// =====================================================================
+function startChain(){
+  G.chainCount++;
+  if(G.chainCount>G.bestChain) G.bestChain=G.chainCount;
+  document.getElementById('CKP').className='ckpanel on';
+  document.getElementById('CH').className='ch on';
+  document.getElementById('CKN').textContent='🔗 '+G.chainCount+'× CHAIN KILL!';
+  document.getElementById('CKL').textContent='Boss berikutnya dalam 30dtk = chain bonus ×'+getChainB().toFixed(1);
+  document.getElementById('QS4').textContent=G.chainCount;
+  clearTimeout(G.chainTimer);
+  G.chainTimer=setTimeout(()=>{
+    G.chainCount=0;
+    document.getElementById('CKP').className='ckpanel';
+    document.getElementById('CH').className='ch';
+    document.getElementById('QS4').textContent=0;
+  },30000);
   checkAch();
 }
 
-function bumpMoney(){
-  const el=document.getElementById('mNum');
-  el.style.transform='scale(1.08)';
-  setTimeout(()=>el.style.transform='',90);
-}
-function spawnFt(x,y,n,crit,cls=''){
-  const el=document.createElement('div');
-  el.className='ft'+(crit?' crit':'')+(cls?' '+cls:'');
-  const f=fmt(n);
-  el.textContent=(crit?'💥 ':'')+'+'+f.d+f.s;
-  el.style.left=(x-40)+'px';
-  el.style.top=(y-22)+'px';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),850);
-}
-function updCombo(){
-  const el=document.getElementById('comboTxt');
-  if(G.combo>1){
-    el.textContent='🔥 COMBO ×'+G.combo+' (+'+((getComboBonus()-1)*100).toFixed(0)+'%)';
-    el.className='combotxt on';
-  } else el.className='combotxt';
-  document.getElementById('qs1').textContent=G.combo+'×';
-}
-
 // =====================================================================
-// BOSS SYSTEM
+// BOSS
 // =====================================================================
-let bossSpawnTm=null;
+let bossTm=null;
 function scheduleBoss(){
-  clearTimeout(bossSpawnTm);
-  bossSpawnTm=setTimeout(spawnBoss,80000+Math.random()*60000);
+  clearTimeout(bossTm);
+  bossTm=setTimeout(spawnBoss,70000+Math.random()*50000);
 }
 function spawnBoss(){
-  const eligible=BOSSES.filter(b=>G.vt>=b.vt);
-  if(!eligible.length){scheduleBoss();return;}
-  const boss=eligible[Math.floor(Math.random()*eligible.length)];
+  const el=BOSSES.filter(b=>G.vt>=b.vt&&(G.vt>0||getNormalTierIdx()>=b.nti));
+  if(!el.length){scheduleBoss();return;}
+  const boss=el[Math.floor(Math.random()*el.length)];
   G.bossActive=true; G.bossData=boss;
-  G.bossHpMax=boss.hp*(1+G.pCount*.3)*(1+G.vt*.5);
+  G.bossHpMax=boss.hp*(1+G.pc*.25)*(1+G.vt*.3);
   G.bossHp=G.bossHpMax;
-  document.getElementById('bossPanel').className='bosspanel on';
-  document.getElementById('bhalo').className='bhalo on';
-  document.getElementById('bIco').textContent=boss.ico;
-  document.getElementById('bName').textContent=boss.n;
-  document.getElementById('bRew').textContent='Reward: '+fmtF(boss.rew*(1+G.pCount*.5));
+  document.getElementById('BSP').className='bsp on';
+  document.getElementById('BH').className='bh on';
+  document.getElementById('BICO').textContent=boss.ico;
+  document.getElementById('BNM').textContent=boss.n;
+  document.getElementById('BRW').textContent='Reward: '+fF(boss.rew*(1+G.pc*.3)*G.rb*G.ab*G.trb);
   updBossUI();
-  showToast('⚔️ '+boss.n+' muncul!','red');
-  // auto-flee 90s
-  clearTimeout(G._bflee);
-  G._bflee=setTimeout(()=>{if(G.bossActive){showToast('👹 Boss kabur!','red');endBoss();}},90000);
+  showToast('⚔️ '+boss.n+' muncul!','re');
+  clearTimeout(G._bfl);
+  G._bfl=setTimeout(()=>{if(G.bossActive){showToast('👹 Boss kabur!','re');endBoss();}},90000);
 }
 function updBossUI(){
   const pct=Math.max(0,(G.bossHp/G.bossHpMax)*100);
-  document.getElementById('bHpF').style.width=pct+'%';
-  document.getElementById('bHpT').textContent='HP: '+fmtF(G.bossHp)+' / '+fmtF(G.bossHpMax);
+  document.getElementById('BHF').style.width=pct+'%';
+  document.getElementById('BHT').textContent='HP: '+fF(G.bossHp)+' / '+fF(G.bossHpMax);
 }
 function defeatBoss(){
-  G.bossKills++;
-  const rew=G.bossData.rew*(1+G.pCount*.5)*G.rbBonus*G.asBonus;
-  G.money+=rew; G.totalEarned+=rew;
+  G.bk++;
+  let rew=G.bossData.rew*(1+G.pc*.3)*G.rb*G.ab*G.trb;
+  // chain bonus
+  if(G.chainCount>0){
+    rew*=getChainB();
+    spawnFt(window.innerWidth/2,window.innerHeight/2,rew,false,'bk');
+  }
+  G.money+=rew; G.te+=rew; checkVT();
   if(isFinite(rew)) G.bossHistory.push({ico:G.bossData.ico,n:G.bossData.n,rew,t:Date.now()});
-  showToast('🏆 '+G.bossData.n+' kalah! +'+fmtF(rew),'gold');
-  // relic drop
-  const dropChance=.1+G.pasLvl[7]*.1;
-  if(Math.random()<dropChance) dropRelic();
+  showToast('🏆 '+G.bossData.n+' kalah! +'+fF(rew),'gold');
+  startChain();
+  if(Math.random()<(.1+G.pl[7]*.1)) dropRelic();
   endBoss(); scheduleBoss(); checkAch();
+  document.getElementById('QS3').textContent=G.bk;
 }
 function endBoss(){
   G.bossActive=false; G.bossData=null;
-  document.getElementById('bossPanel').className='bosspanel';
-  document.getElementById('bhalo').className='bhalo';
-  clearTimeout(G._bflee);
+  document.getElementById('BSP').className='bsp';
+  document.getElementById('BH').className='bh';
+  clearTimeout(G._bfl);
 }
 function dropRelic(){
   const avail=RELICS.filter(r=>!relicSet().has(r.id));
   if(!avail.length) return;
-  // weighted by rarity
-  const weights={Biasa:50,Langka:30,Epik:15,Legendaris:4,Mythic:1};
-  const pool=[];
-  avail.forEach(r=>{ for(let i=0;i<(weights[r.rar]||10);i++) pool.push(r); });
+  const w={Biasa:50,Langka:30,Epik:14,Legendaris:5,Mythic:1};
+  const pool=[]; avail.forEach(r=>{for(let i=0;i<(w[r.rar]||10);i++) pool.push(r);});
   const r=pool[Math.floor(Math.random()*pool.length)];
-  G.relicsOwned.push(r.id);
-  showToast('💠 Relic: '+r.n+' ('+r.rar+')!','purple');
+  G.ro.push(r.id);
+  showToast('💠 Relic: '+r.n+' ('+r.rar+')!','pu');
   setDot('relic',true);
 }
 
 // =====================================================================
 // EVENTS
 // =====================================================================
-let evTickItv=null;
-function scheduleEv(){
-  const base=100000;
-  const red=G.pasLvl[2]*.05;
-  const delay=base*(1-red)*(.4+Math.random()*.8);
-  setTimeout(()=>{startEv();scheduleEv();},delay);
+let evItv=null;
+function schedEv(){
+  const base=95000, red=G.pl[2]*.05;
+  setTimeout(()=>{startEv();schedEv();},base*(1-red)*(.4+Math.random()*.8));
 }
 function startEv(){
   if(G.evActive) return;
   const ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
-  const durB=1+relicBonus('evDB',0);
-  G.evActive=true; G.curEv=ev; G.evLeft=Math.ceil(ev.dur*durB); G.totalEvents++;
-  document.getElementById('evBanner').className='evbanner on';
-  document.getElementById('evIco').textContent=ev.ico;
-  document.getElementById('evName').textContent=ev.n;
-  document.getElementById('evDesc').textContent=ev.d;
-  document.getElementById('lhalo').className='lhalo on';
-  document.getElementById('evBadge').className='ev-badge on';
+  const durB=1+rB('evDB',0);
+  G.evActive=true; G.curEv=ev; G.evLeft=Math.ceil(ev.dur*durB); G.tev++;
+  document.getElementById('EVB').className='evb on';
+  document.getElementById('EVICO').textContent=ev.ico;
+  document.getElementById('EVN').textContent=ev.n;
+  document.getElementById('EVD').textContent=ev.d;
+  document.getElementById('LH').className='lh on';
+  document.getElementById('evBadge').className='evbadge on';
   document.getElementById('evBadge').textContent=ev.ico+' ×'+ev.mult;
-  showToast(ev.ico+' '+ev.n,'purple');
-  clearInterval(evTickItv);
-  evTickItv=setInterval(()=>{
-    G.evLeft--;
-    document.getElementById('evTimer').textContent=G.evLeft+'s';
-    if(G.evLeft<=0) endEv();
-  },1000);
+  showToast(ev.ico+' '+ev.n,'pu');
+  clearInterval(evItv);
+  evItv=setInterval(()=>{G.evLeft--;document.getElementById('EVT').textContent=G.evLeft+'s';if(G.evLeft<=0) endEv();},1000);
 }
 function endEv(){
   G.evActive=false; G.curEv=null;
-  document.getElementById('evBanner').className='evbanner';
-  document.getElementById('lhalo').className='lhalo';
-  document.getElementById('evBadge').className='ev-badge';
-  clearInterval(evTickItv);
+  document.getElementById('EVB').className='evb';
+  document.getElementById('LH').className='lh';
+  document.getElementById('evBadge').className='evbadge';
+  clearInterval(evItv);
 }
 
 // =====================================================================
-// PRESTIGE / REBIRTH / ASCENSION
+// PRESTIGE / REBIRTH / ASCENSION / TRANSCENDENCE
 // =====================================================================
 const PREST_REQ=1e18;
 function doPrestige(){
   if(G.money<PREST_REQ) return;
-  G.pCount++;
-  let pb=(1+G.pCount*.75);
-  // relic bonus
-  if(G.relicsEquipped.some(r=>r!==null&&RELICS[r]&&RELICS[r].eff.prstM)) pb*=2;
-  if(G.rbUpgOwned[2]) pb*=5;
-  if(G.asUpgOwned[3]) pb*=20;
-  G.pBonus=pb;
-  G.money=0; G.totalEarned=0;
-  G.upgLvl=UPGRADES.map(()=>0); G.pasLvl=PASSIVES.map(()=>0);
-  G.genOwn=GENS.map(()=>0); G.megaOwn=MEGA_GENS.map(()=>0);
-  G.divOwn=DIVINE_GENS.map(()=>0); G.ascGenOwn=ASC_GENS.map(()=>0);
-  G.combo=0; G.vt=0; calcPerSec();
-  showToast('✨ PRESTIGE '+G.pCount+'! Bonus ×'+G.pBonus.toFixed(1),'purple');
+  G.pc++; G.pb=getPB(); G.money=0; G.te=0;
+  G.ul=UPGRADES.map(()=>0); G.pl=PASSIVES.map(()=>0);
+  G.go=GENS.map(()=>0); G.mo=MEGA_GENS.map(()=>0);
+  G.do2=DIVINE_GENS.map(()=>0); G.ao=ASC_GENS.map(()=>0);
+  G.to2=TRANS_GENS.map(()=>0); G.combo=0; G.vt=0; calcPS();
+  showToast('✨ PRESTIGE '+G.pc+'! ×'+G.pb.toFixed(1),'pu');
   checkAch(); renderAll();
 }
 function doRebirth(){
-  const ti=gti();
-  if(G.pCount<10||ti<23) return;
-  G.rbCount++;
-  G.rbBonus=1+G.rbCount*5;
-  G.money=0; G.totalEarned=0;
-  G.pCount=0; G.pBonus=1;
-  G.upgLvl=UPGRADES.map(()=>0); G.pasLvl=PASSIVES.map(()=>0);
-  G.genOwn=GENS.map(()=>0); G.megaOwn=MEGA_GENS.map(()=>0);
-  G.divOwn=DIVINE_GENS.map(()=>0); G.ascGenOwn=ASC_GENS.map(()=>0);
-  G.combo=0; G.vt=0; calcPerSec();
-  document.getElementById('rbBadge').textContent='🔁 '+G.rbCount+'×';
-  document.getElementById('mRb').style.display='block';
-  showToast('🔁 REBIRTH '+G.rbCount+'! ×'+G.rbBonus,'pink');
+  if(G.pc<10||G.vt<1) return;
+  G.rc++; G.rb=1+G.rc*5;
+  G.money=0; G.te=0; G.pc=0; G.pb=1;
+  G.ul=UPGRADES.map(()=>0); G.pl=PASSIVES.map(()=>0);
+  G.go=GENS.map(()=>0); G.mo=MEGA_GENS.map(()=>0);
+  G.do2=DIVINE_GENS.map(()=>0); G.ao=ASC_GENS.map(()=>0);
+  G.to2=TRANS_GENS.map(()=>0); G.combo=0; G.vt=0; calcPS();
+  document.getElementById('rbb').textContent='🔁 '+G.rc+'×';
+  document.getElementById('MRB').style.display='block';
+  document.getElementById('MRB').textContent='🔁 ×'+G.rb;
+  showToast('🔁 REBIRTH '+G.rc+'! ×'+G.rb,'pk');
   checkAch(); renderAll();
 }
 function doAscension(){
-  if(G.rbCount<5||G.vt<17) return;
-  G.asCount++;
-  G.asTokens+=G.asCount;
-  G.asBonus=1+G.asCount*50;
-  G.money=0; G.totalEarned=0;
-  G.pCount=0; G.pBonus=1;
-  G.rbCount=0; G.rbBonus=1;
-  G.upgLvl=UPGRADES.map(()=>0); G.pasLvl=PASSIVES.map(()=>0);
-  G.genOwn=GENS.map(()=>0); G.megaOwn=MEGA_GENS.map(()=>0);
-  G.divOwn=DIVINE_GENS.map(()=>0); G.ascGenOwn=ASC_GENS.map(()=>0);
-  G.rbUpgOwned=RB_UPGRADES.map(()=>0);
-  G.combo=0; G.vt=0; calcPerSec();
-  showToast('🌠 ASCENSION '+G.asCount+'! Bonus ×'+G.asBonus,'cyan');
+  if(G.rc<5||G.vt<18) return;
+  G.ac++; G.at+=G.ac; G.ab=1+G.ac*50;
+  G.money=0; G.te=0; G.pc=0; G.pb=1; G.rc=0; G.rb=1;
+  G.ul=UPGRADES.map(()=>0); G.pl=PASSIVES.map(()=>0);
+  G.go=GENS.map(()=>0); G.mo=MEGA_GENS.map(()=>0);
+  G.do2=DIVINE_GENS.map(()=>0); G.ao=ASC_GENS.map(()=>0);
+  G.to2=TRANS_GENS.map(()=>0); G.ru=RB_UPGRADES.map(()=>0);
+  G.combo=0; G.vt=0; calcPS();
+  document.getElementById('asb').textContent='🌠 '+G.at;
+  showToast('🌠 ASCENSION '+G.ac+'! ×'+G.ab,'cy');
   checkAch(); renderAll();
 }
-function gti(){ // get tier index (considering vt)
-  if(G.vt===0){
-    for(let i=22;i>=0;i--) if(G.money>=TIERS[i].v) return i;
-    return 0;
-  }
-  return Math.min(23+G.vt, TIERS.length-1);
+function doTranscend(){
+  if(G.ac<3||G.vt<34) return;
+  G.trc++; G.trc2+=G.trc; G.trb=1+G.trc*1000;
+  G.money=0; G.te=0; G.pc=0; G.pb=1; G.rc=0; G.rb=1; G.ac=0; G.ab=1; G.at=0;
+  G.ul=UPGRADES.map(()=>0); G.pl=PASSIVES.map(()=>0);
+  G.go=GENS.map(()=>0); G.mo=MEGA_GENS.map(()=>0);
+  G.do2=DIVINE_GENS.map(()=>0); G.ao=ASC_GENS.map(()=>0);
+  G.to2=TRANS_GENS.map(()=>0); G.ru=RB_UPGRADES.map(()=>0);
+  G.su=AS_UPGRADES.map(()=>0); G.combo=0; G.vt=0; calcPS();
+  showToast('🌀 TRANSCENDENCE '+G.trc+'! ×'+G.trb,'cy');
+  checkAch(); renderAll();
+}
+
+function getNormalTierIdx(){
+  for(let i=TIERS.length-1;i>=0;i--) if(G.money>=TIERS[i].v) return i;
+  return 0;
 }
 
 // =====================================================================
-// BUY FUNCTIONS
+// BUYING
 // =====================================================================
-function buyUpg(i){
-  const u=UPGRADES[i], cost=u.bc*Math.pow(6,G.upgLvl[i]);
-  if(G.money<cost||G.upgLvl[i]>=u.max) return;
-  G.money-=cost; G.upgLvl[i]++;
-  showToast('⚡ '+u.n+' Lv'+G.upgLvl[i],'gold'); renderShop();
+function buyUpg(i){const u=UPGRADES[i],c=u.bc*Math.pow(6,G.ul[i]);if(G.money<c||G.ul[i]>=u.max)return;G.money-=c;G.ul[i]++;showToast('⚡ '+u.n+' Lv'+G.ul[i],'gold');rShop();}
+function buyPas(i){const p=PASSIVES[i],c=p.bc*Math.pow(4,G.pl[i]);if(G.money<c||G.pl[i]>=p.max)return;G.money-=c;G.pl[i]++;showToast('🔓 '+p.n+' Lv'+G.pl[i],'gr');rShop();}
+function buyGen(i){const g=GENS[i],c=g.bc*Math.pow(1.15,G.go[i]);if(G.money<c)return;G.money-=c;G.go[i]++;calcPS();rGen();}
+function buyMega(i){
+  const g=MEGA_GENS[i],c=g.bc*Math.pow(1.18,G.mo[i]);
+  const ti=G.vt===0?getNormalTierIdx():99;
+  if(G.money<c)return;if(ti<g.ti&&G.vt===0){showToast('🔒 Butuh tier '+TIERS[g.ti].n,'re');return;}
+  G.money-=c;G.mo[i]++;calcPS();rGen();
 }
-function buyPas(i){
-  const p=PASSIVES[i], cost=p.bc*Math.pow(4,G.pasLvl[i]);
-  if(G.money<cost||G.pasLvl[i]>=p.max) return;
-  G.money-=cost; G.pasLvl[i]++;
-  showToast('🔓 '+p.n+' Lv'+G.pasLvl[i],'green'); renderShop();
-}
-function buyGen(i){ const g=GENS[i],c=g.bc*Math.pow(1.15,G.genOwn[i]); if(G.money<c)return; G.money-=c; G.genOwn[i]++; calcPerSec(); renderGen(); }
-function buyMega(i){ const g=MEGA_GENS[i],c=g.bc*Math.pow(1.18,G.megaOwn[i]); const ti=gti(); if(G.money<c)return; if(ti<g.ut){showToast('🔒 Butuh tier lebih tinggi!','red');return;} G.money-=c; G.megaOwn[i]++; calcPerSec(); renderGen(); }
-function buyDiv(i){ const g=DIVINE_GENS[i],c=Math.max(1e10,1e15*Math.pow(1.2,G.divOwn[i])); if(G.money<c||G.vt<g.vt){if(G.vt<g.vt){showToast('🔒 Butuh VT '+g.vt,'red');}return;} G.money-=c; G.divOwn[i]++; calcPerSec(); renderGen(); showToast('⚗️ '+g.n+'!','pink'); }
-function buyAscGen(i){ const g=ASC_GENS[i],c=Math.max(1e10,1e20*Math.pow(1.25,G.ascGenOwn[i])); if(G.money<c||G.vt<g.vt){if(G.vt<g.vt){showToast('🔒 Butuh VT '+g.vt,'red');}return;} G.money-=c; G.ascGenOwn[i]++; calcPerSec(); renderGen(); showToast('🌠 '+g.n+'!','cyan'); }
-function buyRbUpg(i){ const r=RB_UPGRADES[i]; if(G.rbCount<r.rbReq||G.rbUpgOwned[i])return; G.rbUpgOwned[i]=1; showToast('⭐ '+r.n+'!','pink'); renderRebirth(); }
-function buyAsUpg(i){ const a=AS_UPGRADES[i]; if(G.asTokens<a.asReq||G.asUpgOwned[i])return; G.asTokens-=a.asReq; G.asUpgOwned[i]=1; showToast('🌠 '+a.n+'!','cyan'); renderAsc(); }
+function buyDiv(i){const g=DIVINE_GENS[i],c=Math.max(1e10,1e15*Math.pow(1.2,G.do2[i]));if(G.money<c||G.vt<g.vt){if(G.vt<g.vt)showToast('🔒 Butuh VT'+g.vt,'re');return;}G.money-=c;G.do2[i]++;calcPS();rGen();showToast('⚗️ '+g.n,'pk');}
+function buyAsc(i){const g=ASC_GENS[i],c=Math.max(1e10,1e20*Math.pow(1.25,G.ao[i]));if(G.money<c||G.vt<g.vt){if(G.vt<g.vt)showToast('🔒 Butuh VT'+g.vt,'re');return;}G.money-=c;G.ao[i]++;calcPS();rGen();showToast('🌠 '+g.n,'cy');}
+function buyTrGen(i){const g=TRANS_GENS[i],c=Math.max(1e10,1e30*Math.pow(1.3,G.to2[i]));if(G.money<c||G.vt<g.vt){if(G.vt<g.vt)showToast('🔒 Butuh VT'+g.vt,'re');return;}G.money-=c;G.to2[i]++;calcPS();rGen();showToast('🌀 '+g.n,'cy');}
+function buyRbu(i){const r=RB_UPGRADES[i];if(G.rc<r.rbReq||G.ru[i])return;G.ru[i]=1;showToast('⭐ '+r.n,'pk');rRb();}
+function buyAsu(i){const a=AS_UPGRADES[i];if(G.at<a.asReq||G.su[i])return;G.at-=a.asReq;G.su[i]=1;showToast('🌠 '+a.n,'cy');rAsc();}
+function buyTru(i){const t=TR_UPGRADES[i];if(G.trc2<t.trReq||G.tu[i])return;G.trc2-=t.trReq;G.tu[i]=1;showToast('🌀 '+t.n,'cy');rTrans();}
 function equipRelic(rid){
   const rs=relicSet();
-  if(!rs.has(rid)){showToast('💠 Belum punya relic ini','red');return;}
-  const idx=G.relicsEquipped.indexOf(rid);
-  if(idx!==-1){G.relicsEquipped[idx]=null;showToast('💠 Dilepas','blue');renderRelic();return;}
-  const empty=G.relicsEquipped.indexOf(null);
-  if(empty===-1){showToast('⚠️ Slot penuh! Lepas dulu','red');return;}
-  G.relicsEquipped[empty]=rid; showToast('💠 '+RELICS[rid].n+' dipasang!','purple'); renderRelic();
+  if(!rs.has(rid)){showToast('💠 Belum punya','re');return;}
+  const idx=G.re.indexOf(rid);
+  if(idx!==-1){G.re[idx]=null;showToast('💠 Dilepas','bl');rRelic();return;}
+  const empty=G.re.indexOf(null);
+  if(empty===-1){showToast('⚠️ Slot penuh!','re');return;}
+  G.re[empty]=rid;showToast('💠 '+RELICS[rid].n+' dipasang!','pu');rRelic();
 }
 
 // =====================================================================
@@ -1447,8 +1526,8 @@ function equipRelic(rid){
 // =====================================================================
 function checkAch(){
   ACHIEVEMENTS.forEach(a=>{
-    if(!G.achUnlocked.includes(a.id)&&a.cond(G)){
-      G.achUnlocked.push(a.id);
+    if(!G.au.includes(a.id)&&a.cond(G)){
+      G.au.push(a.id);
       showToast('🏆 '+a.n+': '+a.rew,'gold');
       setDot('ach',true);
     }
@@ -1458,518 +1537,417 @@ function checkAch(){
 // =====================================================================
 // MILESTONE
 // =====================================================================
-let lastVT=-1, mileTm=null;
-function checkTierMile(){
-  const ti=gti();
-  if(G.vt>lastVT){
-    lastVT=G.vt;
-    const t=TIERS[Math.min(23+G.vt,TIERS.length-1)];
-    showMile(t.i+' '+t.n,'Virtual Tier '+G.vt+' diraih!');
-    checkAch();
-    if(!G.bossActive) scheduleBoss();
-  }
-}
+let mileTm=null;
 function showMile(t,s){
-  document.getElementById('mileT').textContent=t;
-  document.getElementById('mileS').textContent=s;
-  const el=document.getElementById('mile');
-  el.className='mile on';
-  clearTimeout(mileTm);
-  mileTm=setTimeout(()=>el.className='mile',3000);
+  document.getElementById('MLT').textContent=t;
+  document.getElementById('MLS').textContent=s;
+  const m=document.getElementById('MILE');
+  m.className='mile on'; clearTimeout(mileTm);
+  mileTm=setTimeout(()=>m.className='mile',3000);
 }
-
-// =====================================================================
-// DOT NOTIFS
-// =====================================================================
-function setDot(tab,show){
-  if(!G.cfg.notif) return;
-  const el=document.getElementById('d-'+tab);
-  if(el) el.className='dot'+(show?' on':'');
-}
+function setDot(tab,on){if(!G.cfg.notif)return;const e=document.getElementById('d-'+tab);if(e)e.className='dot'+(on?' on':'');}
 
 // =====================================================================
 // MINI GAME
 // =====================================================================
-let mgActive=false,mgType='cf',mgTimer=null,mgItv=null,mgHits=0,mgTotal=0,mgCells=[];
-const MG_CD=90000;
-let mgLastPlay=0;
-// Number Rush state
-let nrTarget=0, nrOptions=[];
+const MG_CD=75000;
+let mgLast=0,mgActive=false,mgType='cf',mgTimer=null,mgItv=null,mgHits=0,mgTotal=0,mgCells=[];
+let cfActive=-1, nrSoal=0, nrHits=0, crHits=0, crGoal=15, crTimer=null, crItv=null;
 
-function renderMgWidget(){
-  const cd=Math.max(0,Math.ceil((MG_CD-(Date.now()-mgLastPlay))/1000));
-  const avail=cd<=0;
-  document.getElementById('mgWrap').innerHTML=`
-    <div class="mgttl">🎮 Mini Game</div>
-    <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
-      <button class="mgbtn" onclick="startMg('cf')" ${!avail?'disabled':''}>⭐ Clicker Frenzy</button>
-      <button class="mgbtn" style="background:linear-gradient(135deg,var(--purple),var(--p2))" onclick="startMg('nr')" ${!avail?'disabled':''}>🔢 Number Rush</button>
+function rMgWidget(){
+  const cd=Math.max(0,Math.ceil((MG_CD-(Date.now()-mgLast))/1000));
+  const ok=cd<=0;
+  document.getElementById('MGW').innerHTML=`
+    <div class="mgt">🎮 Mini Game</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;">
+      <button class="mgb" onclick="startMg('cf')" ${!ok?'disabled':''}>⭐ Clicker Frenzy</button>
+      <button class="mgb pu" onclick="startMg('nr')" ${!ok?'disabled':''}>🔢 Number Rush</button>
+      <button class="mgb go" onclick="startMg('cr')" ${!ok?'disabled':''}>🖱️ Click Race</button>
     </div>
-    <div style="font-size:.63rem;color:var(--muted)">${avail?'Siap! | Wins: '+G.mgWins+'×':'Cooldown: '+cd+'s | Wins: '+G.mgWins+'×'}</div>`;
+    <div style="font-size:.6rem;color:var(--mu)">${ok?'Siap! | Wins: '+G.mw+'×':'Cooldown: '+cd+'s | Wins: '+G.mw+'×'}</div>`;
 }
 function startMg(type){
-  if(Date.now()-mgLastPlay<MG_CD){showToast('⏳ Cooldown!','blue');return;}
-  mgType=type; mgActive=true; mgHits=0; mgTotal=0; mgLastPlay=Date.now();
-  clearInterval(mgItv); clearInterval(mgTimer);
-  const modal=document.getElementById('mgModal');
+  if(Date.now()-mgLast<MG_CD){showToast('⏳ Cooldown!','bl');return;}
+  mgType=type;mgActive=true;mgHits=0;mgTotal=0;mgLast=Date.now();
+  clearInterval(mgItv);clearTimeout(mgTimer);
+  const m=document.getElementById('MGM');
   if(type==='cf'){
-    document.getElementById('mgTitle').textContent='⭐ Clicker Frenzy!';
-    document.getElementById('mgBody').innerHTML='<div style="font-size:.68rem;color:var(--muted)">Klik semua ⭐ sebanyak mungkin dalam 8 detik!</div><div class="cfgrid" id="cfgrid"></div>';
-    buildCfGrid();
-    let t=8;
-    document.getElementById('mgCd').textContent=t+'s';
-    mgTimer=setInterval(()=>{t--;document.getElementById('mgCd').textContent=t+'s';if(t<=0){clearInterval(mgTimer);endMg();}},1000);
+    document.getElementById('MGTTL').textContent='⭐ Clicker Frenzy!';
+    document.getElementById('MGBDY').innerHTML='<div style="font-size:.65rem;color:var(--mu)">Klik semua ⭐ dalam 8 detik!</div><div class="cfgrid" id="CFG"></div>';
+    buildCf(); let t=8;
+    document.getElementById('MGCD').textContent=t+'s';
+    mgTimer=setInterval(()=>{t--;document.getElementById('MGCD').textContent=t+'s';if(t<=0){clearInterval(mgTimer);endMg();}},1000);
     shuffleCf();
+  } else if(type==='nr'){
+    document.getElementById('MGTTL').textContent='🔢 Number Rush!';
+    document.getElementById('MGSCO').textContent='0 / 10';
+    document.getElementById('MGBDY').innerHTML='<div style="font-size:.7rem;color:var(--mu);margin-bottom:5px" id="NRQ">Cari angka terbesar!</div><div class="nrg" id="NRG"></div>';
+    document.getElementById('MGCD').textContent='10 soal';
+    nrSoal=0;nrHits=0;nextNR();
   } else {
-    document.getElementById('mgTitle').textContent='🔢 Number Rush!';
-    document.getElementById('mgScore').textContent='0 / 10';
-    document.getElementById('mgBody').innerHTML='<div style="font-size:.72rem;color:var(--muted);margin-bottom:6px" id="nrQ">Pilih angka terbesar!</div><div class="nrgrid" id="nrgrid"></div>';
-    document.getElementById('mgCd').textContent='10 soal';
-    nextNR();
+    document.getElementById('MGTTL').textContent='🖱️ Click Race!';
+    document.getElementById('MGSCO').textContent='0 / '+crGoal;
+    document.getElementById('MGBDY').innerHTML=`
+      <div style="font-size:.7rem;color:var(--mu);margin-bottom:5px">Klik ${crGoal}× secepat mungkin!</div>
+      <div class="crprog"><div class="crprogf" id="CRP" style="width:0%"></div></div>
+      <button class="mgb" id="CRB" onclick="clickRace()" style="margin-top:8px;width:100%;font-size:.9rem;padding:14px">KLIK!</button>`;
+    crHits=0; let t=10;
+    document.getElementById('MGCD').textContent=t+'s';
+    clearInterval(crItv);
+    crItv=setInterval(()=>{t--;document.getElementById('MGCD').textContent=t+'s';if(t<=0){clearInterval(crItv);endMg();}},1000);
   }
-  modal.style.display='flex';
+  m.style.display='flex';
 }
-// Clicker Frenzy
-let cfActive=-1, cfSpd=600;
-function buildCfGrid(){
-  const g=document.getElementById('cfgrid'); if(!g) return;
-  g.innerHTML=''; mgCells=[];
-  for(let i=0;i<16;i++){
-    const c=document.createElement('div');c.className='cfcell';c.dataset.i=i;
-    c.onclick=()=>hitCf(i); g.appendChild(c); mgCells.push(c);
-  }
-}
-function shuffleCf(){
-  if(!mgActive||mgType!=='cf') return;
-  if(cfActive>=0&&mgCells[cfActive]){mgCells[cfActive].className='cfcell';mgCells[cfActive].textContent='';}
-  cfActive=Math.floor(Math.random()*16);
-  const c=mgCells[cfActive]; if(!c) return;
-  c.className='cfcell act'; c.textContent='⭐'; mgTotal++;
-  document.getElementById('mgScore').textContent=mgHits+' / '+mgTotal;
-  mgItv=setTimeout(shuffleCf,Math.max(300,cfSpd-mgHits*15));
-}
-function hitCf(i){
-  if(!mgActive||i!==cfActive) return;
-  mgHits++; mgCells[i].classList.add('hit'); mgCells[i].textContent='✅';
-  document.getElementById('mgScore').textContent=mgHits+' / '+mgTotal;
-}
-// Number Rush
-let nrCorrect=0, nrSoal=0;
-function nextNR(){
-  if(nrSoal>=10){endMg();return;}
-  nrSoal++; nrTarget=Math.floor(Math.random()*900)+100;
-  nrOptions=[nrTarget];
-  while(nrOptions.length<6){
-    const o=nrTarget+Math.floor((Math.random()-.5)*200);
-    if(o>0&&!nrOptions.includes(o)) nrOptions.push(o);
-  }
-  nrOptions.sort(()=>Math.random()-.5);
-  document.getElementById('nrQ').textContent='Cari angka '+nrTarget+' ! ('+nrSoal+'/10)';
-  const g=document.getElementById('nrgrid'); if(!g) return;
-  g.innerHTML='';
-  nrOptions.forEach(n=>{
-    const c=document.createElement('div'); c.className='nrcell'; c.textContent=n;
-    c.onclick=()=>{
-      if(n===nrTarget){c.className='nrcell correct';nrCorrect++;mgHits++;}
-      else c.className='nrcell wrong';
-      document.getElementById('mgScore').textContent=mgHits+' / 10';
-      setTimeout(nextNR,400);
-    };
-    g.appendChild(c);
-  });
-}
-function endMg(){
-  if(!mgActive) return;
-  mgActive=false; clearInterval(mgTimer); clearTimeout(mgItv);
-  const ratio=mgTotal>0?mgHits/mgTotal:mgHits/10;
-  const reward=getTapPower()*mgHits*(mgType==='cf'?50:100);
-  G.money+=reward; G.totalEarned+=reward;
-  if((mgType==='cf'&&ratio>=.55)||(mgType==='nr'&&mgHits>=6)) G.mgWins++;
-  showToast('🎮 +'+fmtF(reward)+' ('+mgHits+' hits)','cyan');
-  checkAch();
-  document.getElementById('mgCd').textContent='✅ Selesai!';
-  setTimeout(()=>{document.getElementById('mgModal').style.display='none'; renderMgWidget();},1500);
-}
-function closeMg(){mgActive=false;clearInterval(mgTimer);clearTimeout(mgItv);document.getElementById('mgModal').style.display='none'; renderMgWidget();}
+function buildCf(){const g=document.getElementById('CFG');if(!g)return;g.innerHTML='';mgCells=[];for(let i=0;i<16;i++){const c=document.createElement('div');c.className='cfc';c.onclick=()=>hitCf(i);g.appendChild(c);mgCells.push(c);}}
+function shuffleCf(){if(!mgActive||mgType!=='cf')return;if(cfActive>=0&&mgCells[cfActive]){mgCells[cfActive].className='cfc';mgCells[cfActive].textContent='';}cfActive=Math.floor(Math.random()*16);const c=mgCells[cfActive];if(!c)return;c.className='cfc ac';c.textContent='⭐';mgTotal++;document.getElementById('MGSCO').textContent=mgHits+' / '+mgTotal;mgItv=setTimeout(shuffleCf,Math.max(280,620-mgHits*14));}
+function hitCf(i){if(!mgActive||i!==cfActive)return;mgHits++;mgCells[i].classList.add('ht');mgCells[i].textContent='✅';document.getElementById('MGSCO').textContent=mgHits+' / '+mgTotal;}
+function nextNR(){if(nrSoal>=10){endMg();return;}nrSoal++;const target=Math.floor(Math.random()*900)+100;let opts=[target];while(opts.length<6){const o=target+Math.floor((Math.random()-.5)*200);if(o>0&&!opts.includes(o))opts.push(o);}opts.sort(()=>Math.random()-.5);document.getElementById('NRQ').textContent='Pilih angka '+target+'! ('+nrSoal+'/10)';const g=document.getElementById('NRG');if(!g)return;g.innerHTML='';opts.forEach(n=>{const c=document.createElement('div');c.className='nrc';c.textContent=n;c.onclick=()=>{if(n===target){c.className='nrc co';nrHits++;mgHits++;}else c.className='nrc wr';document.getElementById('MGSCO').textContent=mgHits+' / 10';setTimeout(nextNR,350);};g.appendChild(c);});}
+function clickRace(){if(!mgActive||mgType!=='cr')return;crHits++;mgHits++;const pct=(crHits/crGoal)*100;document.getElementById('CRP').style.width=Math.min(100,pct)+'%';document.getElementById('MGSCO').textContent=crHits+' / '+crGoal;if(crHits>=crGoal){clearInterval(crItv);endMg();}}
+function endMg(){if(!mgActive)return;mgActive=false;clearInterval(mgTimer);clearTimeout(mgItv);clearInterval(crItv);const rew=getTap()*mgHits*(mgType==='cf'?50:mgType==='nr'?100:200);G.money+=rew;G.te+=rew;checkVT();if((mgType==='cf'&&mgTotal>0&&mgHits/mgTotal>=.5)||(mgType==='nr'&&mgHits>=6)||(mgType==='cr'&&crHits>=crGoal)) G.mw++;showToast('🎮 +'+fF(rew)+' ('+mgHits+' hits)','cy');checkAch();document.getElementById('MGCD').textContent='✅ Selesai!';setTimeout(()=>{document.getElementById('MGM').style.display='none';rMgWidget();},1400);}
+function closeMg(){mgActive=false;clearInterval(mgTimer);clearTimeout(mgItv);clearInterval(crItv);document.getElementById('MGM').style.display='none';rMgWidget();}
 
 // =====================================================================
-// RENDER FUNCTIONS
+// RENDER
 // =====================================================================
 let curTab='tap';
 function sw(tab){
   curTab=tab;
-  ['tap','shop','gen','world','relic','ach','rebirth','asc','stats'].forEach(t=>{
+  ['tap','shop','gen','world','relic','ach','rb','asc','trans','stats'].forEach(t=>{
     document.getElementById('c-'+t).style.display=t===tab?'block':'none';
     document.getElementById('tab-'+t).className='tab'+(t===tab?' on':'');
   });
-  const clearDots={'ach':'ach','shop':'shop','gen':'gen','relic':'relic'};
-  if(clearDots[tab]) setDot(clearDots[tab],false);
-  document.getElementById('scr').scrollTop=0;
-  if(tab==='shop') renderShop();
-  else if(tab==='gen') renderGen();
-  else if(tab==='world') renderWorld();
-  else if(tab==='relic') renderRelic();
-  else if(tab==='ach') renderAch();
-  else if(tab==='rebirth') renderRebirth();
-  else if(tab==='asc') renderAsc();
-  else if(tab==='stats') renderStats();
+  const cd={ach:'ach',shop:'shop',gen:'gen',relic:'relic'};
+  if(cd[tab]) setDot(cd[tab],false);
+  document.getElementById('SC').scrollTop=0;
+  if(tab==='shop') rShop();
+  else if(tab==='gen') rGen();
+  else if(tab==='world') rWorld();
+  else if(tab==='relic') rRelic();
+  else if(tab==='ach') rAch();
+  else if(tab==='rb') rRb();
+  else if(tab==='asc') rAsc();
+  else if(tab==='trans') rTrans();
+  else if(tab==='stats') rStats();
 }
 
-function renderMoney(){
-  const ti=gti();
-  const t=TIERS[Math.min(ti,TIERS.length-1)];
-  const f=fmt(G.vt>0?G.money:G.money);
-  document.getElementById('mNum').textContent=f.d;
-  document.getElementById('mSfx').textContent=f.s;
-  document.getElementById('tPill').textContent=t.i+' '+t.n+(G.vt>0?' [VT'+G.vt+']':'');
+function rMoney(){
+  const dt=getDisplayTier();
+  const f=fmt(G.money);
+  document.getElementById('MN').textContent=f.d;
+  document.getElementById('MS').textContent=f.s||'';
+  const label=dt.data.i+' '+dt.data.n+(G.vt>0?' [VT'+G.vt+']':'');
+  document.getElementById('TP').textContent=label;
 
   // color by tier
-  const c=['#FFD700','#FFA500','#00ffcc','#b44fff','#ff6b35','#ff3355','#ff44aa','#00eeff'];
-  document.getElementById('mNum').style.color=c[Math.min(Math.floor(ti/4),c.length-1)];
+  const pal=['#FFD700','#FFD700','#FFA500','#00ffcc','#c44fff','#ff6b35','#ff3355','#ff44aa','#00eeff'];
+  const ci=G.vt>0?Math.min(5+Math.floor(G.vt/10),pal.length-1):Math.min(Math.floor(getNormalTierIdx()/6),pal.length-1);
+  document.getElementById('MN').style.color=pal[ci];
 
-  const ps=calcPerSec(), tp=getTapPower();
-  document.getElementById('mPs').textContent='⚡ '+fmtF(ps)+'/dtk';
-  document.getElementById('mTap').textContent='👆 '+fmtF(tp)+'/tap';
-  if(G.rbCount>0){document.getElementById('mRb').style.display='block';document.getElementById('mRb').textContent='🔁 ×'+G.rbBonus;}
-  if(G.asCount>0){document.getElementById('mRb').style.display='block';document.getElementById('mRb').textContent='🌠 ×'+G.asBonus;}
+  const ps=calcPS(), tp=getTap();
+  document.getElementById('MPS').textContent='⚡ '+fF(ps)+'/dtk';
+  document.getElementById('MTP').textContent='👆 '+fF(tp)+'/tap';
+  if(G.rc>0||G.ac>0||G.trc>0){
+    document.getElementById('MRB').style.display='block';
+    const bonus=G.trc>0?G.trb:G.ac>0?G.ab:G.rb;
+    const icon=G.trc>0?'🌀':G.ac>0?'🌠':'🔁';
+    document.getElementById('MRB').textContent=icon+' ×'+bonus;
+  }
+  document.getElementById('rbb').textContent='🔁 '+G.rc+'×';
+  document.getElementById('asb').textContent='🌠 '+G.at;
 
   // tier bar
-  const PBAR_MAX=1e300;
-  const pct=G.vt>0?Math.min(100,(G.money/PBAR_MAX)*100):Math.min(100,(G.money/(TIERS[Math.min(ti+1,22)].v||PBAR_MAX))*100);
-  document.getElementById('tFill').style.width=(isFinite(pct)?pct:100)+'%';
+  let pct=0;
   if(G.vt>0){
-    document.getElementById('tTxt').textContent=pct.toFixed(1)+'% → VT '+(G.vt+1);
+    pct=Math.min(99.9,(G.money/VT_THRESHOLD)*100);
+    if(!isFinite(pct)) pct=99;
   } else {
-    const nt=TIERS[Math.min(ti+1,22)];
-    document.getElementById('tTxt').textContent=pct.toFixed(0)+'% → '+nt.s+' '+nt.n;
+    const nti=Math.min(getNormalTierIdx()+1,TIERS.length-1);
+    const vA=TIERS[getNormalTierIdx()].v, vB=TIERS[nti].v;
+    pct=(vB>vA&&isFinite(vB))?Math.min(100,((G.money-vA)/(vB-vA))*100):100;
+  }
+  document.getElementById('TF').style.width=pct.toFixed(1)+'%';
+  if(G.vt>0){
+    const next=VT_TIERS[Math.min(G.vt,VT_TIERS.length-1)];
+    document.getElementById('TT').textContent=pct.toFixed(0)+'% → VT'+(G.vt+1)+' '+next.n;
+  } else {
+    const nti=Math.min(getNormalTierIdx()+1,TIERS.length-1);
+    document.getElementById('TT').textContent=pct.toFixed(0)+'% → '+TIERS[nti].s+' '+TIERS[nti].n;
   }
 
   // quick stats
-  document.getElementById('qs0').textContent=fmtF(G.totalTaps);
-  document.getElementById('qs2').textContent=(getCritChance()*100).toFixed(0)+'%';
-  document.getElementById('qs3').textContent=G.bossKills;
-  document.getElementById('rbBadge').textContent='🔁 '+G.rbCount+'×';
+  document.getElementById('QS0').textContent=fF(G.tt);
+  document.getElementById('QS2').textContent=(getCrit()*100).toFixed(0)+'%';
 
-  // prestige btn
+  // prestige
   const pok=G.money>=PREST_REQ;
-  document.getElementById('pBtn').disabled=!pok;
-  const prf=fmt(PREST_REQ); document.getElementById('pReq').textContent=prf.d+prf.s;
-  document.getElementById('pStars').textContent=G.pCount>0?'⭐'.repeat(Math.min(G.pCount,10))+(G.pCount>10?'+':''):'☆';
-  // perk pills
-  const pp=document.getElementById('pPerks'); pp.innerHTML='';
-  if(G.pCount>0){
-    ['×'+G.pBonus.toFixed(1)+' income','VT: '+G.vt,'Combo max: '+G.maxCombo].forEach(s=>{
-      const el=document.createElement('div'); el.className='pperk'; el.textContent=s; pp.appendChild(el);
-    });
-  }
+  document.getElementById('PBTN').disabled=!pok;
+  document.getElementById('PRQ').textContent=fF(PREST_REQ);
+  document.getElementById('PST').textContent=G.pc>0?'⭐'.repeat(Math.min(G.pc,8))+(G.pc>8?'+':''):'☆';
+  const ppk=document.getElementById('PPK'); ppk.innerHTML='';
+  if(G.pc>0){['×'+G.pb.toFixed(1),'VT:'+G.vt,'Combo:'+G.mc].forEach(s=>{const el=document.createElement('div');el.className='ppki';el.textContent=s;ppk.appendChild(el);});}
 
-  // tap icon
-  const icos=['💎','💵','💴','💳','💰','🏦','🚀','⭐','🌟','💫','🌙','🪐','🌍','☀️','🌌','🔭','⚡','🌀','💠','♾️','🌈','👁️','Ω','🎴','🕳️','∅','🔵','🔄','🌅','🖊️','🌪️','🧿','🦕','📐','🔮','⬛','💀','🌀','Α','Ω∞','♾','🌊','🌑','💠','🔆','😴','📖','🦁','😇','👆','🏆','0∞','💫','🌍','🚫','🎯'];
-  document.getElementById('tapIco').textContent=icos[Math.min(ti,icos.length-1)];
+  // tap icon update
+  const ticos=['💎','💵','💴','💳','💰','🏦','🚀','⭐','🌟','💫','🌙','🪐','🌍','☀️','🌌','🔭','⚡','🌀','💠','🌸','🌺','🌻','🌼','🌷','🍀','🍁','🍂','🍃','🌿','🌾','🎋','🎍','🎑','🌙','⛅','🌤️','♾️','🌈','🎆','🎇','✨','💫','👁️','Ω','✨'];
+  const tii=G.vt>0?44+Math.min(G.vt,10):Math.min(getNormalTierIdx(),ticos.length-1);
+  const vticos=['🎴','🕳️','∅','🔵','🔄','🌅','🖊️','🌪️','🧿','🦕','📐','🔮','⬛','💀','🌀','Α','Ω∞','♾','🌊','🌑','💠','🔆','😴','📖','🦁','😇','👆','🏆','0∞','💫','🌍','🚫','🎯','❄️','🌀','📏','🎵','🎸','1️⃣','🔚','🫧','🌫️','🔲','🔳','🪞','🫀','🔀','∅∅','?','▓','▓','🔆🔆','🐣','Ωo','ΑΩ','♾️♾️','∞+','🌅🌅','🔄🔄','🔁0','♾♾'];
+  document.getElementById('TICO').textContent=G.vt>0?vticos[Math.min(G.vt-1,vticos.length-1)]:ticos[Math.min(getNormalTierIdx(),ticos.length-1)];
 }
 
-function makeCard(ico,name,desc,costStr,extra='',cls='',onclick=null){
+function mkCard(ico,name,desc,cost,extra='',cls='',cb=null){
   const c=document.createElement('div');
   c.className='card '+cls;
   c.innerHTML=`<div class="cico">${ico}</div>
-    <div class="cbody"><div class="cname">${name}</div><div class="cdesc">${desc}</div></div>
-    <div class="cr"><div class="ccost ${cls.includes('locked')||(!cls.includes('aff')&&!cls.includes('maxed'))?'dim':''}">${costStr}</div>${extra}</div>`;
-  if(onclick) c.onclick=onclick;
+    <div class="cb"><div class="cn">${name}</div><div class="cd">${desc}</div></div>
+    <div class="cr2"><div class="cc ${(!cls.includes('af')&&!cls.includes('mx'))?'dm':''}">${cost}</div>${extra}</div>`;
+  if(cb) c.onclick=cb;
   return c;
 }
 
-function renderShop(){
-  if(curTab!=='shop') return;
-  // upgrades
-  const uc=document.getElementById('upgCont'); uc.innerHTML='';
-  let ua=0;
+function rShop(){
+  if(curTab!=='shop')return;
+  const uc=document.getElementById('UC');uc.innerHTML='';let ua=0;
   UPGRADES.forEach((u,i)=>{
-    const l=G.upgLvl[i], c=u.bc*Math.pow(6,l);
-    const mx=l>=u.max, ca=G.money>=c;
+    const l=G.ul[i],c=u.bc*Math.pow(6,l);
+    const mx=l>=u.max,ca=G.money>=c;
     if(ca&&!mx) ua++;
-    const cf=fmt(c);
-    const card=makeCard(u.ico,u.n,u.d,mx?'✅ MAX':cf.d+cf.s,
-      `<div class="clvl">Lv <b>${l}</b>/${u.max}</div>`,
-      mx?'maxed':ca?'aff':'',mx?null:()=>buyUpg(i));
+    const card=mkCard(u.ico,u.n,u.d,mx?'✅ MAX':fF(c),`<div class="clv">Lv <b>${l}</b>/${u.max}</div>`,mx?'mx':ca?'af':'',mx?null:()=>buyUpg(i));
     uc.appendChild(card);
   });
-  document.getElementById('shopUBadge').textContent=ua+' tersedia';
-  // passives
-  const pc=document.getElementById('pasCont'); pc.innerHTML='';
-  let pa=0;
+  document.getElementById('SUB').textContent=ua+' tersedia';
+  const pc=document.getElementById('PC');pc.innerHTML='';let pa=0;
   PASSIVES.forEach((p,i)=>{
-    const l=G.pasLvl[i], c=p.bc*Math.pow(4,l);
-    const mx=l>=p.max, ca=G.money>=c;
+    const l=G.pl[i],c=p.bc*Math.pow(4,l);
+    const mx=l>=p.max,ca=G.money>=c;
     if(ca&&!mx) pa++;
-    const cf=fmt(c);
-    let extra='';
-    if(p.eff==='cc') extra=' | '+( getCritChance()*100).toFixed(0)+'%';
-    if(p.eff==='cm') extra=' | ×'+getCritMult().toFixed(1);
-    if(p.eff==='at') extra=' | '+getAutoRate()+'/s';
-    const card=makeCard(p.ico,p.n,p.d+extra,mx?'✅ MAX':cf.d+cf.s,
-      `<div class="clvl">Lv <b>${l}</b>/${p.max}</div>`,
-      mx?'maxed':ca?'aff':'',mx?null:()=>buyPas(i));
+    let ex='';
+    if(p.eff==='cc') ex=' | '+(getCrit()*100).toFixed(0)+'%';
+    if(p.eff==='cm') ex=' | ×'+getCritM().toFixed(1);
+    if(p.eff==='at') ex=' | '+getAutoR().toFixed(0)+'/s';
+    const card=mkCard(p.ico,p.n,p.d+ex,mx?'✅ MAX':fF(c),`<div class="clv">Lv <b>${l}</b>/${p.max}</div>`,mx?'mx':ca?'af':'',mx?null:()=>buyPas(i));
     pc.appendChild(card);
   });
-  document.getElementById('shopPBadge').textContent=pa+' tersedia';
-  renderMgWidget();
+  document.getElementById('SPB').textContent=pa+' tersedia';
+  rMgWidget();
 }
 
-function renderGen(){
-  if(curTab!=='gen') return;
-  const tot=G.genOwn.reduce((a,b)=>a+b,0)+G.megaOwn.reduce((a,b)=>a+b,0)+
-    G.divOwn.reduce((a,b)=>a+b,0)+G.ascGenOwn.reduce((a,b)=>a+b,0);
-  document.getElementById('genBadge').textContent=tot+' aktif';
-  const ti=gti();
-  // normal
-  const gc=document.getElementById('genCont'); gc.innerHTML='';
-  GENS.forEach((g,i)=>{
-    const own=G.genOwn[i], cost=g.bc*Math.pow(1.15,own);
-    const ca=G.money>=cost; const cf=fmt(cost), rf=fmt(g.r*G.pBonus*G.rbBonus*G.asBonus);
-    const c=document.createElement('div'); c.className='card'+(own>0?' spec':ca?' aff':'');
-    c.innerHTML=`<div class="genn">${own}</div>
-      <div class="cbody"><div class="cname">${g.ico} ${g.n}</div><div class="cdesc" style="color:var(--a2)">+${rf.d+rf.s}/dtk</div></div>
-      <div class="cr"><div class="ccost ${ca?'':'dim'}">${cf.d+cf.s}</div></div>`;
-    c.onclick=()=>buyGen(i); gc.appendChild(c);
-  });
-  // mega
-  const mc=document.getElementById('megaCont'); mc.innerHTML='';
-  MEGA_GENS.forEach((g,i)=>{
-    const own=G.megaOwn[i], cost=g.bc*Math.pow(1.18,own);
-    const unl=ti>=g.ut, ca=G.money>=cost&&unl;
-    const cf=fmt(cost), rf=fmt(g.r*G.pBonus*G.rbBonus*G.asBonus);
-    const c=document.createElement('div'); c.className='card'+(own>0?' spec':ca?' aff':unl?'':' locked');
-    c.innerHTML=`<div class="genn mega">${own}</div>
-      <div class="cbody"><div class="cname">${g.ico} ${g.n}</div>
-        <div class="cdesc" style="color:var(--purple)">${unl?'+'+rf.d+rf.s+'/dtk':'🔒 Butuh tier '+TIERS[g.ut].n}</div></div>
-      <div class="cr"><div class="ccost ${ca?'':'dim'}">${unl?cf.d+cf.s:'🔒'}</div></div>`;
-    if(unl) c.onclick=()=>buyMega(i); mc.appendChild(c);
-  });
-  // divine
-  const dc=document.getElementById('divCont'); dc.innerHTML='';
-  DIVINE_GENS.forEach((g,i)=>{
-    const own=G.divOwn[i], cost=Math.max(1e10,1e15*Math.pow(1.2,own));
-    const unl=G.vt>=g.vt, ca=G.money>=cost&&unl;
-    const cf=fmt(cost), rf=fmt(g.r*G.pBonus*G.rbBonus*G.asBonus);
-    const c=document.createElement('div'); c.className='card'+(own>0?' spec':ca?' aff':unl?'':' locked');
-    c.innerHTML=`<div class="genn div">${own}</div>
-      <div class="cbody"><div class="cname">${g.ico} ${g.n}</div>
-        <div class="cdesc" style="color:var(--pink)">${unl?'+'+rf.d+rf.s+'/dtk':'🔒 Butuh VT '+g.vt}</div></div>
-      <div class="cr"><div class="ccost ${ca?'':'dim'}">${unl?cf.d+cf.s:'🔒'}</div></div>`;
-    if(unl) c.onclick=()=>buyDiv(i); dc.appendChild(c);
-  });
-  // ascension gen
-  const ac=document.getElementById('ascGenCont'); ac.innerHTML='';
-  ASC_GENS.forEach((g,i)=>{
-    const own=G.ascGenOwn[i], cost=Math.max(1e10,1e20*Math.pow(1.25,own));
-    const unl=G.vt>=g.vt, ca=G.money>=cost&&unl;
-    const cf=fmt(cost), rf=fmt(g.r*G.pBonus*G.rbBonus*G.asBonus);
-    const c=document.createElement('div'); c.className='card'+(own>0?' spec':ca?' aff':unl?'':' locked');
-    c.innerHTML=`<div class="genn asc">${own}</div>
-      <div class="cbody"><div class="cname">${g.ico} ${g.n}</div>
-        <div class="cdesc" style="color:var(--cyan)">${unl?'+'+rf.d+rf.s+'/dtk':'🔒 Butuh VT '+g.vt}</div></div>
-      <div class="cr"><div class="ccost ${ca?'':'dim'}">${unl?cf.d+cf.s:'🔒'}</div></div>`;
-    if(unl) c.onclick=()=>buyAscGen(i); ac.appendChild(c);
-  });
+function rGen(){
+  if(curTab!=='gen')return;
+  const tot=G.go.reduce((a,b)=>a+b)+G.mo.reduce((a,b)=>a+b)+G.do2.reduce((a,b)=>a+b)+G.ao.reduce((a,b)=>a+b)+G.to2.reduce((a,b)=>a+b);
+  document.getElementById('GB').textContent=tot+' aktif';
+  const allMult=G.pb*G.rb*G.ab*G.trb;
+
+  const gc=document.getElementById('GC');gc.innerHTML='';
+  GENS.forEach((g,i)=>{const own=G.go[i],cost=g.bc*Math.pow(1.15,own),ca=G.money>=cost;
+    const c=document.createElement('div');c.className='card'+(own>0?' sp':ca?' af':'');
+    c.innerHTML=`<div class="gn">${own}</div><div class="cb"><div class="cn">${g.ico} ${g.n}</div><div class="cd" style="color:var(--a2)">+${fF(g.r*allMult)}/dtk</div></div><div class="cr2"><div class="cc ${ca?'':'dm'}">${fF(cost)}</div></div>`;
+    c.onclick=()=>buyGen(i);gc.appendChild(c);});
+
+  const mc=document.getElementById('MC');mc.innerHTML='';
+  MEGA_GENS.forEach((g,i)=>{const own=G.mo[i],cost=g.bc*Math.pow(1.18,own);
+    const ti=getNormalTierIdx();const unl=G.vt>0||(G.vt===0&&ti>=g.ti),ca=G.money>=cost&&unl;
+    const c=document.createElement('div');c.className='card'+(own>0?' sp':ca?' af':unl?'':' lk');
+    c.innerHTML=`<div class="gn mg">${own}</div><div class="cb"><div class="cn">${g.ico} ${g.n}</div><div class="cd" style="color:var(--pu)">${unl?'+'+fF(g.r*allMult)+'/dtk':'🔒 Tier '+TIERS[g.ti].n}</div></div><div class="cr2"><div class="cc ${ca?'':'dm'}">${unl?fF(cost):'🔒'}</div></div>`;
+    if(unl)c.onclick=()=>buyMega(i);mc.appendChild(c);});
+
+  const dc=document.getElementById('DC');dc.innerHTML='';
+  DIVINE_GENS.forEach((g,i)=>{const own=G.do2[i],cost=Math.max(1e10,1e15*Math.pow(1.2,own));
+    const unl=G.vt>=g.vt,ca=G.money>=cost&&unl;
+    const c=document.createElement('div');c.className='card'+(own>0?' sp':ca?' af':unl?'':' lk');
+    c.innerHTML=`<div class="gn dv">${own}</div><div class="cb"><div class="cn">${g.ico} ${g.n}</div><div class="cd" style="color:var(--pk)">${unl?'+'+fF(g.r*allMult)+'/dtk':'🔒 VT'+g.vt}</div></div><div class="cr2"><div class="cc ${ca?'':'dm'}">${unl?fF(cost):'🔒'}</div></div>`;
+    if(unl)c.onclick=()=>buyDiv(i);dc.appendChild(c);});
+
+  const ac2=document.getElementById('AC2');ac2.innerHTML='';
+  ASC_GENS.forEach((g,i)=>{const own=G.ao[i],cost=Math.max(1e10,1e20*Math.pow(1.25,own));
+    const unl=G.vt>=g.vt,ca=G.money>=cost&&unl;
+    const c=document.createElement('div');c.className='card'+(own>0?' sp':ca?' af':unl?'':' lk');
+    c.innerHTML=`<div class="gn ag">${own}</div><div class="cb"><div class="cn">${g.ico} ${g.n}</div><div class="cd" style="color:var(--cy)">${unl?'+'+fF(g.r*allMult)+'/dtk':'🔒 VT'+g.vt}</div></div><div class="cr2"><div class="cc ${ca?'':'dm'}">${unl?fF(cost):'🔒'}</div></div>`;
+    if(unl)c.onclick=()=>buyAsc(i);ac2.appendChild(c);});
+
+  const tc=document.getElementById('TC');tc.innerHTML='';
+  TRANS_GENS.forEach((g,i)=>{const own=G.to2[i],cost=Math.max(1e10,1e30*Math.pow(1.3,own));
+    const unl=G.vt>=g.vt,ca=G.money>=cost&&unl;
+    const c=document.createElement('div');c.className='card'+(own>0?' sp':ca?' af':unl?'':' lk');
+    c.innerHTML=`<div class="gn tg">${own}</div><div class="cb"><div class="cn">${g.ico} ${g.n}</div><div class="cd" style="color:var(--gold)">${unl?'+'+fF(g.r*allMult)+'/dtk':'🔒 VT'+g.vt}</div></div><div class="cr2"><div class="cc ${ca?'':'dm'}">${unl?fF(cost):'🔒'}</div></div>`;
+    if(unl)c.onclick=()=>buyTrGen(i);tc.appendChild(c);});
 }
 
-function renderWorld(){
-  const wm=document.getElementById('wmap'); wm.innerHTML='';
-  ZONES.forEach((z,j)=>{
-    const unl=G.vt>=z.vt||(z.vt===0&&gti()>=0);
-    const isCur=(z.vt===G.vt)||(z.vt===0&&G.vt===0);
+function rWorld(){
+  const wm=document.getElementById('WM');wm.innerHTML='';
+  ZONES.forEach(z=>{
+    const unl=G.vt>=z.vt&&(z.vt>0||getNormalTierIdx()>=z.nti);
+    const isCur=(z.vt>0&&G.vt===z.vt)||(z.vt===0&&G.vt===0);
     const c=document.createElement('div');
-    c.className='zone'+(isCur?' cur':unl?' done':' lkz');
-    c.innerHTML=`<div class="zico">${z.ico}</div>
-      <div class="zname">${z.n}</div>
-      <div class="ztier">VT${z.vt}</div>
-      ${unl?'<div class="zstar">⭐</div>':''}`;
+    c.className='zone'+(isCur?' cu':unl?' dn':' lo');
+    c.innerHTML=`<div class="zic">${z.ico}</div><div class="zn">${z.n}</div><div class="zt">VT${z.vt}</div>${unl?'<div class="zs">⭐</div>':''}`;
     wm.appendChild(c);
   });
-  // boss log
-  const bl=document.getElementById('bossLog'); bl.innerHTML='';
-  if(!G.bossHistory.length){
-    bl.innerHTML='<div style="text-align:center;color:var(--muted);font-size:.72rem;padding:12px">Belum ada boss dikalahkan</div>';
-  } else {
-    [...G.bossHistory].reverse().slice(0,6).forEach(b=>{
-      const c=document.createElement('div'); c.className='card';
-      c.innerHTML=`<div class="cico">${b.ico}</div>
-        <div class="cbody"><div class="cname">${b.n}</div><div class="cdesc">Reward: ${fmtF(b.rew)}</div></div>
-        <div class="cr" style="font-size:.6rem;color:var(--muted)">${new Date(b.t).toLocaleTimeString()}</div>`;
-      bl.appendChild(c);
-    });
-  }
+  document.getElementById('BKB').textContent=G.bk+' killed';
+  const bl=document.getElementById('BL');bl.innerHTML='';
+  if(!G.bossHistory.length){bl.innerHTML='<div style="text-align:center;color:var(--mu);font-size:.7rem;padding:11px">Belum ada boss dikalahkan</div>';return;}
+  [...G.bossHistory].reverse().slice(0,6).forEach(b=>{
+    const c=document.createElement('div');c.className='card';
+    c.innerHTML=`<div class="cico">${b.ico}</div><div class="cb"><div class="cn">${b.n}</div><div class="cd">+${fF(b.rew)}</div></div><div class="cr2" style="font-size:.58rem;color:var(--mu)">${new Date(b.t).toLocaleTimeString()}</div>`;
+    bl.appendChild(c);});
 }
 
-function renderRelic(){
-  const rs=document.getElementById('rSlots'); rs.innerHTML='';
-  let filled=0;
-  G.relicsEquipped.forEach((rid,i)=>{
-    const slot=document.createElement('div');
-    if(rid!==null&&rid!==undefined&&RELICS[rid]){
-      const r=RELICS[rid]; filled++;
-      slot.className='rslot filled';
-      slot.innerHTML=`${r.ico}<div class="rsl">${r.n}</div><div class="rsla">AKTIF</div><div class="rslbadge">×</div>`;
-      slot.onclick=()=>equipRelic(rid);
-    } else {
-      slot.className='rslot';
-      slot.innerHTML=`<span style="font-size:.45rem;color:var(--muted)">SLOT ${i+1}</span>`;
-    }
-    rs.appendChild(slot);
+function rRelic(){
+  const rsl=document.getElementById('RSL');rsl.innerHTML='';let filled=0;
+  G.re.forEach((rid,i)=>{
+    const s=document.createElement('div');
+    if(rid!==null&&RELICS[rid]){const r=RELICS[rid];filled++;
+      s.className='rs fi';
+      s.innerHTML=`${r.ico}<div class="rsl2">${r.n}</div><div class="rsla">AKTIF</div><div class="rsb">×</div>`;
+      s.onclick=()=>equipRelic(rid);
+    } else {s.className='rs';s.innerHTML=`<span style="font-size:.43rem;color:var(--mu)">SLOT${i+1}</span>`;}
+    rsl.appendChild(s);
   });
-  document.getElementById('relicSlotBadge').textContent=filled+'/4';
-  const rc=document.getElementById('relicCont'); rc.innerHTML='';
-  const rs2=relicSet();
-  if(!rs2.size){
-    rc.innerHTML='<div style="text-align:center;color:var(--muted);font-size:.72rem;padding:14px">Belum ada relic. Kalahkan boss!</div>';
-    return;
-  }
+  document.getElementById('RSB').textContent=filled+'/4';
+  const rc=document.getElementById('RC');rc.innerHTML='';
+  const rs=relicSet();
+  if(!rs.size){rc.innerHTML='<div style="text-align:center;color:var(--mu);font-size:.7rem;padding:13px">Belum ada relic. Kalahkan boss!</div>';return;}
   RELICS.forEach(r=>{
-    if(!rs2.has(r.id)) return;
-    const eq=G.relicsEquipped.includes(r.id);
-    const c=document.createElement('div'); c.className='card'+(eq?' spec':'');
-    c.style.borderColor=RELIC_COL[r.rar]+'33';
-    c.innerHTML=`<div class="cico">${r.ico}</div>
-      <div class="cbody">
-        <div class="cname" style="color:${RELIC_COL[r.rar]}">${r.n}</div>
-        <div class="cdesc">${r.d}</div>
-        <div style="font-size:.55rem;color:${RELIC_COL[r.rar]};font-weight:700;margin-top:2px">${r.rar}</div>
-      </div>
-      <div class="cr"><div style="font-size:.67rem;color:${eq?'var(--accent)':'var(--muted)'};font-weight:700">${eq?'✅':'Pasang'}</div></div>`;
-    c.onclick=()=>equipRelic(r.id); rc.appendChild(c);
+    if(!rs.has(r.id)) return;
+    const eq=G.re.includes(r.id);
+    const c=document.createElement('div');c.className='card'+(eq?' sp':'');
+    c.style.borderColor=RELIC_COL[r.rar]+'2a';
+    c.innerHTML=`<div class="cico">${r.ico}</div><div class="cb"><div class="cn" style="color:${RELIC_COL[r.rar]}">${r.n}</div><div class="cd">${r.d}</div><div style="font-size:.52rem;color:${RELIC_COL[r.rar]};font-weight:700;margin-top:1px">${r.rar}</div></div><div class="cr2"><div style="font-size:.64rem;color:${eq?'var(--ac)':'var(--mu)'};font-weight:700">${eq?'✅':'Pasang'}</div></div>`;
+    c.onclick=()=>equipRelic(r.id);rc.appendChild(c);
   });
 }
 
-function renderAch(){
-  const done=G.achUnlocked.length;
-  document.getElementById('achBadge').textContent=done+'/'+ACHIEVEMENTS.length;
-  const cont=document.getElementById('achCont'); cont.innerHTML='';
+function rAch(){
+  document.getElementById('AB').textContent=G.au.length+'/'+ACHIEVEMENTS.length;
+  const cont=document.getElementById('ACHC');cont.innerHTML='';
   ACHIEVEMENTS.forEach(a=>{
-    const isU=G.achUnlocked.includes(a.id);
-    const c=document.createElement('div'); c.className='acard'+(isU?' done':' lka');
+    const isU=G.au.includes(a.id);
+    const c=document.createElement('div');c.className='ach'+(isU?' do':' lk2');
     let prog='';
-    if(!isU&&a.max>1){
-      const cur=Math.min(a.prog(G),a.max);
-      const pct=(cur/a.max)*100;
-      prog=`<div class="apbar"><div class="apfill" style="width:${pct}%"></div></div>`;
-    }
-    c.innerHTML=`<div class="aico">${isU?a.ico:'❓'}</div>
-      <div class="abody">
-        <div class="aname">${isU?a.n:'???'}</div>
-        <div class="adesc">${isU?a.d:'Selesaikan untuk membuka'}</div>
-        ${isU?`<div class="arew">🎁 ${a.rew}</div>`:''}
-        ${prog}
-      </div>
-      ${isU?'<div class="ashine"></div>':''}`;
+    if(!isU&&a.mx>1){const cur=Math.min(a.pg(G),a.mx);const pct=(cur/a.mx)*100;prog=`<div class="apb"><div class="apbf" style="width:${pct}%"></div></div>`;}
+    c.innerHTML=`<div class="aico">${isU?a.ico:'❓'}</div><div class="abody"><div class="an">${isU?a.n:'???'}</div><div class="ad">${isU?a.d:'Selesaikan untuk membuka'}</div>${isU?`<div class="ar">🎁 ${a.rew}</div>`:''}${prog}</div>${isU?'<div class="ash"></div>':''}`;
     cont.appendChild(c);
   });
 }
 
-function renderRebirth(){
-  const ti=gti();
-  const canRb=G.pCount>=10&&ti>=23;
-  document.getElementById('rbBtn').disabled=!canRb;
-  document.getElementById('rbInfo').innerHTML=`Reset prestige+generator. Rebirth bonus: <b>×${(1+(G.rbCount+1)*5).toFixed(0)}</b> permanen.<br>Saat ini: <b>${G.rbCount}×</b> (bonus ×${G.rbBonus}) | Butuh: Prestige 10× + THE END`;
-  const rp=document.getElementById('rbPerks'); rp.innerHTML='';
-  if(G.rbCount>0){
-    ['×'+G.rbBonus+' income','Divine Gen aktif','VT progression'].forEach(s=>{
-      const el=document.createElement('div'); el.className='rbperk'; el.textContent=s; rp.appendChild(el);
-    });
-  }
-  const rc=document.getElementById('rbUpgCont'); rc.innerHTML='';
-  RB_UPGRADES.forEach((r,i)=>{
-    const owned=G.rbUpgOwned[i]>0, canB=G.rbCount>=r.rbReq&&!owned;
-    const c=makeCard(r.ico,r.n,r.d,owned?'✅ AKTIF':'Butuh Rebirth '+r.rbReq+'×','',
-      owned?'maxed':canB?'aff':'',canB?()=>buyRbUpg(i):null);
-    rc.appendChild(c);
-  });
+function rRb(){
+  const canRb=G.pc>=10&&G.vt>=1;
+  document.getElementById('RBBTN').disabled=!canRb;
+  document.getElementById('RBI').innerHTML=`Reset prestige+gen. Bonus: <b>×${(1+(G.rc+1)*5)}</b> permanen.<br>Saat ini: <b>${G.rc}×</b> (×${G.rb}) | Butuh: Prestige 10× + VT1+`;
+  const rpk=document.getElementById('RBPK');rpk.innerHTML='';
+  if(G.rc>0){['×'+G.rb+' income','VT prog','Divine Gen'].forEach(s=>{const e=document.createElement('div');e.className='pk rb';e.textContent=s;rpk.appendChild(e);});}
+  const ruc=document.getElementById('RUC');ruc.innerHTML='';
+  RB_UPGRADES.forEach((r,i)=>{const owned=G.ru[i],canB=G.rc>=r.rbReq&&!owned;
+    const c=mkCard(r.ico,r.n,r.d,owned?'✅':'Rebirth '+r.rbReq+'×','',owned?'mx':canB?'af':'',canB?()=>buyRbu(i):null);
+    ruc.appendChild(c);});
 }
 
-function renderAsc(){
-  const canAs=G.rbCount>=5&&G.vt>=17;
-  document.getElementById('asBtn').disabled=!canAs;
-  document.getElementById('asTokenBadge').textContent=G.asTokens;
-  document.getElementById('asInfo').innerHTML=`Reset segalanya termasuk Rebirth. Dapatkan <b>Ascension Bonus ×${(1+(G.asCount+1)*50).toFixed(0)}</b> permanen.<br>Saat ini: <b>${G.asCount}×</b> (bonus ×${G.asBonus}) | Token: <b>${G.asTokens}</b><br>Butuh: Rebirth 5× + VT 17 (∞ ABSOLUTE)`;
-  const ac=document.getElementById('asUpgCont'); ac.innerHTML='';
-  AS_UPGRADES.forEach((a,i)=>{
-    const owned=G.asUpgOwned[i]>0, canB=G.asTokens>=a.asReq&&!owned;
-    const c=makeCard(a.ico,a.n,a.d,owned?'✅ AKTIF':a.asReq+' Token',`<div class="clvl" style="color:var(--cyan)">${owned?'aktif':'butuh '+a.asReq+'🌠'}</div>`,
-      owned?'maxed':canB?'aff':'',canB?()=>buyAsUpg(i):null);
-    ac.appendChild(c);
-  });
-  const ah=document.getElementById('asHistory');
-  ah.innerHTML=G.asCount>0?`Ascension dilakukan ${G.asCount}× | Bonus saat ini: ×${G.asBonus} | Token tersisa: ${G.asTokens}`:
-    'Belum pernah ascension. Butuh Rebirth 5× + VT 17.';
+function rAsc(){
+  const canAs=G.rc>=5&&G.vt>=18;
+  document.getElementById('ASBTN').disabled=!canAs;
+  document.getElementById('ATB').textContent=G.at+' Token';
+  document.getElementById('ASI').innerHTML=`Melampaui Rebirth. Bonus: <b>×${(1+(G.ac+1)*50)}</b> permanen.<br>Saat ini: <b>${G.ac}×</b> (×${G.ab}) | Token: <b>${G.at}</b><br>Butuh: Rebirth 5× + VT18`;
+  const aspk=document.getElementById('ASPK');aspk.innerHTML='';
+  if(G.ac>0){['×'+G.ab+' income','Asc Gen aktif','Token: '+G.at].forEach(s=>{const e=document.createElement('div');e.className='pk asc';e.textContent=s;aspk.appendChild(e);});}
+  const auc=document.getElementById('AUC');auc.innerHTML='';
+  AS_UPGRADES.forEach((a,i)=>{const owned=G.su[i],canB=G.at>=a.asReq&&!owned;
+    const c=mkCard(a.ico,a.n,a.d,owned?'✅':a.asReq+' Token','',owned?'mx':canB?'af':'',canB?()=>buyAsu(i):null);
+    auc.appendChild(c);});
 }
 
-function renderStats(){
-  const ti=gti(), elapsed=Math.floor((Date.now()-G.startTime)/1000);
-  const h=Math.floor(elapsed/3600),m=Math.floor(elapsed%3600/60),s=elapsed%60;
-  const tStr=h>0?h+'j '+m+'m':m>0?m+'m '+s+'d':s+'d';
-  const items=[
-    {l:"Uang",           v:fmtF(G.money)+(G.vt>0?' [VT'+G.vt+']':'')},
-    {l:"Total Dikumpulkan",v:fmtF(G.totalEarned)},
-    {l:"Per Detik",      v:fmtF(calcPerSec())},
-    {l:"Tap Power",      v:fmtF(getTapPower())},
-    {l:"Total Tap",      v:G.totalTaps.toLocaleString()},
-    {l:"Total Crit",     v:G.totalCrits.toLocaleString()},
-    {l:"Crit Chance",    v:(getCritChance()*100).toFixed(1)+'%'},
-    {l:"Crit Mult",      v:'×'+getCritMult().toFixed(1)},
-    {l:"Max Combo",      v:G.maxCombo+'×'},
-    {l:"Virtual Tier",   v:'VT'+G.vt+' ('+TIERS[Math.min(23+G.vt,TIERS.length-1)].n+')'},
-    {l:"Prestige",       v:G.pCount+'× (×'+G.pBonus.toFixed(1)+')'},
-    {l:"Rebirth",        v:G.rbCount+'× (×'+G.rbBonus+')'},
-    {l:"Ascension",      v:G.asCount+'× (×'+G.asBonus+')'},
-    {l:"Boss Kill",      v:G.bossKills},
-    {l:"Event",          v:G.totalEvents},
-    {l:"MG Menang",      v:G.mgWins},
-    {l:"Relic",          v:G.relicsOwned.length+'/'+RELICS.length},
-    {l:"Daily Streak",   v:G.dailyStreak+' hari'},
-    {l:"Achievement",    v:G.achUnlocked.length+'/'+ACHIEVEMENTS.length},
-    {l:"Waktu Main",     v:tStr},
-  ];
-  const sg=document.getElementById('statGrid'); sg.innerHTML='';
-  items.forEach(it=>{
-    const b=document.createElement('div'); b.className='sbox';
-    b.innerHTML=`<div class="slbl">${it.l}</div><div class="sval">${it.v}</div>`;
-    sg.appendChild(b);
-  });
-  const th=document.getElementById('tierHist'); th.innerHTML='';
-  const ts=tierSet();
-  // show first 23 normal tiers + vt tiers reached
-  TIERS.slice(0,24).forEach((t,i)=>{
-    const r=i<=23&&(i===0||G.totalEarned>0);
+function rTrans(){
+  const canTr=G.ac>=3&&G.vt>=34;
+  document.getElementById('TRBTN').disabled=!canTr;
+  document.getElementById('TCB').textContent=G.trc2+' Crystal';
+  document.getElementById('TRI').innerHTML=`Melampaui Ascension. Bonus: <b>×${(1+(G.trc+1)*1000)}</b> MASIF.<br>Saat ini: <b>${G.trc}×</b> (×${G.trb}) | Crystal: <b>${G.trc2}</b><br>Butuh: Ascension 3× + VT34 (THE REAL END)`;
+  const trpk=document.getElementById('TRPK');trpk.innerHTML='';
+  if(G.trc>0){['×'+G.trb+' income','Trans Gen aktif','Crystal: '+G.trc2].forEach(s=>{const e=document.createElement('div');e.className='pk tr';e.textContent=s;trpk.appendChild(e);});}
+  const tuc=document.getElementById('TUC');tuc.innerHTML='';
+  TR_UPGRADES.forEach((t,i)=>{const owned=G.tu[i],canB=G.trc2>=t.trReq&&!owned;
+    const c=mkCard(t.ico,t.n,t.d,owned?'✅':t.trReq+' Crystal','',owned?'mx':canB?'af':'',canB?()=>buyTru(i):null);
+    tuc.appendChild(c);});
+  // Post THE REAL END tier list
+  const pt=document.getElementById('POSTTRE');pt.innerHTML='';
+  VT_TIERS.slice(34).forEach((t,i)=>{
+    const vt=35+i;const r=G.tr.includes(vt);
     const el=document.createElement('span');
-    el.style.cssText=`display:inline-block;margin:2px;padding:2px 8px;border-radius:18px;font-size:.56rem;font-weight:700;
-      background:${r?'rgba(255,215,0,.09)':'var(--panel)'};
-      border:1px solid ${r?'rgba(255,215,0,.22)':'rgba(255,255,255,.04)'};
-      color:${r?'var(--gold)':'var(--muted)'};`;
+    el.style.cssText=`display:inline-block;margin:2px;padding:2px 8px;border-radius:16px;font-size:.54rem;font-weight:700;
+      background:${r?'rgba(0,238,255,.08)':'var(--p)'};
+      border:1px solid ${r?'rgba(0,238,255,.2)':'rgba(255,255,255,.04)'};
+      color:${r?'var(--cy)':'var(--mu)'};`;
+    el.textContent=(r?t.i:'◌')+' '+t.n+(r?' VT'+vt:'');
+    pt.appendChild(el);
+  });
+}
+
+function rStats(){
+  const elapsed=Math.floor((Date.now()-G.startTime)/1000);
+  const h=Math.floor(elapsed/3600),m=Math.floor((elapsed%3600)/60),s=elapsed%60;
+  const tStr=h>0?h+'j '+m+'m':m>0?m+'m '+s+'d':s+'d';
+  const dt=getDisplayTier();
+  const items=[
+    {l:"Uang",          v:fF(G.money)+(G.vt>0?' VT'+G.vt:'')},
+    {l:"Total Earned",  v:fF(G.te)},
+    {l:"Per Detik",     v:fF(calcPS())},
+    {l:"Tap Power",     v:fF(getTap())},
+    {l:"Total Tap",     v:G.tt.toLocaleString()},
+    {l:"Total Crit",    v:G.tc.toLocaleString()},
+    {l:"Crit Chance",   v:(getCrit()*100).toFixed(1)+'%'},
+    {l:"Crit Mult",     v:'×'+getCritM().toFixed(1)},
+    {l:"Max Combo",     v:G.mc+'×'},
+    {l:"Best Chain",    v:G.bestChain+'× kill'},
+    {l:"Tier",          v:dt.data.n+(G.vt>0?' VT'+G.vt:'')},
+    {l:"Prestige",      v:G.pc+'× (×'+G.pb.toFixed(1)+')'},
+    {l:"Rebirth",       v:G.rc+'× (×'+G.rb+')'},
+    {l:"Ascension",     v:G.ac+'× (×'+G.ab+')'},
+    {l:"Transcendence", v:G.trc+'× (×'+G.trb+')'},
+    {l:"Boss Kill",     v:G.bk},
+    {l:"Event",         v:G.tev},
+    {l:"MG Win",        v:G.mw},
+    {l:"Relic",         v:G.ro.length+'/'+RELICS.length},
+    {l:"Daily Streak",  v:G.ds+' hari'},
+    {l:"Achievement",   v:G.au.length+'/'+ACHIEVEMENTS.length},
+    {l:"Waktu Main",    v:tStr},
+  ];
+  const sg=document.getElementById('SGR');sg.innerHTML='';
+  items.forEach(it=>{const b=document.createElement('div');b.className='sb2';
+    b.innerHTML=`<div class="sl">${it.l}</div><div class="sv">${it.v}</div>`;sg.appendChild(b);});
+
+  // tier history
+  const th=document.getElementById('THC');th.innerHTML='';
+  // normal tiers
+  TIERS.forEach((t,i)=>{
+    const r=G.vt>0||(G.money>=(t.v||0));
+    const el=document.createElement('span');
+    el.style.cssText=`display:inline-block;margin:2px;padding:2px 7px;border-radius:16px;font-size:.52rem;font-weight:700;
+      background:${r?'rgba(255,215,0,.08)':'var(--p)'};
+      border:1px solid ${r?'rgba(255,215,0,.2)':'rgba(255,255,255,.04)'};
+      color:${r?'var(--gold)':'var(--mu)'};`;
     el.textContent=t.i+' '+t.n;
     th.appendChild(el);
   });
   // vt tiers
-  TIERS.slice(24).forEach((t,i)=>{
-    const vt=i+1, r=ts.has(vt);
+  VT_TIERS.forEach((t,i)=>{
+    const vt=i+1;const r=G.tr.includes(vt);
     const el=document.createElement('span');
-    el.style.cssText=`display:inline-block;margin:2px;padding:2px 8px;border-radius:18px;font-size:.56rem;font-weight:700;
-      background:${r?'rgba(180,79,255,.09)':'var(--panel)'};
-      border:1px solid ${r?'rgba(180,79,255,.22)':'rgba(255,255,255,.04)'};
-      color:${r?'var(--purple)':'var(--muted)'};`;
+    el.style.cssText=`display:inline-block;margin:2px;padding:2px 7px;border-radius:16px;font-size:.52rem;font-weight:700;
+      background:${r?'rgba(180,79,255,.08)':'var(--p)'};
+      border:1px solid ${r?'rgba(180,79,255,.2)':'rgba(255,255,255,.04)'};
+      color:${r?'var(--pu)':'var(--mu)'};`;
     el.textContent=(r?t.i:'◌')+' '+t.n+(r?' ✓':'');
     th.appendChild(el);
   });
 }
 
 function renderAll(){
-  renderMoney();
-  if(curTab==='shop') renderShop();
-  else if(curTab==='gen') renderGen();
-  else if(curTab==='world') renderWorld();
-  else if(curTab==='relic') renderRelic();
-  else if(curTab==='ach') renderAch();
-  else if(curTab==='rebirth') renderRebirth();
-  else if(curTab==='asc') renderAsc();
-  else if(curTab==='stats') renderStats();
+  rMoney();
+  if(curTab==='shop') rShop();
+  else if(curTab==='gen') rGen();
+  else if(curTab==='world') rWorld();
+  else if(curTab==='relic') rRelic();
+  else if(curTab==='ach') rAch();
+  else if(curTab==='rb') rRb();
+  else if(curTab==='asc') rAsc();
+  else if(curTab==='trans') rTrans();
+  else if(curTab==='stats') rStats();
 }
 
 // =====================================================================
@@ -1977,23 +1955,21 @@ function renderAll(){
 // =====================================================================
 function showToast(msg,type='gold'){
   const el=document.createElement('div');
-  el.className='toast '+type; el.textContent=msg;
-  const stack=document.getElementById('toasts');
-  stack.appendChild(el);
-  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .28s';setTimeout(()=>el.remove(),300);},2200);
-  while(stack.children.length>5) stack.removeChild(stack.firstChild);
+  el.className='toast '+type;el.textContent=msg;
+  const s=document.getElementById('TOASTS');s.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .26s';setTimeout(()=>el.remove(),280);},2100);
+  while(s.children.length>5) s.removeChild(s.firstChild);
 }
 
 // =====================================================================
-// STARS BG
+// STARS
 // =====================================================================
 function buildStars(){
-  const c=document.getElementById('bgStars');
-  for(let i=0;i<55;i++){
-    const s=document.createElement('div'); s.className='star';
-    const sz=Math.random()*2+.8;
-    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;
-      --d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;opacity:${.08+Math.random()*.5};`;
+  const c=document.getElementById('ST');
+  for(let i=0;i<52;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2+.7;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;opacity:${.07+Math.random()*.5};`;
     c.appendChild(s);
   }
 }
@@ -2003,60 +1979,43 @@ function buildStars(){
 // =====================================================================
 let last=Date.now(), autoAc=0, slowT=0, shopT=0;
 function loop(){
-  const now=Date.now(), dt=Math.min((now-last)/1000,.1); last=now; // cap dt to prevent insane offline skip
-  // income
+  const now=Date.now(),dt=Math.min((now-last)/1000,.08);last=now;
+
   if(G.perSec>0){
     let gain=G.perSec*dt;
     if(G.evActive&&G.curEv&&!G.curEv.tap) gain*=G.curEv.mult;
-    if(isFinite(gain)&&gain>0){G.money+=gain; G.totalEarned+=gain; checkVT();}
+    if(isFinite(gain)&&gain>0){G.money+=gain;G.te+=gain;checkVT();}
   }
-  // auto tap
-  const ar=getAutoRate();
-  if(ar>0){
-    autoAc+=ar*dt;
-    while(autoAc>=1){
-      const r=document.getElementById('tapBtn').getBoundingClientRect();
-      doTap(undefined,undefined,true);
-      autoAc--;
-    }
-  }
-  // slow UI
+  const ar=getAutoR();
+  if(ar>0){autoAc+=ar*dt;while(autoAc>=1){doTap(undefined,undefined,true);autoAc--;}}
+
   slowT+=dt;
-  if(slowT>=0.08){slowT=0; renderMoney(); checkAch(); checkTierMile();}
-  // tab refresh
+  if(slowT>=0.075){slowT=0;rMoney();checkAch();}
   shopT+=dt;
-  if(shopT>=0.45){shopT=0;
-    if(curTab==='shop') renderShop();
-    else if(curTab==='gen') renderGen();
-    else if(curTab==='rebirth') renderRebirth();
-    else if(curTab==='asc') renderAsc();
+  if(shopT>=0.42){shopT=0;
+    if(curTab==='shop') rShop();
+    else if(curTab==='gen') rGen();
+    else if(curTab==='rb') rRb();
+    else if(curTab==='asc') rAsc();
+    else if(curTab==='trans') rTrans();
   }
   requestAnimationFrame(loop);
 }
 
 // =====================================================================
-// INPUT HANDLING — no double fire on mobile
+// INPUT
 // =====================================================================
-const tapBtn=document.getElementById('tapBtn');
-let tapCooldown=false;
-tapBtn.addEventListener('touchstart',e=>{
-  e.preventDefault();
-  if(tapCooldown) return;
-  tapCooldown=true; setTimeout(()=>tapCooldown=false,50);
-  const t=e.touches[0];
-  doTap(t.clientX,t.clientY);
-  tapBtn.classList.add('press'); setTimeout(()=>tapBtn.classList.remove('press'),150);
+const TAPBTN=document.getElementById('TAPBTN');
+let tcd=false;
+TAPBTN.addEventListener('touchstart',e=>{
+  e.preventDefault();if(tcd)return;tcd=true;setTimeout(()=>tcd=false,45);
+  const t=e.touches[0];doTap(t.clientX,t.clientY);
+  TAPBTN.classList.add('pr');setTimeout(()=>TAPBTN.classList.remove('pr'),140);
 },{passive:false});
-tapBtn.addEventListener('click',e=>{
-  if(tapCooldown) return;
-  tapCooldown=true; setTimeout(()=>tapCooldown=false,50);
-  doTap(e.clientX,e.clientY);
-});
+TAPBTN.addEventListener('click',e=>{if(tcd)return;tcd=true;setTimeout(()=>tcd=false,45);doTap(e.clientX,e.clientY);});
 document.addEventListener('keydown',e=>{
-  if((e.code==='Space'||e.code==='Enter')&&!e.target.matches('button,input')){
-    e.preventDefault();
-    const r=tapBtn.getBoundingClientRect();
-    doTap(r.left+r.width/2,r.top+r.height/2);
+  if((e.code==='Space'||e.code==='Enter')&&!e.target.matches('button,input,textarea')){
+    e.preventDefault();const r=TAPBTN.getBoundingClientRect();doTap(r.left+r.width/2,r.top+r.height/2);
   }
 });
 
@@ -2065,19 +2024,15 @@ document.addEventListener('keydown',e=>{
 // =====================================================================
 buildStars();
 loadGame();
-initArrays();
-calcPerSec();
-lastVT=G.vt;
-scheduleEv();
+initA();
+calcPS();
+schedEv();
 scheduleBoss();
-
-// check daily
 const todayStr=new Date().toDateString();
-if(G.lastDailyDate===todayStr) document.getElementById('dailyBtn').className='daily-btn claimed';
-
+if(G.ld===todayStr) document.getElementById('dlyBtn').className='dly claimed';
 renderAll();
 loop();
-console.log('%c💎 TAP EMPIRE V0.4 SEMI%c\nBy Tap Empire Dev','color:#FFD700;font-size:1.2rem;font-weight:900;','color:#00ffcc;font-size:.8rem');
+console.log('%c💎 TAP EMPIRE V0.5 SEMI FINAL','color:#FFD700;font-weight:900;font-size:1.1rem;font-family:monospace');
 </script>
 </body>
 </html>
